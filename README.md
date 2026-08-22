@@ -44,6 +44,51 @@ Donut House is a full-stack donut ordering web application where customers can b
 - View all orders
 - Update order status
 
+## 📝 Planning
+ 
+### User Stories
+ 
+**Customer / General User Stories**
+- AAG, I can view the home/landing page explaining what Donut House offers.
+- AAU, I can sign up and log in to my account.
+- AAU, I can log out of my account.
+- AAU, I can view and edit my profile.
+- AAG, I can view all available donuts.
+- AAG, I can view the details of a specific donut.
+- AAU, I can create a donut order.
+- AAU, I can add donuts to my order.
+- AAU, I can change the quantity of donuts in my order.
+- AAU, I can remove donuts from my order.
+- AAU, I can view my current order before placing it.
+- AAU, I can place an order.
+- AAU, I can view my previous orders.
+- AAU, I can view the details and status of a specific order.
+- AAU, I can cancel an order if it has not been processed.
+- AAG, I can view the available Donut House locations.
+- AAG, I can view the details of a specific location.
+- AAU, I can select a location for my order.
+- AAU, I can delete my account and its associated orders.
+**Admin User Stories**
+- AA, I can create a new donut.
+- AA, I can edit a donut.
+- AA, I can delete a donut.
+- AA, I can create a Donut House location.
+- AA, I can edit a location.
+- AA, I can delete a location.
+- AA, I can view all customer orders.
+- AA, I can update an order's status.
+> AAG = As a Guest, AAU = As a User, AA = As an Admin
+ 
+### ERD (Entity Relationship Diagram)
+ 
+![Donut House ERD](./public/images/erd.png)
+ 
+ 
+### Wireframes
+ 
+![Donut House Wireframes](./public/images/wireframes.png)
+
+
 ## 🗄️ Data Models
 
 **User** — Stores account information and user role.
