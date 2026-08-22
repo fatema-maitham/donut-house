@@ -81,12 +81,12 @@ Donut House is a full-stack donut ordering web application where customers can b
  
 ### ERD (Entity Relationship Diagram)
  
-![Donut House ERD](./public/images/erd.png)
+![Donut House ERD](./docs/erd.png)
  
  
 ### Wireframes
  
-![Donut House Wireframes](./public/images/wireframes.png)
+![Donut House Wireframes](./docs/wireframes.png)
 
 
 ## 🗄️ Data Models
