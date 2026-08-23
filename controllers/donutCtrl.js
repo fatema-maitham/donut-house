@@ -32,7 +32,26 @@ const show = async (req, res) => {
     }
 };
 
+// Show create donut form
+const newDonut = async (req, res) => {
+    res.render('donuts/new.ejs');
+};
+
+// Create donut
+const create = async (req, res) => {
+    try {
+        await Donut.create(req.body);
+
+        res.redirect('/donuts');
+    } catch (err) {
+        console.log(err);
+        res.send('Something went wrong');
+    }
+};
+
 module.exports = {
     index,
     show,
+    newDonut,
+    create,
 };

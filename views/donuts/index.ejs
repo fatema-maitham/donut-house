@@ -1,43 +1,23 @@
-<!DOCTYPE html>
-<html lang="en">
+<% donuts.forEach((donut)=> { %>
 
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Donut House</title>
-</head>
+    <div>
+        <h2>
+            <a href="/donuts/<%= donut._id %>">
+                <%= donut.name %>
+            </a>
+        </h2>
 
-<body>
+        <img src="<%= donut.image %>" alt="<%= donut.name %>" width="200">
 
-    <%- include('../partials/_navbar.ejs') %>
+        <p>
+            <%= donut.description %>
+        </p>
 
-        <h1>Our Donuts 🍩</h1>
+        <p>Price: <%= donut.price %>
+        </p>
 
-        <% donuts.forEach((donut)=> { %>
+        <p>Category: <%= donut.category %>
+        </p>
+    </div>
 
-            <div>
-                <h2>
-                    <a href="/donuts/<%= donut._id %>">
-                        <%= donut.name %>
-                    </a>
-                </h2>
-
-                <p>
-                    <%= donut.description %>
-                </p>
-
-                <p>Price: <%= donut.price %>
-                </p>
-
-                <p>Category: <%= donut.category %>
-                </p>
-
-            </div>
-
-            <% }) %>
-
-                <%- include('../partials/_footer.ejs') %>
-
-</body>
-
-</html>
+    <% }) %>

@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Add Donut | Donut House</title>
+</head>
+
+<body>
+
+    <h1>Add a New Donut 🍩</h1>
+
+    <form action="/donuts" method="POST">
+
+        <label for="name">Name:</label>
+        <input type="text" name="name" id="name" required>
+
+        <br><br>
+
+        <label for="description">Description:</label>
+        <textarea name="description" id="description" required></textarea>
+
+        <br><br>
+
+        <label for="price">Price:</label>
+        <input type="number" name="price" id="price" step="0.001" min="0" required>
+
+        <br><br>
+
+        <label for="image">Image URL:</label>
+        <input type="text" name="image" id="image" required>
+
+        <br><br>
+
+        <label for="category">Category:</label>
+        <input type="text" name="category" id="category" required>
+
+        <br><br>
+
+        <label for="available">Available:</label>
+        <input type="checkbox" name="available" id="available" value="true" checked>
+
+        <br><br>
+
+        <button type="submit">Create Donut</button>
+
+    </form>
+
+    <a href="/donuts">Back to Donuts</a>
+
+</body>
+
+</html>
