@@ -10,13 +10,11 @@
         </a>
       </div>
 
-
       <!-- Mobile Button -->
       <button class="navBtn" id="navBtn" type="button" aria-expanded="false" aria-controls="mobileMenu"
         aria-label="Open menu">
         <span class="burger"></span>
       </button>
-
 
       <!-- Desktop Navigation -->
       <ul>
@@ -28,6 +26,10 @@
 
         <li>
           <a href="/locations">Locations</a>
+        </li>
+
+        <li>
+          <a href="/about">About Us</a>
         </li>
 
 
@@ -81,7 +83,6 @@
               <% } %>
 
       </ul>
-
     </div>
 
 
@@ -92,6 +93,8 @@
       <a href="/donuts">Menu</a>
 
       <a href="/locations">Locations</a>
+
+      <a href="/about">About Us</a>
 
 
       <% if (user && user.role==='admin' ) { %>
