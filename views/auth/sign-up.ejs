@@ -2,32 +2,63 @@
 <html lang="en">
 
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
   <title>Sign Up | Donut House</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@300;400;600;700;800;900&display=swap"
+    rel="stylesheet">
+
+  <link rel="stylesheet" href="/stylesheets/style.css">
 </head>
 
 <body>
 
-  <h1>Create a Donut House Account</h1>
+  <%- include('../partials/_navbar.ejs') %>
 
-  <form action="/auth/sign-up" method="POST">
+    <main class="auth-page">
 
-    <label for="username">Username:</label>
-    <input type="text" name="username" id="username" required />
+      <div class="auth-card">
 
-    <label for="email">Email:</label>
-    <input type="email" name="email" id="email" required />
+        <h1 class="auth-title">Join Donut House</h1>
 
-    <label for="password">Password:</label>
-    <input type="password" name="password" id="password" required />
+        <p class="auth-subtitle">
+          Create your account and start enjoying better donuts.
+        </p>
 
-    <label for="confirmPassword">Confirm Password:</label>
-    <input type="password" name="confirmPassword" id="confirmPassword" required />
+        <form action="/auth/sign-up" method="POST" class="auth-form">
 
-    <button type="submit">Sign Up</button>
+          <label for="username">Username</label>
+          <input type="text" id="username" name="username" required>
 
-  </form>
+          <label for="email">Email</label>
+          <input type="email" id="email" name="email" required>
+
+          <label for="password">Password</label>
+          <input type="password" id="password" name="password" required>
+
+          <label for="confirmPassword">Confirm Password</label>
+          <input type="password" id="confirmPassword" name="confirmPassword" required>
+
+          <button type="submit" class="auth-button">
+            Create Account
+          </button>
+
+        </form>
+
+        <p class="auth-switch">
+          Already have an account?
+          <a href="/auth/sign-in">Sign In</a>
+        </p>
+
+      </div>
+
+    </main>
+
+    <%- include('../partials/_footer.ejs') %>
 
 </body>
 

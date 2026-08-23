@@ -1,20 +1,59 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Sign In</title>
-  </head>
-  <body>
-    <h1>Sign in</h1>
-    <form action="/auth/sign-in" method="POST">
-      <label for="username">Username:</label>
-      <input type="text" name="username" id="username" />
 
-      <label for="password">Password:</label>
-      <input type="password" name="password" id="password" />
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-      <button type="submit">Sign in</button>
-    </form>
-  </body>
+  <title>Sign In | Donut House</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@300;400;600;700;800;900&display=swap"
+    rel="stylesheet">
+
+  <link rel="stylesheet" href="/stylesheets/style.css">
+</head>
+
+<body>
+
+  <%- include('../partials/_navbar.ejs') %>
+
+    <main class="auth-page">
+
+      <div class="auth-card">
+
+        <h1 class="auth-title">Welcome Back</h1>
+
+        <p class="auth-subtitle">
+          Sign in to your Donut House account.
+        </p>
+
+        <form action="/auth/sign-in" method="POST" class="auth-form">
+
+          <label for="username">Username</label>
+          <input type="text" id="username" name="username" required>
+
+          <label for="password">Password</label>
+          <input type="password" id="password" name="password" required>
+
+          <button type="submit" class="auth-button">
+            Sign In
+          </button>
+
+        </form>
+
+        <p class="auth-switch">
+          Don't have an account?
+          <a href="/auth/sign-up">Create Account</a>
+        </p>
+
+      </div>
+
+    </main>
+
+    <%- include('../partials/_footer.ejs') %>
+
+</body>
+
 </html>
