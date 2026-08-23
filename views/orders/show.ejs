@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Order Details | Donut House</title>
+</head>
+
+<body>
+
+    <%- include('../partials/_navbar.ejs') %>
+
+        <h1>Order Details</h1>
+
+        <h2>Order #<%= order._id %>
+        </h2>
+
+        <h3>Location</h3>
+
+        <p>
+            <%= order.location.name %>
+        </p>
+
+        <p>
+            <%= order.location.address %>,
+                <%= order.location.city %>
+        </p>
+
+        <h3>Items</h3>
+
+        <% order.items.forEach(item=> { %>
+
+            <div>
+
+                <p>
+                    <strong>
+                        <%= item.donut.name %>
+                    </strong>
+                </p>
+
+                <p>
+                    Quantity: <%= item.quantity %>
+                </p>
+
+                <p>
+                    Price: <%= item.price %> BD
+                </p>
+
+                <p>
+                    Subtotal:
+                    <%= item.price * item.quantity %> BD
+                </p>
+
+            </div>
+
+            <hr>
+
+            <% }) %>
+
+                <h2>
+                    Total: <%= order.total %> BD
+                </h2>
+
+                <p>
+                    Status: <%= order.status %>
+                </p>
+
+                <a href="/orders">
+                    Back to My Orders
+                </a>
+
+                <%- include('../partials/_footer.ejs') %>
+
+</body>
+
+</html>

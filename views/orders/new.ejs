@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Checkout | Donut House</title>
+</head>
+
+<body>
+
+    <%- include('../partials/_navbar.ejs') %>
+
+        <h1>Checkout</h1>
+
+        <h2>Choose a Location</h2>
+
+        <form action="/orders" method="POST">
+
+            <% locations.forEach(location=> { %>
+
+                <div>
+
+                    <input type="radio" id="<%= location._id %>" name="location" value="<%= location._id %>" required>
+
+                    <label for="<%= location._id %>">
+                        <%= location.name %> -
+                            <%= location.address %>,
+                                <%= location.city %>
+                    </label>
+
+                </div>
+
+                <% }) %>
+
+                    <br>
+
+                    <button type="submit">
+                        Place Order
+                    </button>
+
+        </form>
+
+        <br>
+
+        <a href="/cart">
+            Back to Cart
+        </a>
+
+        <%- include('../partials/_footer.ejs') %>
+
+</body>
+
+</html>

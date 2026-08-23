@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>My Orders | Donut House</title>
+</head>
+
+<body>
+
+    <%- include('../partials/_navbar.ejs') %>
+
+        <h1>My Orders</h1>
+
+        <% if (orders.length===0) { %>
+
+            <p>You have no orders yet.</p>
+
+            <% } else { %>
+
+                <% orders.forEach(order=> { %>
+
+                    <div>
+
+                        <h2>Order #<%= order._id %>
+                        </h2>
+
+                        <p>
+                            Location:
+                            <%= order.location.name %>
+                        </p>
+
+                        <p>
+                            Total:
+                            <%= order.total %> BD
+                        </p>
+
+                        <p>
+                            Status:
+                            <%= order.status %>
+                        </p>
+
+                        <a href="/orders/<%= order._id %>">
+                            View Order
+                        </a>
+
+                    </div>
+
+                    <hr>
+
+                    <% }) %>
+
+                        <% } %>
+
+                            <%- include('../partials/_footer.ejs') %>
+
+</body>
+
+</html>
