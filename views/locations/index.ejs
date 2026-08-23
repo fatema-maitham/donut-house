@@ -5,54 +5,80 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>Our Locations | Donut House</title>
+    <title>Locations - Donut House</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+    <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@300;400;600;700;800;900&display=swap"
+        rel="stylesheet">
+
+    <link rel="stylesheet" href="/stylesheets/style.css">
 </head>
 
 <body>
 
     <%- include('../partials/_navbar.ejs') %>
 
-        <h1>Our Locations</h1>
+        <div class="admin-layout">
 
-        <% if (locations.length===0) { %>
+            <%- include('../partials/_adminSidebar.ejs') %>
 
-            <p>No locations available right now.</p>
+                <main class="admin-content">
 
-            <% } else { %>
+                    <div class="admin-page-header">
 
-                <% locations.forEach(location=> { %>
+                        <div>
+                            <h1>Locations</h1>
 
-                    <div>
+                            <p>
+                                Manage Donut House locations.
+                            </p>
+                        </div>
 
-                        <h2>
-                            <%= location.name %>
-                        </h2>
-
-                        <p>
-                            <%= location.address %>, <%= location.city %>
-                        </p>
-
-                        <p>
-                            📞 <%= location.phone %>
-                        </p>
-
-                        <p>
-                            🕐 <%= location.openingHours %>
-                        </p>
-
-                        <a href="/locations/<%= location._id %>">
-                            View Location
+                        <a href="/locations/new" class="admin-button admin-button-link">
+                            Add Location
                         </a>
 
                     </div>
 
-                    <hr>
 
-                    <% }) %>
+                    <div class="admin-cards">
 
-                        <% } %>
+                        <% locations.forEach(location=> { %>
 
-                            <%- include('../partials/_footer.ejs') %>
+                            <div class="admin-card">
+
+                                <h2>
+                                    <%= location.name %>
+                                </h2>
+
+                                <p>
+                                    <strong>Address:</strong>
+                                    <%= location.address %>
+                                </p>
+
+                                <p>
+                                    <strong>Opening:</strong>
+                                    <%= location.openingTime %>
+                                </p>
+
+                                <p>
+                                    <strong>Closing:</strong>
+                                    <%= location.closingTime %>
+                                </p>
+
+                            </div>
+
+                            <% }) %>
+
+                    </div>
+
+                </main>
+
+        </div>
+
+        <%- include('../partials/_footer.ejs') %>
 
 </body>
 

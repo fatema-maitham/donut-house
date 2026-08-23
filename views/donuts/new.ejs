@@ -4,50 +4,112 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Add Donut | Donut House</title>
+
+    <title>Add Donut - Donut House</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+    <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@300;400;600;700;800;900&display=swap"
+        rel="stylesheet">
+
+    <link rel="stylesheet" href="/stylesheets/style.css">
 </head>
 
 <body>
 
-    <h1>Add a New Donut</h1>
+    <%- include('../partials/_navbar.ejs') %>
 
-    <form action="/donuts" method="POST">
 
-        <label for="name">Name:</label>
-        <input type="text" name="name" id="name" required>
+        <div class="admin-layout">
 
-        <br><br>
+            <%- include('../partials/_adminSidebar.ejs') %>
 
-        <label for="description">Description:</label>
-        <textarea name="description" id="description" required></textarea>
 
-        <br><br>
+                <main class="admin-content">
 
-        <label for="price">Price:</label>
-        <input type="number" name="price" id="price" step="0.001" min="0" required>
+                    <div class="admin-form-card">
 
-        <br><br>
+                        <h1>Add Donut</h1>
 
-        <label for="image">Image URL:</label>
-        <input type="text" name="image" id="image" required>
+                        <p class="admin-form-subtitle">
+                            Add a new donut to the Donut House menu.
+                        </p>
 
-        <br><br>
 
-        <label for="category">Category:</label>
-        <input type="text" name="category" id="category" required>
+                        <form action="/donuts" method="POST" class="admin-form">
 
-        <br><br>
+                            <label for="name">
+                                Donut Name
+                            </label>
 
-        <label for="available">Available:</label>
-        <input type="checkbox" name="available" id="available" value="true" checked>
+                            <input type="text" id="name" name="name" placeholder="e.g. Boston Cream" required>
 
-        <br><br>
 
-        <button type="submit">Create Donut</button>
+                            <label for="description">
+                                Description
+                            </label>
 
-    </form>
+                            <textarea id="description" name="description" placeholder="Describe the donut..." rows="5"
+                                required></textarea>
 
-    <a href="/donuts">Back to Donuts</a>
+
+                            <label for="price">
+                                Price
+                            </label>
+
+                            <input type="number" id="price" name="price" step="0.001" min="0" placeholder="1.560"
+                                required>
+
+
+                            <label for="category">
+                                Category
+                            </label>
+
+                            <select id="category" name="category" required>
+                                <option value="">Select category</option>
+                                <option value="classic">Classic Donut</option>
+                                <option value="special">Special Donut</option>
+                                <option value="box">Box Deal</option>
+                            </select>
+
+
+                            <label for="image">
+                                Image URL
+                            </label>
+
+                            <input type="url" id="image" name="image" placeholder="https://...">
+
+
+                            <label for="available">
+                                Availability
+                            </label>
+
+                            <select id="available" name="available">
+                                <option value="true">
+                                    Available
+                                </option>
+
+                                <option value="false">
+                                    Not Available
+                                </option>
+                            </select>
+
+
+                            <button type="submit" class="admin-button">
+                                Add Donut
+                            </button>
+
+                        </form>
+
+                    </div>
+
+                </main>
+
+        </div>
+
+
+        <%- include('../partials/_footer.ejs') %>
 
 </body>
 

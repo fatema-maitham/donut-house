@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>Manage Orders | Donut House</title>
+    <title>Manage Orders - Donut House</title>
 
     <link rel="stylesheet" href="/stylesheets/style.css">
 </head>
@@ -14,67 +14,59 @@
 
     <%- include('../partials/_navbar.ejs') %>
 
-        <main>
+        <div class="admin-layout">
 
-            <section class="section">
+            <%- include('../partials/_adminSidebar.ejs') %>
 
-                <div class="container">
+                <main class="admin-content">
 
-                    <h1 class="sectionTitle">
-                        Manage Orders
-                    </h1>
+                    <div class="admin-page-header">
 
-                    <% if (orders.length===0) { %>
+                        <div>
+                            <h1>Manage Orders</h1>
 
-                        <p>No orders yet.</p>
+                            <p>
+                                View customer orders.
+                            </p>
+                        </div>
 
-                        <% } else { %>
+                    </div>
 
-                            <% orders.forEach(order=> { %>
 
-                                <div class="cardBase" style="position: relative; margin-bottom: 20px;">
+                    <div class="admin-cards">
 
-                                    <h2>
-                                        Order #<%= order._id %>
-                                    </h2>
+                        <% orders.forEach(order=> { %>
 
-                                    <p>
-                                        Customer:
-                                        <%= order.user.username %>
-                                    </p>
+                            <div class="admin-card">
 
-                                    <p>
-                                        Location:
-                                        <%= order.location.name %>
-                                    </p>
+                                <h2>
+                                    Order
+                                </h2>
 
-                                    <p>
-                                        Total:
-                                        BD <%= order.total.toFixed(3) %>
-                                    </p>
+                                <p>
+                                    <strong>Customer:</strong>
+                                    <%= order.user %>
+                                </p>
 
-                                    <p>
-                                        Status:
-                                        <%= order.status %>
-                                    </p>
+                                <p>
+                                    <strong>Status:</strong>
+                                    <%= order.status %>
+                                </p>
 
-                                    <br>
+                                <p>
+                                    <strong>Total:</strong>
+                                    BD <%= order.total %>
+                                </p>
 
-                                    <a href="/orders/<%= order._id %>">
-                                        View Order
-                                    </a>
+                            </div>
 
-                                </div>
+                            <% }) %>
 
-                                <% }) %>
+                    </div>
 
-                                    <% } %>
+                </main>
 
-                </div>
-
-            </section>
-
-        </main>
+        </div>
 
         <%- include('../partials/_footer.ejs') %>
 
