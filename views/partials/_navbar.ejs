@@ -1,42 +1,168 @@
 <nav>
   <div class="container">
+
     <div class="nav-inner">
 
+      <!-- Logo -->
       <div class="logo">
         <a href="/">
           <img src="https://i.imgur.com/9Jv1mEh.png" alt="Donut House" height="50">
         </a>
       </div>
 
-      <button class="navBtn" id="navBtn" type="button" aria-expanded="false" aria-controls="mobileMenu">
+
+      <!-- Mobile Button -->
+      <button class="navBtn" id="navBtn" type="button" aria-expanded="false" aria-controls="mobileMenu"
+        aria-label="Open menu">
         <span class="burger"></span>
       </button>
 
+
+      <!-- Desktop Navigation -->
       <ul>
-        <li><a href="/donuts">Menu</a></li>
-        <li><a href="/locations">Locations</a></li>
 
-        <% if (user) { %>
-          <li><a href="/cart">Cart</a></li>
-          <li><a href="/orders">My Orders</a></li>
-          <% } %>
+        <!-- Everyone -->
+        <li>
+          <a href="/donuts">Menu</a>
+        </li>
 
-            <% if (user && user.role==='admin' ) { %>
-              <li><a href="/orders/admin">Manage Orders</a></li>
-              <li><a href="/donuts/new">Add Donut</a></li>
-              <li><a href="/locations/new">Add Location</a></li>
+        <li>
+          <a href="/locations">Locations</a>
+        </li>
+
+
+        <% if (user && user.role==='admin' ) { %>
+
+          <!-- ADMIN -->
+          <li>
+            <a href="/orders/admin">Manage Orders</a>
+          </li>
+
+          <li>
+            <a href="/donuts/new">Add Donut</a>
+          </li>
+
+          <li>
+            <a href="/locations/new">Add Location</a>
+          </li>
+
+          <li>
+            <a href="/auth/sign-out">Logout</a>
+          </li>
+
+
+          <% } else if (user) { %>
+
+            <!-- CUSTOMER -->
+            <li>
+              <a href="/cart">Cart</a>
+            </li>
+
+            <li>
+              <a href="/orders">My Orders</a>
+            </li>
+
+            <li>
+              <a href="/auth/sign-out">Logout</a>
+            </li>
+
+
+            <% } else { %>
+
+              <!-- GUEST -->
+              <li>
+                <a href="/auth/sign-in">Login</a>
+              </li>
+
+              <li>
+                <a href="/auth/sign-up">Sign Up</a>
+              </li>
+
               <% } %>
 
-                <% if (user) { %>
-                  <li>
-                    <a href="/auth/sign-out">Logout</a>
-                  </li>
-                  <% } else { %>
-                    <li><a href="/auth/sign-in">Login</a></li>
-                    <li><a href="/auth/sign-up">Sign Up</a></li>
-                    <% } %>
       </ul>
 
     </div>
+
+
+    <!-- Mobile Navigation -->
+    <div class="mobileMenu" id="mobileMenu">
+
+      <!-- Everyone -->
+      <a href="/donuts">Menu</a>
+
+      <a href="/locations">Locations</a>
+
+
+      <% if (user && user.role==='admin' ) { %>
+
+        <!-- ADMIN -->
+        <a href="/orders/admin">Manage Orders</a>
+
+        <a href="/donuts/new">Add Donut</a>
+
+        <a href="/locations/new">Add Location</a>
+
+        <a href="/auth/sign-out">Logout</a>
+
+
+        <% } else if (user) { %>
+
+          <!-- CUSTOMER -->
+          <a href="/cart">Cart</a>
+
+          <a href="/orders">My Orders</a>
+
+          <a href="/auth/sign-out">Logout</a>
+
+
+          <% } else { %>
+
+            <!-- GUEST -->
+            <a href="/auth/sign-in">Login</a>
+
+            <a href="/auth/sign-up">Sign Up</a>
+
+            <% } %>
+
+    </div>
+
   </div>
 </nav>
+
+
+<script>
+  const navBtn = document.getElementById("navBtn");
+  const mobileMenu = document.getElementById("mobileMenu");
+
+  if (navBtn && mobileMenu) {
+
+    navBtn.addEventListener("click", () => {
+
+      const open = mobileMenu.classList.toggle("open");
+
+      navBtn.setAttribute(
+        "aria-expanded",
+        String(open)
+      );
+
+    });
+
+
+    mobileMenu.addEventListener("click", (event) => {
+
+      if (event.target.tagName === "A") {
+
+        mobileMenu.classList.remove("open");
+
+        navBtn.setAttribute(
+          "aria-expanded",
+          "false"
+        );
+
+      }
+
+    });
+
+  }
+</script>
