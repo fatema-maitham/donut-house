@@ -7,16 +7,16 @@ const isAdmin = require('../middleware/isAdmin');
 
 router.get('/', locationCtrl.index);
 
-router.get('/new', isAdmin, locationCtrl.new);
+router.get('/new', isSignedIn, isAdmin, locationCtrl.new);
 
-router.get('/:id/edit', isAdmin, locationCtrl.edit);
+router.get('/:id/edit', isSignedIn, isAdmin, locationCtrl.edit);
 
 router.get('/:id', locationCtrl.show);
 
-router.post('/', isAdmin, locationCtrl.create);
+router.post('/', isSignedIn, isAdmin, locationCtrl.create);
 
-router.put('/:id', isAdmin, locationCtrl.update);
+router.put('/:id', isSignedIn, isAdmin, locationCtrl.update);
 
-router.delete('/:id', isAdmin, locationCtrl.delete);
+router.delete('/:id', isSignedIn, isAdmin, locationCtrl.delete);
 
 module.exports = router;
