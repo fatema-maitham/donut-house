@@ -3,131 +3,162 @@
 
 <head>
     <meta charset="UTF-8">
-
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>Your Cart | Donut House</title>
+    <title>My Cart | Donut House</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+    <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@300;400;600;700;800;900&display=swap"
+        rel="stylesheet">
+
+    <link rel="stylesheet" href="/stylesheets/style.css">
 </head>
 
 <body>
 
     <%- include('../partials/_navbar.ejs') %>
 
+
         <main>
 
-            <h1>Your Cart 🛒🍩</h1>
+            <section class="section">
+
+                <div class="container">
+
+                    <h1 class="sectionTitle">
+                        Your Cart
+                    </h1>
 
 
-            <% if (cart.length===0) { %>
+                    <% if (!user.cart || user.cart.length===0) { %>
 
-                <p>Your cart is empty.</p>
+                        <p>Your cart is empty.</p>
 
-                <a href="/donuts">
-                    Browse Donuts
-                </a>
+                        <br>
 
+                        <a href="/donuts">
+                            Continue Shopping
+                        </a>
 
-                <% } else { %>
-
-                    <% let total=0; %>
-
-
-                        <% cart.forEach((item)=> { %>
-
-                            <% const itemTotal=item.donutId.price * item.quantity; %>
-
-                                <% total +=itemTotal; %>
+                        <% } else { %>
 
 
-                                    <section>
-
-                                        <h2>
-                                            <%= item.donutId.name %>
-                                        </h2>
+                            <% let total=0; %>
 
 
-                                        <img src="<%= item.donutId.image %>" alt="<%= item.donutId.name %>" width="150">
+                                <% user.cart.forEach(item=> { %>
+
+                                    <% if (item.donutId) { %>
+
+                                        <% const itemTotal=item.donutId.price * item.quantity; %>
+
+                                            <% total +=itemTotal; %>
 
 
-                                        <p>
-                                            Price:
-                                            <%= item.donutId.price.toFixed(3) %>
-                                        </p>
+                                                <div class="cardBase" style="position: relative; margin-bottom: 20px;">
+
+                                                    <div class="metaRow">
+
+                                                        <div>
+
+                                                            <div class="name">
+                                                                <%= item.donutId.name %>
+                                                            </div>
+
+                                                            <small>
+                                                                BD <%= item.donutId.price.toFixed(3) %>
+                                                                    each
+                                                            </small>
+
+                                                        </div>
 
 
-                                        <p>
-                                            Quantity:
-                                            <%= item.quantity %>
-                                        </p>
+                                                        <div>
+
+                                                            <strong>
+                                                                BD <%= itemTotal.toFixed(3) %>
+                                                            </strong>
+
+                                                        </div>
+
+                                                    </div>
 
 
-                                        <!-- DECREASE -->
+                                                    <!-- Quantity -->
+                                                    <div style="margin-top: 15px;">
 
-                                        <form action="/cart/decrease/<%= item.donutId._id %>" method="POST"
-                                            style="display: inline;">
+                                                        <strong>
+                                                            Quantity:
+                                                        </strong>
 
-                                            <button type="submit">
-                                                −
-                                            </button>
+                                                        <a href="/cart/decrease/<%= item.donutId._id %>">
+                                                            −
+                                                        </a>
 
-                                        </form>
+                                                        <span style="margin: 0 15px;">
+                                                            <%= item.quantity %>
+                                                        </span>
 
+                                                        <a href="/cart/increase/<%= item.donutId._id %>">
+                                                            +
+                                                        </a>
 
-                                        <!-- INCREASE -->
-
-                                        <form action="/cart/increase/<%= item.donutId._id %>" method="POST"
-                                            style="display: inline;">
-
-                                            <button type="submit">
-                                                +
-                                            </button>
-
-                                        </form>
+                                                    </div>
 
 
-                                        <p>
-                                            Item Total:
-                                            <%= itemTotal.toFixed(3) %>
-                                        </p>
+                                                    <!-- Remove -->
+                                                    <form action="/cart/remove/<%= item.donutId._id %>" method="POST"
+                                                        style="margin-top: 15px;">
+
+                                                        <button type="submit">
+                                                            Remove
+                                                        </button>
+
+                                                    </form>
+
+                                                </div>
+
+                                                <% } %>
+
+                                                    <% }) %>
 
 
-                                        <!-- REMOVE -->
+                                                        <!-- Total -->
+                                                        <div style="margin-top: 30px;">
 
-                                        <form action="/cart/remove/<%= item.donutId._id %>" method="POST">
+                                                            <h2>
+                                                                Total:
+                                                                BD <%= total.toFixed(3) %>
+                                                            </h2>
 
-                                            <button type="submit">
-                                                Remove 🗑️
-                                            </button>
+                                                            <br>
 
-                                        </form>
+                                                            <a href="/donuts">
+                                                                Continue Shopping
+                                                            </a>
 
+                                                            <br><br>
 
-                                        <hr>
+                                                            <a href="/orders/new">
+                                                                Checkout
+                                                            </a>
 
-                                    </section>
-
-                                    <% }) %>
-
-
-                                        <h2>
-                                            Total:
-                                            <%= total.toFixed(3) %>
-                                        </h2>
+                                                        </div>
 
 
-                                        <a href="/donuts">
-                                            Continue Shopping
-                                        </a>
+                                                        <% } %>
 
-                                        <% } %>
+                </div>
+
+            </section>
 
         </main>
 
 
         <%- include('../partials/_footer.ejs') %>
-            <a href="/orders/new">
-                Checkout
-            </a>
+
 </body>
 
 </html>

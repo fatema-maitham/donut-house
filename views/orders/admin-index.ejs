@@ -5,13 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>My Orders | Donut House</title>
-
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-
-    <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@300;400;600;700;800;900&display=swap"
-        rel="stylesheet">
+    <title>Manage Orders | Donut House</title>
 
     <link rel="stylesheet" href="/stylesheets/style.css">
 </head>
@@ -27,20 +21,12 @@
                 <div class="container">
 
                     <h1 class="sectionTitle">
-                        My Orders
+                        Manage Orders
                     </h1>
 
                     <% if (orders.length===0) { %>
 
-                        <p>
-                            You haven't placed any orders yet.
-                        </p>
-
-                        <br>
-
-                        <a href="/donuts">
-                            Start Shopping
-                        </a>
+                        <p>No orders yet.</p>
 
                         <% } else { %>
 
@@ -52,19 +38,24 @@
                                         Order #<%= order._id %>
                                     </h2>
 
-                                    <p style="margin-top: 10px;">
-                                        <strong>Status:</strong>
-                                        <%= order.status %>
+                                    <p>
+                                        Customer:
+                                        <%= order.user.username %>
                                     </p>
 
                                     <p>
-                                        <strong>Total:</strong>
+                                        Location:
+                                        <%= order.location.name %>
+                                    </p>
+
+                                    <p>
+                                        Total:
                                         BD <%= order.total.toFixed(3) %>
                                     </p>
 
                                     <p>
-                                        <strong>Date:</strong>
-                                        <%= order.createdAt.toLocaleDateString() %>
+                                        Status:
+                                        <%= order.status %>
                                     </p>
 
                                     <br>

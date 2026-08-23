@@ -1,7 +1,92 @@
-<% const year = new Date().getFullYear(); %>
+<footer class="footer">
 
-<footer id="footer">
-  <p>
-    &copy; <%= year %> All Rights Reserved.
-  </p>
+  <div class="container footerInner">
+
+    <div class="footerCol">
+
+      <div class="footerLogo">
+        Donut House
+      </div>
+
+      <p class="footerText">
+        Freshly baked. Fully plant-based. Made to crave.
+      </p>
+
+    </div>
+
+    <div class="footerCol">
+
+      <div class="footerTitle">
+        Menu
+      </div>
+
+      <a class="footerLink" href="/donuts">
+        All Donuts
+      </a>
+
+      <a class="footerLink" href="/locations">
+        Locations
+      </a>
+
+    </div>
+
+    <div class="footerCol">
+
+      <div class="footerTitle">
+        Account
+      </div>
+
+      <% if (user) { %>
+
+        <a class="footerLink" href="/cart">
+          Cart
+        </a>
+
+        <a class="footerLink" href="/orders">
+          My Orders
+        </a>
+
+        <% } %>
+
+    </div>
+
+    <div class="footerCol">
+
+      <div class="footerTitle">
+        Contact
+      </div>
+
+      <p class="footerText">
+        Bahrain
+      </p>
+
+      <p class="footerText">
+        Phone: +973 1700 1192
+      </p>
+
+      <p class="footerText">
+        Email: hello@donuthouse.com
+      </p>
+
+    </div>
+
+  </div>
+
+  <div class="footerBottom">
+
+    <div class="container footerBottomInner">
+
+      <small>
+        © <%= new Date().getFullYear() %>
+          Donut House. All rights reserved.
+      </small>
+
+      <small class="footerRight">
+        Made with Love
+      </small>
+
+    </div>
+
+  </div>
+
 </footer>

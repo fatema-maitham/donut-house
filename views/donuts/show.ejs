@@ -8,6 +8,14 @@
     <title>
         <%= donut.name %> | Donut House
     </title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+    <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@300;400;600;700;800;900&display=swap"
+        rel="stylesheet">
+
+    <link rel="stylesheet" href="/stylesheets/style.css">
 </head>
 
 <body>
@@ -16,71 +24,61 @@
 
         <main>
 
-            <h1>
-                <%= donut.name %>
-            </h1>
+            <section class="infoSection">
 
-            <img src="<%= donut.image %>" alt="<%= donut.name %>" width="300">
+                <div class="container">
 
-            <p>
-                <%= donut.description %>
-            </p>
+                    <div class="infoBlock">
 
-            <p>
-                Price: <%= donut.price %>
-            </p>
+                        <!-- Donut Image -->
+                        <div class="infoImg">
 
-            <p>
-                Category: <%= donut.category %>
-            </p>
+                            <img src="<%= donut.image %>" alt="<%= donut.name %>">
 
-            <% if (donut.available) { %>
-
-                <p>Available 🍩</p>
-
-                <% } else { %>
-
-                    <p>Currently unavailable</p>
-
-                    <% } %>
+                        </div>
 
 
-                        <!-- CUSTOMER: ADD TO CART -->
+                        <!-- Donut Information -->
+                        <div>
 
-                        <% if (user && user.role==='customer' && donut.available) { %>
+                            <h2>
+                                <%= donut.name %>
+                            </h2>
 
-                            <form action="/cart/add/<%= donut._id %>" method="POST">
+                            <p>
+                                <strong>Category:</strong>
+                                <%= donut.category %>
+                            </p>
 
-                                <button type="submit">
-                                    Add to Cart 🛒
-                                </button>
+                            <p>
+                                <strong>Price:</strong>
+                                BD <%= donut.price.toFixed(3) %>
+                            </p>
 
-                            </form>
+                            <p style="margin-top: 14px;">
+                                <%= donut.description %>
+                            </p>
 
-                            <% } %>
 
+                            <% if (user) { %>
 
-                                <!-- ADMIN ACTIONS -->
+                                <form action="/cart/add/<%= donut._id %>" method="POST" style="margin-top: 24px;">
 
-                                <% if (user && user.role==='admin' ) { %>
+                                    <button type="submit">
+                                        Add to Cart
+                                    </button>
 
-                                    <hr>
+                                </form>
 
-                                    <h2>Admin Actions</h2>
+                                <% } else { %>
 
-                                    <a href="/donuts/<%= donut._id %>/edit">
-                                        Edit Donut
+                                    <p style="margin-top: 24px;">
+                                        Please log in to add items to your cart.
+                                    </p>
+
+                                    <a href="/auth/login">
+                                        Login
                                     </a>
-
-                                    <br><br>
-
-                                    <form action="/donuts/<%= donut._id %>?_method=DELETE" method="POST">
-
-                                        <button type="submit">
-                                            Delete Donut
-                                        </button>
-
-                                    </form>
 
                                     <% } %>
 
@@ -88,8 +86,16 @@
                                         <br>
 
                                         <a href="/donuts">
-                                            Back to Donuts
+                                            Back to Menu
                                         </a>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </section>
 
         </main>
 

@@ -1,21 +1,50 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="stylesheet" href="/stylesheets/style.css" />
-    <link rel="stylesheet" href="/stylesheets/partials.css" />
-    <title>Home Page</title>
-  </head>
-  <body>
-     <%- include('./partials/_navbar.ejs') %>
 
-    <% if(user){ %>
-      <h1>Welcome to the app, <%= user.username %>!</h1>
-    <% }else{ %>
-      <h1>Welcome to the app!</h1>
-    <%}%>
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>Donut House</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@300;400;600;700;800;900&display=swap"
+    rel="stylesheet">
+
+  <link rel="stylesheet" href="/stylesheets/style.css">
+</head>
+
+<body>
+
+  <%- include('./partials/_navbar.ejs') %>
+
+
+    <!-- HERO -->
+    <header class="hero">
+
+      <div class="container">
+
+        <div class="heroCard">
+
+          <div class="heroTitle">
+            Donuts, But Better.
+          </div>
+
+          <div class="heroSub">
+            Freshly baked. Fully plant-based. Made to crave.
+          </div>
+
+        </div>
+
+      </div>
+
+    </header>
+
 
     <%- include('./partials/_footer.ejs') %>
-  </body>
+
+</body>
+
 </html>

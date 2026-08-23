@@ -1,5 +1,4 @@
 <!DOCTYPE html>
-
 <html lang="en">
 
 <head>
@@ -7,72 +6,92 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
     <title>Order Details | Donut House</title>
+
+    <link rel="stylesheet" href="/stylesheets/style.css">
 </head>
 
 <body>
 
     <%- include('../partials/_navbar.ejs') %>
 
-        <h1>Order Details</h1>
+        <main>
 
-        <h2>Order #<%= order._id %>
-        </h2>
+            <section class="section">
 
-        <h3>Location</h3>
+                <div class="container">
 
-        <p>
-            <%= order.location.name %>
-        </p>
+                    <h1 class="sectionTitle">
+                        Order Details
+                    </h1>
 
-        <p>
-            <%= order.location.address %>,
-                <%= order.location.city %>
-        </p>
+                    <div class="cardBase">
 
-        <h3>Items</h3>
+                        <h2>
+                            Order #<%= order._id %>
+                        </h2>
 
-        <% order.items.forEach(item=> { %>
+                        <p>
+                            <strong>Status:</strong>
+                            <%= order.status %>
+                        </p>
 
-            <div>
+                        <p>
+                            <strong>Location:</strong>
+                            <%= order.location.name %>
+                        </p>
 
-                <p>
-                    <strong>
-                        <%= item.donut.name %>
-                    </strong>
-                </p>
+                        <hr>
 
-                <p>
-                    Quantity: <%= item.quantity %>
-                </p>
+                        <h2>Items</h2>
 
-                <p>
-                    Price: <%= item.price %> BD
-                </p>
+                        <% order.items.forEach(item=> { %>
 
-                <p>
-                    Subtotal:
-                    <%= item.price * item.quantity %> BD
-                </p>
+                            <div style="margin: 20px 0;">
 
-            </div>
+                                <h3>
+                                    <%= item.donut.name %>
+                                </h3>
 
-            <hr>
+                                <p>
+                                    Quantity: <%= item.quantity %>
+                                </p>
 
-            <% }) %>
+                                <p>
+                                    Price:
+                                    BD <%= item.price.toFixed(3) %>
+                                </p>
 
-                <h2>
-                    Total: <%= order.total %> BD
-                </h2>
+                                <p>
+                                    Subtotal:
+                                    BD <%= (item.price * item.quantity).toFixed(3) %>
+                                </p>
 
-                <p>
-                    Status: <%= order.status %>
-                </p>
+                            </div>
 
-                <a href="/orders">
-                    Back to My Orders
-                </a>
+                            <% }) %>
 
-                <%- include('../partials/_footer.ejs') %>
+                                <hr>
+
+                                <h2>
+                                    Total:
+                                    BD <%= order.total.toFixed(3) %>
+                                </h2>
+
+                                <br>
+
+                                <a href="/orders">
+                                    Back to My Orders
+                                </a>
+
+                    </div>
+
+                </div>
+
+            </section>
+
+        </main>
+
+        <%- include('../partials/_footer.ejs') %>
 
 </body>
 

@@ -1,23 +1,119 @@
-<% donuts.forEach((donut)=> { %>
+<!DOCTYPE html>
+<html lang="en">
 
-    <div>
-        <h2>
-            <a href="/donuts/<%= donut._id %>">
-                <%= donut.name %>
-            </a>
-        </h2>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-        <img src="<%= donut.image %>" alt="<%= donut.name %>" width="200">
+    <title>Menu | Donut House</title>
 
-        <p>
-            <%= donut.description %>
-        </p>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 
-        <p>Price: <%= donut.price %>
-        </p>
+    <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@300;400;600;700;800;900&display=swap"
+        rel="stylesheet">
 
-        <p>Category: <%= donut.category %>
-        </p>
-    </div>
+    <link rel="stylesheet" href="/stylesheets/style.css">
+</head>
 
-    <% }) %>
+<body>
+
+    <%- include('../partials/_navbar.ejs') %>
+
+
+        <main>
+
+            <div class="container">
+
+                <div class="menuIntro">
+
+                    <div class="menuIntroTitle">
+                        Menu
+                    </div>
+
+                    <p class="menuIntroText">
+                        Choose your favorite donut.
+                        Handmade fresh for you!
+                    </p>
+
+                </div>
+
+
+                <section class="section">
+
+                    <div class="grid">
+
+                        <% if (donuts.length===0) { %>
+
+                            <p>No donuts available right now.</p>
+
+                            <% } else { %>
+
+                                <% donuts.forEach(donut=> { %>
+
+                                    <article class="card">
+
+                                        <div class="cardInner">
+
+                                            <div class="face front">
+
+                                                <div class="donutFloat">
+
+                                                    <img src="<%= donut.image %>" alt="<%= donut.name %>">
+
+                                                </div>
+
+
+                                                <div class="cardBase">
+
+                                                    <div class="metaRow">
+
+                                                        <small>
+                                                            <%= donut.category %>
+                                                        </small>
+
+                                                    </div>
+
+
+                                                    <div class="name">
+                                                        <%= donut.name %>
+                                                    </div>
+
+
+                                                    <div class="price">
+                                                        BD <%= donut.price.toFixed(3) %>
+                                                    </div>
+
+
+                                                    <br>
+
+                                                    <a href="/donuts/<%= donut._id %>">
+                                                        View Donut
+                                                    </a>
+
+                                                </div>
+
+                                            </div>
+
+                                        </div>
+
+                                    </article>
+
+                                    <% }) %>
+
+                                        <% } %>
+
+                    </div>
+
+                </section>
+
+            </div>
+
+        </main>
+
+
+        <%- include('../partials/_footer.ejs') %>
+
+</body>
+
+</html>
