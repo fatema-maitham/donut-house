@@ -372,6 +372,33 @@ nav a:hover::after {
   margin-top: 6px;
 }
 
+/* =========================
+   ABOUT US
+========================= */
+
+.aboutHeader {
+  text-align: center;
+  padding: 80px 0 40px;
+}
+
+.aboutHeader h1 {
+  font-size: clamp(60px, 8vw, 120px);
+  font-weight: 900;
+  letter-spacing: -3px;
+  line-height: 1;
+  color: #f26f5f;
+  margin-bottom: 24px;
+}
+
+.aboutHeader p {
+  max-width: 700px;
+  margin: 0 auto;
+  font-size: 20px;
+  font-weight: 700;
+  line-height: 1.6;
+  color: rgba(15, 42, 67, .85);
+}
+
 .infoSection {
   padding: 58px 0 78px;
 }

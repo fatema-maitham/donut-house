@@ -15,7 +15,7 @@ const morgan = require('morgan');
 const isSignedIn = require('./middleware/isSignedIn');
 const isAdmin = require('./middleware/isAdmin');
 const addUserToViews = require('./middleware/addUserToViews');
-const indexRouter = require('./routes/index');
+const aboutRouter = require('./routes/aboutRouter');
 
 // Routers
 const authRouter = require('./routes/authRouter');
@@ -52,7 +52,7 @@ app.use('/auth', authRouter);
 app.use('/donuts', donutRouter);
 app.use('/cart', cartRouter);
 app.use('/orders', orderRouter);
-app.use('/', indexRouter);
+app.use('/about', aboutRouter);
 
 // Customer middleware
 app.use(isSignedIn);
