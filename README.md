@@ -68,6 +68,7 @@ Donut House is a full-stack donut ordering web application where customers can b
 - AAG, I can view the details of a specific location.
 - AAU, I can select a location for my order.
 - AAU, I can delete my account and its associated orders.
+
 **Admin User Stories**
 - AA, I can create a new donut.
 - AA, I can edit a donut.
@@ -77,7 +78,6 @@ Donut House is a full-stack donut ordering web application where customers can b
 - AA, I can delete a location.
 - AA, I can view all customer orders.
 - AA, I can update an order's status.
-> AAG = As a Guest, AAU = As a User, AA = As an Admin
  
 ### ERD (Entity Relationship Diagram)
  
