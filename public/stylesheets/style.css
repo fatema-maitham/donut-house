@@ -412,6 +412,7 @@ nav a:hover::after {
 
 .infoBlock h2 {
   font-size: clamp(44px, 5vw, 84px);
+  white-space: nowrap;
   letter-spacing: -1.4px;
   font-weight: 900;
   margin-bottom: 14px;
@@ -635,6 +636,16 @@ nav a:hover::after {
   .footerInner {
     grid-template-columns: 1fr 1fr;
   }
+}
+
+#values .infoBlock {
+  grid-template-columns: 1fr;
+  text-align: center;
+}
+
+#values p {
+  margin-left: auto;
+  margin-right: auto;
 }
 
 /* =========================
