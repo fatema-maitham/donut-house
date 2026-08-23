@@ -49,10 +49,11 @@ app.use('', pagesRouter);
 app.use('/auth', authRouter);
 app.use('/donuts', donutRouter);
 app.use('/cart', cartRouter);
-app.use('/locations', locationRouter);
 
 // Customer middleware
 app.use(isSignedIn);
+
+app.use('/locations', locationRouter);
 
 app.get('/protected', async (req, res) => {
   res.send(`You are logged in as ${req.session.user.username}`);
