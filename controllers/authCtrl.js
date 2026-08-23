@@ -1,78 +1,117 @@
-/* eslint-disable no-empty */
 /* eslint-disable no-console */
+
 const bcrypt = require('bcrypt');
 const User = require('../models/user');
 
-const SALT_ROUDS = 10;
+const SALT_ROUNDS = 10;
 
+// Show sign-up page
 const signup = async (req, res) => {
   res.render('auth/sign-up.ejs');
 };
 
+// Create new user
 const register = async (req, res) => {
   try {
-    // verify if the username alrady exists
-    const userInDatabase = await User.findOne({ username: req.body.username });
-    // if the user exists send error msg
-    if (userInDatabase) {
-      return res.send('Invalid input');
+    // Check if username already exists
+    const usernameExists = await User.findOne({
+      username: req.body.username,
+    });
+
+    if (usernameExists) {
+      return res.send('Username already exists');
     }
-    // else send error msg
+
+    // Check if email already exists
+    const emailExists = await User.findOne({
+      email: req.body.email,
+    });
+
+    if (emailExists) {
+      return res.send('Email already exists');
+    }
+
+    // Check passwords
     if (req.body.password !== req.body.confirmPassword) {
-      return res.send('Invalid input');
+      return res.send('Passwords do not match');
     }
-    // Encrypt the password
-    const hashedPassword = bcrypt.hashSync(req.body.password, SALT_ROUDS);
-    req.body.password = hashedPassword;
 
-    // else lets check if the password match
-    // if password matches create the new user
-    const user = await User.create(req.body);
+    // Hash password
+    const hashedPassword = bcrypt.hashSync(
+      req.body.password,
+      SALT_ROUNDS
+    );
 
+    // Create user
+    const user = await User.create({
+      username: req.body.username,
+      email: req.body.email,
+      password: hashedPassword,
+      role: 'customer',
+    });
+
+    // Store user information in session
     req.session.user = {
       username: user.username,
+      email: user.email,
+      role: user.role,
       _id: user._id,
     };
-    // redirect to homepage
+
     req.session.save(() => {
       res.redirect('/');
     });
   } catch (err) {
     console.log(err);
-    res.send('something went wrong');
+    res.send('Something went wrong');
   }
 };
 
+// Show sign-in page
 const signin = async (req, res) => {
   res.render('auth/sign-in.ejs');
 };
 
+// Login
 const login = async (req, res) => {
-  const userInDatabase = await User.findOne({ username: req.body.username });
+  try {
+    const userInDatabase = await User.findOne({
+      username: req.body.username,
+    });
 
-  // only allow users that exist to login
-  if (!userInDatabase) {
-    return res.send('Invalid credentials');
+    // User doesn't exist
+    if (!userInDatabase) {
+      return res.send('Invalid credentials');
+    }
+
+    // Check password
+    if (
+      !bcrypt.compareSync(
+        req.body.password,
+        userInDatabase.password
+      )
+    ) {
+      return res.send('Invalid credentials');
+    }
+
+    // Store user information in session
+    req.session.user = {
+      username: userInDatabase.username,
+      email: userInDatabase.email,
+      role: userInDatabase.role,
+      _id: userInDatabase._id,
+    };
+
+    req.session.save(() => {
+      res.redirect('/');
+    });
+  } catch (err) {
+    console.log(err);
+    res.send('Something went wrong');
   }
-
-  // make sure the user's password matches the req.body.password
-  if (!bcrypt.compareSync(req.body.password, userInDatabase.password)) {
-    return res.send('Invalid credentials');
-  }
-
-  // There is a user AND they had the correct password. Time to make a session!
-  // Avoid storing the password, even in hashed format, in the session
-  // If there is other data you want to save to `req.session.user`, do so here!
-  req.session.user = {
-    username: userInDatabase.username,
-    _id: userInDatabase._id,
-  };
-
-  req.session.save(() => {
-    res.redirect('/');
-  });
 };
 
+// Logout
 const signout = async (req, res) => {
   req.session.destroy(() => {
     res.redirect('/');
