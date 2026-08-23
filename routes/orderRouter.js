@@ -14,8 +14,6 @@ router.get('/', isSignedIn, orderCtrl.index);
 
 router.get('/new', isSignedIn, orderCtrl.new);
 
-router.get('/:id', isSignedIn, orderCtrl.show);
-
 router.post('/', isSignedIn, orderCtrl.create);
 
 router.put('/:id/cancel', isSignedIn, orderCtrl.cancel);
@@ -32,5 +30,6 @@ router.put(
     orderCtrl.updateStatus
 );
 
+router.get('/:id', isSignedIn, orderCtrl.show);
 
 module.exports = router;
