@@ -1,130 +1,186 @@
-<section class="aboutHeader">
-    <div class="container">
-        <h1>About Us</h1>
+<!DOCTYPE html>
+<html lang="en">
 
-        <p>
-            Get to know Donut House, our story, our team,
-            and what makes our donuts special.
-        </p>
-    </div>
-</section>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
+    <title>About Us - Donut House</title>
 
-<section class="infoSection" id="story">
-    <div class="container">
-        <div class="infoBlock">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 
-            <div>
-                <h2>Our Story</h2>
+    <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@300;400;600;700;800;900&display=swap"
+        rel="stylesheet">
 
-                <p>
-                    Donut House started with a simple idea: to create delicious,
-                    high-quality donuts that bring people together.
-                </p>
+    <link rel="stylesheet" href="/stylesheets/style.css">
+</head>
 
-                <p style="margin-top:14px;">
-                    From classic favorites to creative flavors, every donut is
-                    made with care using quality ingredients and plenty of love.
-                </p>
+<body>
 
-                <p style="margin-top:14px;">
-                    Our goal is simple — to make every visit to Donut House
-                    a little sweeter.
-                </p>
-            </div>
+    <%- include('../partials/_navbar.ejs') %>
 
-            <div class="infoImg">
-                <img src="https://i.imgur.com/ryL66H7.jpg" alt="Donuts in a tray">
-            </div>
-
-        </div>
-    </div>
-</section>
-
-
-<section class="infoSection" id="suppliers">
-    <div class="container">
-        <div class="infoBlock">
-
-            <div class="infoImg">
-                <img src="https://i.imgur.com/bnynsYm.png" alt="Chocolate donut">
-            </div>
-
-            <div>
-                <h2>Our Suppliers</h2>
+        <!-- ABOUT HEADER -->
+        <section class="aboutHeader">
+            <div class="container">
+                <h1>About Us</h1>
 
                 <p>
-                    We work with trusted suppliers to bring quality ingredients
-                    into every donut we make.
-                </p>
-
-                <p style="margin-top:14px;">
-                    From fresh ingredients to delicious toppings, we carefully
-                    choose the products that help us create our donuts.
-                </p>
-
-                <p style="margin-top:14px;">
-                    Quality matters to us at every step, from our ingredients
-                    to the final donut.
+                    Get to know Donut House, our story, our team,
+                    and what makes our donuts special.
                 </p>
             </div>
-
-        </div>
-    </div>
-</section>
+        </section>
 
 
-<section class="infoSection" id="team">
-    <div class="container">
-        <div class="infoBlock" style="grid-template-columns: 1fr;">
+        <!-- OUR STORY -->
+        <section class="infoSection" id="story">
+            <div class="container">
 
-            <div>
-                <h2>Our Team</h2>
+                <div class="infoBlock">
 
-                <p>
-                    Behind every donut is a team that cares about creativity,
-                    quality, and making every customer's experience special.
-                </p>
+                    <div>
+                        <h2>Our Story</h2>
 
-                <p style="margin-top:14px;">
-                    Our team works together to prepare fresh donuts, serve our
-                    customers, and create a welcoming environment at Donut House.
-                </p>
+                        <p>
+                            Our story started simple: we wanted to bring high-quality
+                            donuts to the city and show people how good plant-based
+                            treats can taste. Small batches, real ingredients, and
+                            big flavor.
+                        </p>
 
-                <p style="margin-top:14px;">
-                    We believe that great donuts start with a great team.
-                </p>
+                        <p style="margin-top:14px;">
+                            Years later, the mission is still the same — change the
+                            perception of plant-based food, one donut at a time.
+                        </p>
+
+                        <p style="margin-top:14px;">
+                            At Donut House we are a team of more than 170 people in
+                            Bahrain and we keep growing. Our team is supported with
+                            fair and transparent working conditions, ensuring every
+                            member feels valued and respected.
+                        </p>
+                    </div>
+
+                    <div class="infoImg">
+                        <img src="https://i.imgur.com/ryL66H7.jpg" alt="Donuts in tray">
+                    </div>
+
+                </div>
+
             </div>
-
-        </div>
-    </div>
-</section>
+        </section>
 
 
-<section class="infoSection" id="impact">
-    <div class="container">
-        <div class="infoBlock">
+        <!-- OUR SUPPLIERS -->
+        <section class="infoSection" id="suppliers">
+            <div class="container">
 
-            <div>
-                <h2>Sustainability</h2>
+                <div class="infoBlock">
 
-                <p>
-                    We believe small choices can make a difference. We aim to
-                    reduce waste, use ingredients responsibly, and make choices
-                    that are better for our community and environment.
-                </p>
+                    <div class="infoImg">
+                        <img src="https://i.imgur.com/bnynsYm.png" alt="Chocolate dipping">
+                    </div>
 
-                <p style="margin-top:14px;">
-                    We continue looking for ways to improve how we work while
-                    keeping the quality and taste of our donuts at the heart
-                    of everything we do.
-                </p>
+                    <div>
+                        <h2>Our Suppliers</h2>
+
+                        <p>
+                            Like our donuts, our product sources are one of a kind.
+                            We work closely with incredible partners who care about
+                            impact, quality, and honest sourcing.
+                        </p>
+
+                        <p style="margin-top:14px;">
+                            As a base for our glazes we puree whole fruits,
+                            preferably sustainably sourced whenever available.
+                        </p>
+                    </div>
+
+                </div>
+
             </div>
+        </section>
 
-            <div class="infoImg">
-                <img src="https://i.imgur.com/GjUgeVo.png" alt="Fresh donuts">
+
+        <!-- OUR TEAM -->
+        <section class="infoSection" id="team">
+            <div class="container">
+
+                <div class="infoBlock">
+
+                    <div>
+                        <h2>Our Team</h2>
+
+                        <p>
+                            In Bahrain, we are a passionate team dedicated to
+                            bringing high-quality, plant-based donuts to our
+                            community.
+                        </p>
+
+                        <p style="margin-top:14px;">
+                            We believe in fair and transparent working conditions,
+                            ensuring that every team member is valued, respected,
+                            and supported as we continue to grow.
+                        </p>
+
+                        <p style="margin-top:14px;">
+                            Behind every donut is a group of people who care deeply
+                            about craftsmanship, sustainability, and creating
+                            moments of joy — one bite at a time.
+                        </p>
+                    </div>
+
+                </div>
+
             </div>
+        </section>
 
-        </div>
-    </div>
-</section>
+
+        <!-- SUSTAINABILITY -->
+        <section class="infoSection" id="impact">
+            <div class="container">
+
+                <div class="infoBlock">
+
+                    <div>
+                        <h2>Sustainability</h2>
+
+                        <p>
+                            We see sustainability holistically; Every sold (or
+                            donated) donut is an entry point to show people that
+                            careful use of our human and planetary resources can
+                            taste good. We treat people, animals, and our environment
+                            fairly and with care. And by people, we don’t just mean
+                            those we employ, buy from, collaborate with, and sell to
+                            – we mean future generations, too!
+                        </p>
+
+                        <p style="margin-top:14px;">
+                            As a self-funded, founder-owned business, we choose to
+                            put our values at the front of all our decisions.
+                            Success to us means we are kind AND run a profitable
+                            business in a way that we hope inspires others!
+                        </p>
+
+                        <p style="margin-top:14px;">
+                            We know we’re not perfect, but we question how we do
+                            things and strive to do better with every donut we make.
+                        </p>
+                    </div>
+
+                    <div class="infoImg">
+                        <img src="https://i.imgur.com/GjUgeVo.png" alt="Fresh donuts">
+                    </div>
+
+                </div>
+
+            </div>
+        </section>
+
+
+        <%- include('../partials/_footer.ejs') %>
+
+</body>
+
+</html>
