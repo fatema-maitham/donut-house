@@ -22,6 +22,7 @@ const pagesRouter = require('./routes/pagesRouter');
 const donutRouter = require('./routes/donutRouter');
 const cartRouter = require('./routes/cartRouter');
 const locationRouter = require('./routes/locationRouter');
+const orderRouter = require('./routes/orderRouter');
 
 // Set the port from environment variable or default to 3000
 const port = process.env.PORT ? process.env.PORT : '3000';
@@ -49,6 +50,7 @@ app.use('', pagesRouter);
 app.use('/auth', authRouter);
 app.use('/donuts', donutRouter);
 app.use('/cart', cartRouter);
+app.use('/orders', orderRouter);
 
 // Customer middleware
 app.use(isSignedIn);
