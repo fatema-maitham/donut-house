@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Your Cart | Donut House</title>
+</head>
+
+<body>
+
+    <%- include('../partials/_navbar.ejs') %>
+
+        <main>
+
+            <h1>Your Cart 🛒🍩</h1>
+
+
+            <% if (cart.length===0) { %>
+
+                <p>Your cart is empty.</p>
+
+                <a href="/donuts">
+                    Browse Donuts
+                </a>
+
+
+                <% } else { %>
+
+                    <% let total=0; %>
+
+
+                        <% cart.forEach((item)=> { %>
+
+                            <% const itemTotal=item.donutId.price * item.quantity; %>
+
+                                <% total +=itemTotal; %>
+
+
+                                    <section>
+
+                                        <h2>
+                                            <%= item.donutId.name %>
+                                        </h2>
+
+
+                                        <img src="<%= item.donutId.image %>" alt="<%= item.donutId.name %>" width="150">
+
+
+                                        <p>
+                                            Price:
+                                            <%= item.donutId.price.toFixed(3) %>
+                                        </p>
+
+
+                                        <p>
+                                            Quantity:
+                                            <%= item.quantity %>
+                                        </p>
+
+
+                                        <!-- DECREASE -->
+
+                                        <form action="/cart/decrease/<%= item.donutId._id %>" method="POST"
+                                            style="display: inline;">
+
+                                            <button type="submit">
+                                                −
+                                            </button>
+
+                                        </form>
+
+
+                                        <!-- INCREASE -->
+
+                                        <form action="/cart/increase/<%= item.donutId._id %>" method="POST"
+                                            style="display: inline;">
+
+                                            <button type="submit">
+                                                +
+                                            </button>
+
+                                        </form>
+
+
+                                        <p>
+                                            Item Total:
+                                            <%= itemTotal.toFixed(3) %>
+                                        </p>
+
+
+                                        <!-- REMOVE -->
+
+                                        <form action="/cart/remove/<%= item.donutId._id %>" method="POST">
+
+                                            <button type="submit">
+                                                Remove 🗑️
+                                            </button>
+
+                                        </form>
+
+
+                                        <hr>
+
+                                    </section>
+
+                                    <% }) %>
+
+
+                                        <h2>
+                                            Total:
+                                            <%= total.toFixed(3) %>
+                                        </h2>
+
+
+                                        <a href="/donuts">
+                                            Continue Shopping
+                                        </a>
+
+                                        <% } %>
+
+        </main>
+
+
+        <%- include('../partials/_footer.ejs') %>
+
+</body>
+
+</html>

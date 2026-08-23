@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Edit Donut</title>
+</head>
+
+<body>
+
+    <h1>Edit Donut 🍩</h1>
+
+    <form action="/donuts/<%= donut._id %>?_method=PUT" method="POST">
+
+        <label for="name">Name:</label>
+        <input type="text" name="name" id="name" value="<%= donut.name %>" required>
+
+        <br><br>
+
+        <label for="description">Description:</label>
+        <textarea name="description" id="description" required><%= donut.description %></textarea>
+
+        <br><br>
+
+        <label for="price">Price:</label>
+        <input type="number" name="price" id="price" step="0.001" value="<%= donut.price %>" required>
+
+        <br><br>
+
+        <label for="image">Image URL:</label>
+        <input type="text" name="image" id="image" value="<%= donut.image %>" required>
+
+        <br><br>
+
+        <label for="category">Category:</label>
+        <input type="text" name="category" id="category" value="<%= donut.category %>" required>
+
+        <br><br>
+
+        <label for="available">Available:</label>
+
+        <input type="checkbox" name="available" id="available" value="true" <%=donut.available ? 'checked' : '' %>
+        >
+
+        <br><br>
+
+        <button type="submit">Update Donut</button>
+
+    </form>
+
+    <a href="/donuts/<%= donut._id %>">
+        Cancel
+    </a>
+
+</body>
+
+</html>

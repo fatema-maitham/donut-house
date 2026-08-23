@@ -20,6 +20,7 @@ const addUserToViews = require('./middleware/addUserToViews');
 const authRouter = require('./routes/authRouter');
 const pagesRouter = require('./routes/pagesRouter');
 const donutRouter = require('./routes/donutRouter');
+const cartRouter = require('./routes/cartRouter');
 
 // Set the port from environment variable or default to 3000
 const port = process.env.PORT ? process.env.PORT : '3000';
@@ -46,6 +47,7 @@ app.use(addUserToViews);
 app.use('', pagesRouter);
 app.use('/auth', authRouter);
 app.use('/donuts', donutRouter);
+app.use('/cart', cartRouter);
 
 // Customer middleware
 app.use(isSignedIn);

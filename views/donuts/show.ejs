@@ -4,6 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
     <title>
         <%= donut.name %> | Donut House
     </title>
@@ -13,30 +14,86 @@
 
     <%- include('../partials/_navbar.ejs') %>
 
-        <h1>
-            <%= donut.name %>
-        </h1>
-        <img src="<%= donut.image %>" alt="<%= donut.name %>" width="300">
+        <main>
 
-        <p>
-            <%= donut.description %>
-        </p>
+            <h1>
+                <%= donut.name %>
+            </h1>
 
-        <p>Price: <%= donut.price %>
-        </p>
+            <img src="<%= donut.image %>" alt="<%= donut.name %>" width="300">
 
-        <p>Category: <%= donut.category %>
-        </p>
+            <p>
+                <%= donut.description %>
+            </p>
 
-        <% if (donut.available) { %>
-            <p>Available 🍩</p>
-            <% } else { %>
-                <p>Currently unavailable</p>
-                <% } %>
+            <p>
+                Price: <%= donut.price %>
+            </p>
 
-                    <a href="/donuts">Back to donuts</a>
+            <p>
+                Category: <%= donut.category %>
+            </p>
 
-                    <%- include('../partials/_footer.ejs') %>
+            <% if (donut.available) { %>
+
+                <p>Available 🍩</p>
+
+                <% } else { %>
+
+                    <p>Currently unavailable</p>
+
+                    <% } %>
+
+
+                        <!-- CUSTOMER: ADD TO CART -->
+
+                        <% if (user && user.role==='customer' && donut.available) { %>
+
+                            <form action="/cart/add/<%= donut._id %>" method="POST">
+
+                                <button type="submit">
+                                    Add to Cart 🛒
+                                </button>
+
+                            </form>
+
+                            <% } %>
+
+
+                                <!-- ADMIN ACTIONS -->
+
+                                <% if (user && user.role==='admin' ) { %>
+
+                                    <hr>
+
+                                    <h2>Admin Actions</h2>
+
+                                    <a href="/donuts/<%= donut._id %>/edit">
+                                        Edit Donut
+                                    </a>
+
+                                    <br><br>
+
+                                    <form action="/donuts/<%= donut._id %>?_method=DELETE" method="POST">
+
+                                        <button type="submit">
+                                            Delete Donut
+                                        </button>
+
+                                    </form>
+
+                                    <% } %>
+
+
+                                        <br>
+
+                                        <a href="/donuts">
+                                            Back to Donuts
+                                        </a>
+
+        </main>
+
+        <%- include('../partials/_footer.ejs') %>
 
 </body>
 

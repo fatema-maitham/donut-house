@@ -8,15 +8,23 @@ const isSignedIn = require('../middleware/isSignedIn');
 
 const isAdmin = require('../middleware/isAdmin');
 
-// Admin routes
+// ADMIN — create
 router.get('/new', isSignedIn, isAdmin, donutCtrl.newDonut);
 
-// Public routes
+router.post('/', isSignedIn, isAdmin, donutCtrl.create);
+
+// PUBLIC
 router.get('/', donutCtrl.index);
 
-router.get('/:id', donutCtrl.show);
+// ADMIN — edit
+router.get('/:id/edit', isSignedIn, isAdmin, donutCtrl.edit);
 
-// Admin create
-router.post('/', isSignedIn, isAdmin, donutCtrl.create);
+router.put('/:id', isSignedIn, isAdmin, donutCtrl.update);
+
+// ADMIN — delete
+router.delete('/:id', isSignedIn, isAdmin, donutCtrl.deleteDonut);
+
+// PUBLIC — one donut
+router.get('/:id', donutCtrl.show);
 
 module.exports = router;
