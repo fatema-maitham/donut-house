@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>
+        <%= donut.name %> | Donut House
+    </title>
+</head>
+
+<body>
+
+    <%- include('../partials/_navbar.ejs') %>
+
+        <h1>
+            <%= donut.name %>
+        </h1>
+
+        <p>
+            <%= donut.description %>
+        </p>
+
+        <p>Price: <%= donut.price %>
+        </p>
+
+        <p>Category: <%= donut.category %>
+        </p>
+
+        <% if (donut.available) { %>
+            <p>Available 🍩</p>
+            <% } else { %>
+                <p>Currently unavailable</p>
+                <% } %>
+
+                    <a href="/donuts">Back to donuts</a>
+
+                    <%- include('../partials/_footer.ejs') %>
+
+</body>
+
+</html>
