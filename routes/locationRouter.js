@@ -3,6 +3,8 @@ const express = require('express');
 const router = express.Router();
 
 const locationCtrl = require('../controllers/locationCtrl');
+
+const isSignedIn = require('../middleware/isSignedIn');
 const isAdmin = require('../middleware/isAdmin');
 
 router.get('/', locationCtrl.index);

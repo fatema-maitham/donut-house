@@ -5,7 +5,6 @@ require('./config/database');
 const path = require('path');
 const express = require('express');
 const app = express();
-app.use(express.static('public'));
 
 // Middleware
 const session = require('express-session');
@@ -40,7 +39,7 @@ app.use(
   session({
     secret: process.env.SESSION_SECRET,
     resave: false,
-    saveUninitialized: true,
+    saveUninitialized: false,
     store: MongoStore.create({ mongoUrl: process.env.MONGODB_URI }),
   })
 );

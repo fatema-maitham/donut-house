@@ -70,10 +70,22 @@ const create = async (req, res) => {
     try {
         const user = await User.findById(req.session.user._id);
 
-        const location = req.body.location;
+        if (!user) {
+            return res.status(404).send('User not found');
+        }
 
         if (!user.cart || user.cart.length === 0) {
             return res.send('Your cart is empty');
+        }
+
+        // Validate pickup location
+        const selectedLocation = await Location.findOne({
+            _id: req.body.location,
+            available: true,
+        });
+
+        if (!selectedLocation) {
+            return res.status(400).send('Invalid pickup location');
         }
 
         const items = [];
@@ -103,7 +115,7 @@ const create = async (req, res) => {
 
         const order = await Order.create({
             user: user._id,
-            location,
+            location: selectedLocation._id,
             items,
             total,
         });
@@ -176,6 +188,18 @@ const updateStatus = async (req, res) => {
 
         if (!order) {
             return res.send('Order not found');
+        }
+
+        const validStatuses = [
+            'pending',
+            'preparing',
+            'ready',
+            'completed',
+            'cancelled',
+        ];
+
+        if (!validStatuses.includes(req.body.status)) {
+            return res.status(400).send('Invalid order status');
         }
 
         order.status = req.body.status;

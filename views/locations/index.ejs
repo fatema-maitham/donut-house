@@ -20,34 +20,84 @@
 
     <%- include('../partials/_navbar.ejs') %>
 
-        <div class="admin-layout">
+        <% if (user && user.role==='admin' ) { %>
 
-            <%- include('../partials/_adminSidebar.ejs') %>
+            <div class="admin-layout">
 
-                <main class="admin-content">
+                <%- include('../partials/_adminSidebar.ejs') %>
 
-                    <div class="admin-page-header">
+                    <main class="admin-content">
 
-                        <div>
-                            <h1>Locations</h1>
+                        <div class="admin-page-header">
 
-                            <p>
-                                Manage Donut House locations.
-                            </p>
+                            <div>
+                                <h1>Locations</h1>
+
+                                <p>
+                                    Manage Donut House locations.
+                                </p>
+                            </div>
+
+                            <a href="/locations/new" class="admin-button admin-button-link">
+                                Add Location
+                            </a>
+
                         </div>
 
-                        <a href="/locations/new" class="admin-button admin-button-link">
-                            Add Location
-                        </a>
+                        <div class="admin-cards">
+
+                            <% locations.forEach(location=> { %>
+
+                                <div class="admin-card">
+
+                                    <h2>
+                                        <%= location.name %>
+                                    </h2>
+
+                                    <p>
+                                        <strong>Address:</strong>
+                                        <%= location.address %>
+                                    </p>
+
+                                    <p>
+                                        <strong>Opening:</strong>
+                                        <%= location.openingTime %>
+                                    </p>
+
+                                    <p>
+                                        <strong>Closing:</strong>
+                                        <%= location.closingTime %>
+                                    </p>
+
+                                </div>
+
+                                <% }) %>
+
+                        </div>
+
+                    </main>
+
+            </div>
+
+            <% } else { %>
+
+                <main class="locations-page">
+
+                    <div class="locations-header">
+
+                        <h1>Our Locations</h1>
+
+                        <p>
+                            Find your nearest Donut House and pick up your favorite donuts.
+                        </p>
 
                     </div>
 
-
-                    <div class="admin-cards">
+                    <div class="locations-cards">
 
                         <% locations.forEach(location=> { %>
 
-                            <div class="admin-card">
+                            <div class="location-card">
 
                                 <h2>
                                     <%= location.name %>
@@ -76,9 +126,9 @@
 
                 </main>
 
-        </div>
+                <% } %>
 
-        <%- include('../partials/_footer.ejs') %>
+                    <%- include('../partials/_footer.ejs') %>
 
 </body>
 
