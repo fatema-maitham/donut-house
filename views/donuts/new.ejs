@@ -1,7 +1,9 @@
 <!DOCTYPE html>
+
 <html lang="en">
 
 <head>
+
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
@@ -14,17 +16,16 @@
         rel="stylesheet">
 
     <link rel="stylesheet" href="/stylesheets/style.css">
+
 </head>
 
 <body>
 
     <%- include('../partials/_navbar.ejs') %>
 
-
         <div class="admin-layout">
 
             <%- include('../partials/_adminSidebar.ejs') %>
-
 
                 <main class="admin-content">
 
@@ -36,8 +37,7 @@
                             Add a new donut to the Donut House menu.
                         </p>
 
-
-                        <form action="/donuts" method="POST" class="admin-form">
+                        <form action="/donuts" method="POST" enctype="multipart/form-data" class="admin-form">
 
                             <label for="name">
                                 Donut Name
@@ -67,18 +67,32 @@
                             </label>
 
                             <select id="category" name="category" required>
-                                <option value="">Select category</option>
-                                <option value="classic">Classic Donut</option>
-                                <option value="special">Special Donut</option>
-                                <option value="box">Box Deal</option>
+
+                                <option value="">
+                                    Select category
+                                </option>
+
+                                <option value="classic">
+                                    Classic Donut
+                                </option>
+
+                                <option value="special">
+                                    Special Donut
+                                </option>
+
+                                <option value="box">
+                                    Box Deal
+                                </option>
+
                             </select>
 
 
                             <label for="image">
-                                Image URL
+                                Donut Image
                             </label>
 
-                            <input type="url" id="image" name="image" placeholder="https://...">
+                            <input type="file" id="image" name="image" accept="image/jpeg,image/png,image/webp"
+                                required>
 
 
                             <label for="available">
@@ -86,6 +100,7 @@
                             </label>
 
                             <select id="available" name="available">
+
                                 <option value="true">
                                     Available
                                 </option>
@@ -93,6 +108,7 @@
                                 <option value="false">
                                     Not Available
                                 </option>
+
                             </select>
 
 
@@ -107,7 +123,6 @@
                 </main>
 
         </div>
-
 
         <%- include('../partials/_footer.ejs') %>
 

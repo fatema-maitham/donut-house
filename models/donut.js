@@ -14,15 +14,15 @@ const donutSchema = new mongoose.Schema({
     price: {
         type: Number,
         required: true,
-        min: 0,
-    },
-
-    image: {
-        type: String,
-        required: true,
     },
 
     category: {
+        type: String,
+        required: true,
+        enum: ['classic', 'special', 'box'],
+    },
+
+    image: {
         type: String,
         required: true,
     },
@@ -33,6 +33,4 @@ const donutSchema = new mongoose.Schema({
     },
 });
 
-const Donut = mongoose.model('Donut', donutSchema);
-
-module.exports = Donut;
+module.exports = mongoose.model('Donut', donutSchema);

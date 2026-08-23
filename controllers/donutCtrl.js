@@ -40,7 +40,14 @@ const newDonut = async (req, res) => {
 // Create donut
 const create = async (req, res) => {
     try {
-        await Donut.create(req.body);
+        const donut = await Donut.create({
+            name: req.body.name,
+            description: req.body.description,
+            price: req.body.price,
+            category: req.body.category,
+            image: req.file.path,
+            available: req.body.available === 'true',
+        });
 
         res.redirect('/donuts');
     } catch (err) {
