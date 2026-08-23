@@ -75,6 +75,17 @@ const update = async (req, res) => {
     }
 };
 
+const deleteLocation = async (req, res) => {
+    try {
+        await Location.findByIdAndDelete(req.params.id);
+
+        res.redirect('/locations');
+    } catch (err) {
+        console.log(err);
+        res.send('Something went wrong');
+    }
+};
+
 module.exports = {
     index,
     show,
@@ -82,4 +93,5 @@ module.exports = {
     create,
     edit,
     update,
+    delete: deleteLocation,
 };

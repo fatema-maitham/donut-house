@@ -17,4 +17,6 @@ router.post('/', isAdmin, locationCtrl.create);
 
 router.put('/:id', isAdmin, locationCtrl.update);
 
+router.delete('/:id', isAdmin, locationCtrl.delete);
+
 module.exports = router;
