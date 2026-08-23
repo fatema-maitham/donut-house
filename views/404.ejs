@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>404 - Donut House</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+    <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@300;400;600;700;800;900&display=swap"
+        rel="stylesheet">
+
+    <link rel="stylesheet" href="/stylesheets/style.css">
+</head>
+
+<body>
+
+    <%- include('./partials/_navbar.ejs') %>
+
+        <main class="error-page">
+
+            <div class="error-card">
+
+                <div class="error-number">
+
+                    <span>4</span>
+
+                    <img src="/images/404.png" alt="Donut" class="error-donut">
+
+                    <span>4</span>
+
+                </div>
+
+                <h1>There’s a hole in our website!</h1>
+
+                <p>
+                    Looks like this page got lost somewhere.
+                </p>
+
+                <a href="/" class="error-button">
+                    Back to Donut House
+                </a>
+
+            </div>
+
+        </main>
+
+        <%- include('./partials/_footer.ejs') %>
+
+</body>
+
+</html>

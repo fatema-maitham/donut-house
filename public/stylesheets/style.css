@@ -980,3 +980,92 @@ nav a:hover::after {
   }
 
 }
+
+/* =========================
+   404 PAGE
+========================= */
+
+.error-page {
+  min-height: 75vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 70px 20px;
+  background: #ffd9d4;
+}
+
+.error-card {
+  width: min(800px, 100%);
+  text-align: center;
+}
+
+.error-number {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 25px;
+  margin-bottom: 35px;
+}
+
+.error-number>span {
+  font-size: 180px;
+  font-weight: 900;
+  line-height: 1;
+  color: #0f2a43;
+}
+
+.error-donut {
+  width: 240px;
+  height: 240px;
+  object-fit: contain;
+}
+
+.error-card h1 {
+  margin-bottom: 12px;
+  color: #0f2a43;
+  font-size: 42px;
+  font-weight: 900;
+}
+
+.error-card p {
+  margin-bottom: 30px;
+  color: #6b7a88;
+  font-size: 18px;
+  font-weight: 700;
+}
+
+.error-button {
+  display: inline-block;
+  padding: 15px 28px;
+  background: #0f2a43;
+  color: #ffffff;
+  border-radius: 10px;
+  text-decoration: none;
+  font-weight: 900;
+  transition: .2s ease;
+}
+
+.error-button:hover {
+  background: #f26f5f;
+  transform: translateY(-2px);
+}
+
+@media (max-width: 600px) {
+
+  .error-number {
+    gap: 10px;
+  }
+
+  .error-number>span {
+    font-size: 100px;
+  }
+
+  .error-donut {
+    width: 100px;
+    height: 100px;
+  }
+
+  .error-card h1 {
+    font-size: 30px;
+  }
+}

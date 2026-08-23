@@ -65,6 +65,10 @@ app.get('/admin-test', isAdmin, async (req, res) => {
   res.send('Welcome Admin!');
 });
 
+app.use((req, res) => {
+  res.status(404).render('404.ejs');
+});
+
 app.listen(port, () => {
   console.log(`The express app is ready on port ${port}!`);
 });
