@@ -13,6 +13,7 @@ const MongoStore = require('connect-mongo').MongoStore;
 const methodOverride = require('method-override');
 const morgan = require('morgan');
 const isSignedIn = require('./middleware/isSignedIn');
+const isAdmin = require('./middleware/isAdmin');
 const addUserToViews = require('./middleware/addUserToViews');
 
 // Routers
@@ -49,6 +50,10 @@ app.use(isSignedIn);
 
 app.get('/protected', async (req, res) => {
   res.send(`You are logged in as ${req.session.user.username}`);
+});
+
+app.get('/admin-test', isAdmin, async (req, res) => {
+  res.send('Welcome Admin!');
 });
 
 app.listen(port, () => {
