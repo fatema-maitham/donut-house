@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Our Locations | Donut House</title>
+</head>
+
+<body>
+
+    <%- include('../partials/_navbar.ejs') %>
+
+        <h1>Our Locations 📍</h1>
+
+        <% if (locations.length===0) { %>
+
+            <p>No locations available right now.</p>
+
+            <% } else { %>
+
+                <% locations.forEach(location=> { %>
+
+                    <div>
+
+                        <h2>
+                            <%= location.name %>
+                        </h2>
+
+                        <p>
+                            📍 <%= location.address %>, <%= location.city %>
+                        </p>
+
+                        <p>
+                            📞 <%= location.phone %>
+                        </p>
+
+                        <p>
+                            🕐 <%= location.openingHours %>
+                        </p>
+
+                        <a href="/locations/<%= location._id %>">
+                            View Location
+                        </a>
+
+                    </div>
+
+                    <hr>
+
+                    <% }) %>
+
+                        <% } %>
+
+                            <%- include('../partials/_footer.ejs') %>
+
+</body>
+
+</html>

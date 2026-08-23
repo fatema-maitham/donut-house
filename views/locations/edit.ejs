@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Edit <%= location.name %> | Donut House</title>
+</head>
+
+<body>
+
+    <%- include('../partials/_navbar.ejs') %>
+
+        <h1>Edit Location 📍</h1>
+
+        <form action="/locations/<%= location._id %>?_method=PUT" method="POST">
+
+            <div>
+                <label for="name">Location Name:</label>
+
+                <input type="text" id="name" name="name" value="<%= location.name %>" required>
+            </div>
+
+            <br>
+
+            <div>
+                <label for="address">Address:</label>
+
+                <input type="text" id="address" name="address" value="<%= location.address %>" required>
+            </div>
+
+            <br>
+
+            <div>
+                <label for="city">City:</label>
+
+                <input type="text" id="city" name="city" value="<%= location.city %>" required>
+            </div>
+
+            <br>
+
+            <div>
+                <label for="phone">Phone:</label>
+
+                <input type="text" id="phone" name="phone" value="<%= location.phone %>" required>
+            </div>
+
+            <br>
+
+            <div>
+                <label for="openingHours">Opening Hours:</label>
+
+                <input type="text" id="openingHours" name="openingHours" value="<%= location.openingHours %>" required>
+            </div>
+
+            <br>
+
+            <div>
+                <label for="available">Available:</label>
+
+                <input type="checkbox" id="available" name="available" value="true" <%=location.available ? 'checked'
+                    : '' %>
+                >
+            </div>
+
+            <br>
+
+            <button type="submit">
+                Update Location
+            </button>
+
+        </form>
+
+        <br>
+
+        <a href="/locations/<%= location._id %>">
+            Cancel
+        </a>
+
+        <%- include('../partials/_footer.ejs') %>
+
+</body>
+
+</html>
