@@ -101,6 +101,58 @@ Donut House is a full-stack donut ordering web application where customers can b
 
 **Location** — Stores store name, address, phone number, and opening hours.
 
+## 🍩 Donuts Routes
+
+| HTTP Method | Route              | Action | Description                          |
+|-------------|---------------------|--------|---------------------------------------|
+| GET         | /donuts             | Index  | Displays all available donuts         |
+| GET         | /donuts/new          | New    | Shows a form to create a new donut    |
+| POST        | /donuts             | Create | Creates a new donut                   |
+| GET         | /donuts/:id          | Show   | Displays details of a specific donut  |
+| GET         | /donuts/:id/edit     | Edit   | Shows a form to edit a donut          |
+| PUT         | /donuts/:id          | Update | Updates a specific donut              |
+| DELETE      | /donuts/:id          | Delete | Deletes a specific donut              |
+
+## 🛒 Cart Routes
+
+| HTTP Method | Route            | Action | Description                          |
+|-------------|--------------------|--------|----------------------------------------|
+| GET         | /cart              | Index  | Displays the user's shopping cart      |
+| POST        | /cart/:donutId      | Add    | Adds a donut to the cart               |
+| PUT         | /cart/:donutId      | Update | Updates the quantity of a donut        |
+| DELETE      | /cart/:donutId      | Remove | Removes a donut from the cart          |
+
+## 📦 Orders Routes
+
+| HTTP Method | Route            | Action        | Description                              |
+|-------------|--------------------|----------------|--------------------------------------------|
+| GET         | /orders            | Index          | Displays the logged-in user's orders       |
+| GET         | /orders/:id         | Show           | Displays details of a specific order       |
+| POST        | /orders            | Create         | Creates an order from the user's cart      |
+| GET         | /orders/admin       | Admin Orders   | Allows admins to view all customer orders  |
+| PUT         | /orders/:id         | Update         | Updates an order's status                  |
+
+## 📍 Locations Routes
+
+| HTTP Method | Route              | Action | Description                          |
+|-------------|----------------------|--------|----------------------------------------|
+| GET         | /locations           | Index  | Displays all pickup locations          |
+| GET         | /locations/new        | New    | Shows a form to create a location      |
+| POST        | /locations           | Create | Creates a new pickup location          |
+| GET         | /locations/:id/edit   | Edit   | Shows a form to edit a location        |
+| PUT         | /locations/:id        | Update | Updates a pickup location               |
+| DELETE      | /locations/:id        | Delete | Deletes a pickup location               |
+
+## 👤 Authentication Routes
+
+| HTTP Method | Route            | Action     | Description                                |
+|-------------|--------------------|------------|----------------------------------------------|
+| GET         | /auth/sign-up       | Sign Up    | Displays the registration form                |
+| POST        | /auth/sign-up       | Register   | Creates a new customer account                |
+| GET         | /auth/sign-in       | Sign In    | Displays the login form                       |
+| POST        | /auth/sign-in       | Login      | Logs in the user and starts a session         |
+| GET         | /auth/sign-out      | Logout     | Logs out the user and destroys the session    |
+
 ## 🛠️ Technologies
 - Node.js
 - Express.js
