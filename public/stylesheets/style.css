@@ -1229,3 +1229,11 @@ nav a:hover::after {
   width: 4px;
   height: 16px;
 }
+
+/* Remove hover underline from logo only */
+.logo a::after,
+.logo a:hover::after {
+  display: none;
+  content: none;
+  width: 0;
+}

@@ -18,61 +18,60 @@
 
 <body>
 
-    <%- include('../partials/_navbar.ejs') %>
 
-        <div class="admin-layout">
+    <div class="admin-layout">
 
-            <%- include('../partials/_adminSidebar.ejs') %>
+        <%- include('../partials/_adminSidebar.ejs') %>
 
-                <main class="admin-content">
+            <main class="admin-content">
 
-                    <div class="admin-form-card">
+                <div class="admin-form-card">
 
-                        <h1>Add Location</h1>
+                    <h1>Add Location</h1>
 
-                        <p class="admin-form-subtitle">
-                            Add a new Donut House location.
-                        </p>
+                    <p class="admin-form-subtitle">
+                        Add a new Donut House location.
+                    </p>
 
-                        <form action="/locations" method="POST" class="admin-form">
+                    <form action="/locations" method="POST" class="admin-form">
 
-                            <label for="name">
-                                Location Name
-                            </label>
+                        <label for="name">
+                            Location Name
+                        </label>
 
-                            <input type="text" id="name" name="name" placeholder="e.g. Seef District" required>
+                        <input type="text" id="name" name="name" placeholder="e.g. Seef District" required>
 
-                            <label for="address">
-                                Address
-                            </label>
+                        <label for="address">
+                            Address
+                        </label>
 
-                            <input type="text" id="address" name="address" placeholder="Enter address" required>
+                        <input type="text" id="address" name="address" placeholder="Enter address" required>
 
-                            <label for="openingTime">
-                                Opening Time
-                            </label>
+                        <label for="openingTime">
+                            Opening Time
+                        </label>
 
-                            <input type="text" id="openingTime" name="openingTime" placeholder="9:00 AM" required>
+                        <input type="text" id="openingTime" name="openingTime" placeholder="9:00 AM" required>
 
-                            <label for="closingTime">
-                                Closing Time
-                            </label>
+                        <label for="closingTime">
+                            Closing Time
+                        </label>
 
-                            <input type="text" id="closingTime" name="closingTime" placeholder="10:00 PM" required>
+                        <input type="text" id="closingTime" name="closingTime" placeholder="10:00 PM" required>
 
-                            <button type="submit" class="admin-button">
-                                Add Location
-                            </button>
+                        <button type="submit" class="admin-button">
+                            Add Location
+                        </button>
 
-                        </form>
+                    </form>
 
-                    </div>
+                </div>
 
-                </main>
+            </main>
 
-        </div>
+    </div>
 
-        <%- include('../partials/_footer.ejs') %>
+    <%- include('../partials/_footer.ejs') %>
 
 </body>
 
