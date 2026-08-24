@@ -12,63 +12,61 @@
 
 <body>
 
-    <%- include('../partials/_navbar.ejs') %>
 
-        <div class="admin-layout">
+    <div class="admin-layout">
 
-            <%- include('../partials/_adminSidebar.ejs') %>
+        <%- include('../partials/_adminSidebar.ejs') %>
 
-                <main class="admin-content">
+            <main class="admin-content">
 
-                    <div class="admin-page-header">
+                <div class="admin-page-header">
 
-                        <div>
-                            <h1>Manage Orders</h1>
+                    <div>
+                        <h1>Manage Orders</h1>
+
+                        <p>
+                            View customer orders.
+                        </p>
+                    </div>
+
+                </div>
+
+
+                <div class="admin-cards">
+
+                    <% orders.forEach(order=> { %>
+
+                        <div class="admin-card">
+
+                            <h2>
+                                Order
+                            </h2>
 
                             <p>
-                                View customer orders.
+                                <strong>Customer:</strong>
+                                <%= order.user.username %>
                             </p>
+
+                            <p>
+                                <strong>Status:</strong>
+                                <%= order.status %>
+                            </p>
+
+                            <p>
+                                <strong>Total:</strong>
+                                BD <%= order.total %>
+                            </p>
+
                         </div>
 
-                    </div>
+                        <% }) %>
 
+                </div>
 
-                    <div class="admin-cards">
+            </main>
 
-                        <% orders.forEach(order=> { %>
+    </div>
 
-                            <div class="admin-card">
-
-                                <h2>
-                                    Order
-                                </h2>
-
-                                <p>
-                                    <strong>Customer:</strong>
-                                    <%= order.user.username %>
-                                </p>
-
-                                <p>
-                                    <strong>Status:</strong>
-                                    <%= order.status %>
-                                </p>
-
-                                <p>
-                                    <strong>Total:</strong>
-                                    BD <%= order.total %>
-                                </p>
-
-                            </div>
-
-                            <% }) %>
-
-                    </div>
-
-                </main>
-
-        </div>
-
-        <%- include('../partials/_footer.ejs') %>
 
 </body>
 

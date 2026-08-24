@@ -1,20 +1,43 @@
 const express = require('express');
 const router = express.Router();
+
 const cartCtrl = require('../controllers/cartController');
 const isSignedIn = require('../middleware/isSignedIn');
 
-// View Cart
+
+// ============================================
+// CART PAGE
+// ============================================
+
 router.get('/', isSignedIn, cartCtrl.index);
 
-// Add/Increase Cart Items (GET-friendly anchors)
-router.post('/add/:id', isSignedIn, cartCtrl.addToCart);
+
+// ============================================
+// ADD DONUT
+// ============================================
+
 router.get('/add/:id', isSignedIn, cartCtrl.addToCart);
 
-// Adjust Cart Quantities
+
+// ============================================
+// INCREASE
+// ============================================
+
 router.get('/increase/:id', isSignedIn, cartCtrl.increase);
+
+
+// ============================================
+// DECREASE
+// ============================================
+
 router.get('/decrease/:id', isSignedIn, cartCtrl.decrease);
 
-// Remove Item from Cart
-router.post('/remove/:id', isSignedIn, cartCtrl.remove);
+
+// ============================================
+// REMOVE
+// ============================================
+
+router.get('/remove/:id', isSignedIn, cartCtrl.remove);
+
 
 module.exports = router;

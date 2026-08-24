@@ -1,162 +1,384 @@
 <!DOCTYPE html>
+
 <html lang="en">
 
 <head>
+
     <meta charset="UTF-8">
+
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
     <title>Menu | Donut House</title>
+
     <link rel="preconnect" href="https://fonts.googleapis.com">
+
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
     <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@300;400;600;700;800;900&display=swap"
         rel="stylesheet">
+
     <link rel="stylesheet" href="/stylesheets/style.css">
+
 </head>
 
+
 <body>
+
     <%- include('../partials/_navbar.ejs') %>
 
+
         <main>
+
             <div class="container">
+
+
+                <!-- MENU INTRO -->
+
                 <div class="menuIntro" id="menu">
-                    <div class="menuIntroTitle">Menu</div>
+
+                    <div class="menuIntroTitle">
+                        Menu
+                    </div>
+
                     <p class="menuIntroText">
+
                         Choose from a selection of our Classic, Charity or Special Donuts.<br>
+
                         Handmade daily for you!
+
                     </p>
+
                 </div>
 
+
                 <!-- DYNAMIC SECTIONS -->
+
                 <% const categories=[ { key: 'box' , title: 'Boxes' }, { key: 'special' , title: 'Monthly Specials' }, {
                     key: 'classic' , title: 'Standard Donuts' }, { key: 'weekend' , title: 'Weekend Specials' } ]; %>
 
+
                     <% categories.forEach(cat=> { %>
-                        <% const filteredDonuts=donuts.filter(d=> d.category === cat.key); %>
+
+                        <% const filteredDonuts=donuts.filter( donut=> donut.category === cat.key
+                            );
+                            %>
+
+
                             <% if (filteredDonuts.length> 0) { %>
+
+
                                 <section class="section">
+
+
                                     <div class="sectionTitle">
+
                                         <%= cat.title %>
+
                                     </div>
+
+
                                     <div class="grid">
+
+
                                         <% filteredDonuts.forEach(donut=> { %>
+
+
                                             <article class="card" data-card>
+
+
                                                 <div class="cardInner">
+
+
                                                     <!-- FRONT SIDE -->
+
                                                     <div class="face front">
+
+
                                                         <div class="donutFloat">
+
                                                             <img src="<%= donut.image %>" alt="<%= donut.name %>">
+
                                                         </div>
 
+
                                                         <div class="cardBase">
+
+
                                                             <div class="metaRow">
+
                                                                 <small style="text-transform: uppercase;">
+
                                                                     <%= cat.title %>
+
                                                                 </small>
+
+
                                                                 <button class="infoBtn" type="button" data-open
                                                                     data-desc="<%= donut.description %>"
                                                                     data-trace="May contain traces of peanuts, nuts, and tree nuts."
                                                                     data-allergens="Allergens: wheat, gluten, soy"
-                                                                    aria-label="Open product info">i</button>
+                                                                    aria-label="Open product info">
+                                                                    i
+                                                                </button>
+
                                                             </div>
+
 
                                                             <div class="name">
+
                                                                 <%= donut.name %>
+
                                                             </div>
+
+
+                                                            <!-- PRICE + CART -->
 
                                                             <div class="priceRow">
-                                                                <div class="price">BD <%= donut.price.toFixed(3) %>
+
+
+                                                                <div class="price">
+
+                                                                    BD <%= donut.price.toFixed(3) %>
+
                                                                 </div>
 
+
                                                                 <% if (user) { %>
+
+
                                                                     <% const cartItem=user.cart ? user.cart.find(item=>
-                                                                        item.donutId.toString() ===
-                                                                        donut._id.toString()) : null;
-                                                                        const quantity = cartItem ? cartItem.quantity :
-                                                                        0;
+                                                                        item.donutId &&
+                                                                        item.donutId.toString() === donut._id.toString()
+                                                                        )
+                                                                        : null;
+
+                                                                        const quantity = cartItem
+                                                                        ? cartItem.quantity
+                                                                        : 0;
                                                                         %>
+
+
                                                                         <div class="buttons">
+
+
                                                                             <% if (quantity> 0) { %>
+
+
                                                                                 <a href="/cart/decrease/<%= donut._id %>"
                                                                                     class="btn-action min"
-                                                                                    aria-label="Remove one"></a>
+                                                                                    aria-label="Remove one">
+                                                                                    −
+                                                                                </a>
+
+
                                                                                 <div class="amount">
+
                                                                                     <%= quantity %>x
+
                                                                                 </div>
+
+
                                                                                 <% } %>
+
+
                                                                                     <a href="/cart/add/<%= donut._id %>"
                                                                                         class="btn-action plus"
-                                                                                        aria-label="Add one"></a>
+                                                                                        aria-label="Add one">
+                                                                                        +
+                                                                                    </a>
+
+
                                                                         </div>
+
+
                                                                         <% } else { %>
+
+
                                                                             <div class="buttons">
+
+
                                                                                 <a href="/auth/sign-in"
                                                                                     class="btn-action plus"
-                                                                                    aria-label="Login to Order"></a>
+                                                                                    aria-label="Login to Order">
+                                                                                    +
+                                                                                </a>
+
+
                                                                             </div>
+
+
                                                                             <% } %>
+
+
                                                             </div>
+
+
                                                         </div>
+
                                                     </div>
 
+
                                                     <!-- BACK SIDE -->
+
                                                     <div class="face back" aria-hidden="true">
+
+
                                                         <div class="backTop">
-                                                            <div class="backTitle">Product info</div>
+
+
+                                                            <div class="backTitle">
+
+                                                                Product info
+
+                                                            </div>
+
+
                                                             <button class="closeBtn" type="button" data-close
-                                                                aria-label="Close">&times;</button>
+                                                                aria-label="Close">
+                                                                &times;
+                                                            </button>
+
+
                                                         </div>
+
+
                                                         <div class="backText" data-bdesc></div>
+
+
                                                         <div class="backText muted" data-btrace></div>
+
+
                                                         <div class="backText bold" data-ballergens></div>
+
+
                                                     </div>
+
+
                                                 </div>
+
+
                                             </article>
+
+
                                             <% }) %>
+
+
                                     </div>
+
+
                                 </section>
+
+
                                 <% } %>
+
+
                                     <% }) %>
+
+
             </div>
+
         </main>
+
 
         <%- include('../partials/_footer.ejs') %>
 
+
             <script>
+
                 const cards = document.querySelectorAll("[data-card]");
 
+
                 function closeAll() {
-                    cards.forEach(c => c.classList.remove("flipped"));
+
+                    cards.forEach(card => {
+
+                        card.classList.remove("flipped");
+
+                    });
+
                 }
+
 
                 function cleanText(s) {
+
                     return (s || "")
-                        .replace(/\\n/g, "\n")
+                        .replace(/\\\n/g, "\n")
                         .replace(/\r\n/g, "\n");
+
                 }
 
+
                 cards.forEach(card => {
-                    const openBtn = card.querySelector("[data-open]");
-                    const closeBtn = card.querySelector("[data-close]");
-                    const bDesc = card.querySelector("[data-bdesc]");
-                    const bTrace = card.querySelector("[data-btrace]");
-                    const bAll = card.querySelector("[data-ballergens]");
+
+
+                    const openBtn =
+                        card.querySelector("[data-open]");
+
+
+                    const closeBtn =
+                        card.querySelector("[data-close]");
+
+
+                    const bDesc =
+                        card.querySelector("[data-bdesc]");
+
+
+                    const bTrace =
+                        card.querySelector("[data-btrace]");
+
+
+                    const bAll =
+                        card.querySelector("[data-ballergens]");
+
 
                     openBtn?.addEventListener("click", () => {
+
+
                         closeAll();
-                        bDesc.textContent = cleanText(openBtn.dataset.desc);
-                        bTrace.textContent = cleanText(openBtn.dataset.trace);
-                        bAll.textContent = cleanText(openBtn.dataset.allergens);
+
+
+                        bDesc.textContent =
+                            cleanText(openBtn.dataset.desc);
+
+
+                        bTrace.textContent =
+                            cleanText(openBtn.dataset.trace);
+
+
+                        bAll.textContent =
+                            cleanText(openBtn.dataset.allergens);
+
+
                         card.classList.add("flipped");
+
                     });
+
 
                     closeBtn?.addEventListener("click", () => {
+
                         card.classList.remove("flipped");
+
                     });
+
+
                 });
 
+
                 document.addEventListener("keydown", (e) => {
-                    if (e.key === "Escape") closeAll();
+
+
+                    if (e.key === "Escape") {
+
+                        closeAll();
+
+                    }
+
+
                 });
+
             </script>
+
+
 </body>
 
 </html>
