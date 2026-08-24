@@ -1,6 +1,6 @@
 const Order = require('../models/Order');
 const Donut = require('../models/donut');
-const Location = require('../models/Location');
+const Location = require('../models/location');
 const User = require('../models/user');
 
 // GET user's orders

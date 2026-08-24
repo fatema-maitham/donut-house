@@ -33,57 +33,73 @@
           <a href="/about">About Us</a>
         </li>
 
-
         <% if (user && user.role==='admin' ) { %>
 
           <!-- ADMIN -->
           <li>
-            <a href="/orders/admin">Manage Orders</a>
+            <a href="/orders/admin">
+              Manage Orders
+            </a>
           </li>
 
           <li>
-            <a href="/donuts/new">Add Donut</a>
+            <a href="/donuts/new">
+              Add Donut
+            </a>
           </li>
 
           <li>
-            <a href="/locations/new">Add Location</a>
+            <a href="/locations/new">
+              Add Location
+            </a>
           </li>
 
           <li>
-            <a href="/auth/sign-out">Logout</a>
+            <a href="/auth/sign-out">
+              Logout
+            </a>
           </li>
-
 
           <% } else if (user) { %>
 
             <!-- CUSTOMER -->
             <li>
-              <a href="/cart">Cart</a>
+              <a href="/cart">
+                Cart
+              </a>
             </li>
 
             <li>
-              <a href="/orders">My Orders</a>
+              <a href="/orders">
+                My Orders
+              </a>
             </li>
 
             <li>
-              <a href="/auth/sign-out">Logout</a>
+              <a href="/auth/sign-out">
+                Logout
+              </a>
             </li>
-
 
             <% } else { %>
 
               <!-- GUEST -->
               <li>
-                <a href="/auth/sign-in">Login</a>
+                <a href="/auth/sign-in">
+                  Login
+                </a>
               </li>
 
               <li>
-                <a href="/auth/sign-up">Sign Up</a>
+                <a href="/auth/sign-up">
+                  Sign Up
+                </a>
               </li>
 
               <% } %>
 
       </ul>
+
     </div>
 
 
@@ -91,33 +107,62 @@
     <div class="mobileMenu" id="mobileMenu">
 
       <!-- Everyone -->
-      <a href="/donuts">Menu</a>
-      <a href="/locations">Locations</a>
-      <a href="/about">About Us</a>
+      <a href="/donuts">
+        Menu
+      </a>
 
+      <a href="/locations">
+        Locations
+      </a>
+
+      <a href="/about">
+        About Us
+      </a>
 
       <% if (user && user.role==='admin' ) { %>
 
         <!-- ADMIN -->
-        <a href="/orders/admin">Manage Orders</a>
-        <a href="/donuts/new">Add Donut</a>
-        <a href="/locations/new">Add Location</a>
-        <a href="/auth/sign-out">Logout</a>
+        <a href="/orders/admin">
+          Manage Orders
+        </a>
 
+        <a href="/donuts/new">
+          Add Donut
+        </a>
+
+        <a href="/locations/new">
+          Add Location
+        </a>
+
+        <a href="/auth/sign-out">
+          Logout
+        </a>
 
         <% } else if (user) { %>
 
           <!-- CUSTOMER -->
-          <a href="/cart">Cart</a>
-          <a href="/orders">My Orders</a>
-          <a href="/auth/sign-out">Logout</a>
+          <a href="/cart">
+            Cart
+          </a>
 
+          <a href="/orders">
+            My Orders
+          </a>
+
+          <a href="/auth/sign-out">
+            Logout
+          </a>
 
           <% } else { %>
 
             <!-- GUEST -->
-            <a href="/auth/sign-in">Login</a>
-            <a href="/auth/sign-up">Sign Up</a>
+            <a href="/auth/sign-in">
+              Login
+            </a>
+
+            <a href="/auth/sign-up">
+              Sign Up
+            </a>
 
             <% } %>
 
@@ -129,7 +174,6 @@
 
 
 <script>
-
   const navBtn = document.getElementById("navBtn");
   const mobileMenu = document.getElementById("mobileMenu");
 
@@ -145,7 +189,6 @@
       );
 
     });
-
 
     mobileMenu.addEventListener("click", (event) => {
 
@@ -163,5 +206,4 @@
     });
 
   }
-
 </script>

@@ -49,6 +49,7 @@ app.use(addUserToViews);
 app.use('', pagesRouter);
 app.use('/auth', authRouter);
 app.use('/donuts', donutRouter);
+app.use('/locations', locationRouter);
 app.use('/cart', cartRouter);
 app.use('/orders', orderRouter);
 app.use('/about', aboutRouter);
@@ -56,7 +57,6 @@ app.use('/about', aboutRouter);
 // Customer middleware
 app.use(isSignedIn);
 
-app.use('/locations', locationRouter);
 
 app.get('/protected', async (req, res) => {
   res.send(`You are logged in as ${req.session.user.username}`);

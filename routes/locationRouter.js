@@ -2,23 +2,56 @@ const express = require('express');
 
 const router = express.Router();
 
-const locationCtrl = require('../controllers/locationCtrl');
+const locationController = require('../controllers/locationController');
 
 const isSignedIn = require('../middleware/isSignedIn');
 const isAdmin = require('../middleware/isAdmin');
 
-router.get('/', locationCtrl.index);
+// =========================
+// CUSTOMER + ADMIN
+// =========================
 
-router.get('/new', isSignedIn, isAdmin, locationCtrl.new);
+router.get('/', locationController.index);
 
-router.get('/:id/edit', isSignedIn, isAdmin, locationCtrl.edit);
+router.get('/:id', locationController.show);
 
-router.get('/:id', locationCtrl.show);
+// =========================
+// ADMIN ONLY
+// =========================
 
-router.post('/', isSignedIn, isAdmin, locationCtrl.create);
+router.get(
+    '/new',
+    isSignedIn,
+    isAdmin,
+    locationController.newLocation
+);
 
-router.put('/:id', isSignedIn, isAdmin, locationCtrl.update);
+router.post(
+    '/',
+    isSignedIn,
+    isAdmin,
+    locationController.create
+);
 
-router.delete('/:id', isSignedIn, isAdmin, locationCtrl.delete);
+router.get(
+    '/:id/edit',
+    isSignedIn,
+    isAdmin,
+    locationController.edit
+);
+
+router.put(
+    '/:id',
+    isSignedIn,
+    isAdmin,
+    locationController.update
+);
+
+router.delete(
+    '/:id',
+    isSignedIn,
+    isAdmin,
+    locationController.destroy
+);
 
 module.exports = router;

@@ -1237,3 +1237,679 @@ nav a:hover::after {
   content: none;
   width: 0;
 }
+
+/* =========================================================
+   LOCATIONS
+========================================================= */
+
+.locations-page {
+  min-height: 70vh;
+}
+
+
+/* =========================
+   CUSTOMER LOCATION HERO
+========================= */
+
+.locations-hero {
+  padding: 90px 0 70px;
+  text-align: center;
+}
+
+.locations-eyebrow {
+  display: inline-block;
+  margin-bottom: 14px;
+
+  font-size: 12px;
+  font-weight: 800;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+
+  opacity: 0.65;
+}
+
+.locations-hero h1 {
+  margin: 0;
+
+  font-size: clamp(42px, 6vw, 72px);
+  font-weight: 900;
+  letter-spacing: -2px;
+}
+
+.locations-hero p {
+  max-width: 600px;
+  margin: 18px auto 0;
+
+  font-size: 17px;
+  line-height: 1.7;
+  opacity: 0.7;
+}
+
+
+/* =========================
+   CUSTOMER LOCATION GRID
+========================= */
+
+.locations-section {
+  padding: 20px 0 100px;
+}
+
+.locations-grid {
+  display: grid;
+
+  grid-template-columns:
+    repeat(3, minmax(0, 1fr));
+
+  gap: 24px;
+}
+
+
+/* =========================
+   CUSTOMER LOCATION CARD
+========================= */
+
+.location-card {
+  padding: 30px;
+
+  border: 1px solid rgba(15, 42, 67, 0.08);
+  border-radius: 22px;
+
+  background: #fff;
+
+  box-shadow:
+    0 12px 40px rgba(15, 42, 67, 0.07);
+
+  transition:
+    transform 0.25s ease,
+    box-shadow 0.25s ease;
+}
+
+.location-card:hover {
+  transform: translateY(-5px);
+
+  box-shadow:
+    0 18px 50px rgba(15, 42, 67, 0.11);
+}
+
+
+.location-card-header {
+  display: flex;
+
+  align-items: flex-start;
+  justify-content: space-between;
+
+  gap: 15px;
+
+  margin-bottom: 28px;
+}
+
+
+.location-label {
+  display: block;
+
+  margin-bottom: 7px;
+
+  font-size: 10px;
+  font-weight: 900;
+
+  letter-spacing: 1.8px;
+  text-transform: uppercase;
+
+  opacity: 0.5;
+}
+
+
+.location-card h2 {
+  margin: 0;
+
+  font-size: 25px;
+  font-weight: 900;
+}
+
+
+/* =========================
+   STATUS
+========================= */
+
+.location-status {
+  display: inline-flex;
+
+  align-items: center;
+  justify-content: center;
+
+  padding: 7px 11px;
+
+  border-radius: 999px;
+
+  font-size: 11px;
+  font-weight: 800;
+
+  white-space: nowrap;
+}
+
+
+.location-open {
+  background: #e8f6ed;
+  color: #287044;
+}
+
+
+.location-closed {
+  background: #f9e7e7;
+  color: #a53d3d;
+}
+
+
+/* =========================
+   LOCATION DETAILS
+========================= */
+
+.location-details {
+  display: flex;
+
+  flex-direction: column;
+
+  gap: 20px;
+
+  margin-bottom: 28px;
+}
+
+
+.location-detail-title {
+  display: block;
+
+  margin-bottom: 5px;
+
+  font-size: 11px;
+  font-weight: 800;
+
+  text-transform: uppercase;
+  letter-spacing: 1px;
+
+  opacity: 0.5;
+}
+
+
+.location-detail p {
+  margin: 0;
+
+  font-size: 15px;
+  line-height: 1.6;
+}
+
+
+/* =========================
+   LOCATION BUTTON
+========================= */
+
+.location-card-button {
+  display: inline-flex;
+
+  align-items: center;
+  justify-content: center;
+
+  width: 100%;
+
+  padding: 13px 18px;
+
+  border-radius: 999px;
+
+  text-decoration: none;
+
+  font-size: 13px;
+  font-weight: 800;
+
+  background: var(--navy, #0f2a43);
+  color: #fff;
+
+  transition:
+    transform 0.2s ease,
+    opacity 0.2s ease;
+}
+
+.location-card-button:hover {
+  transform: translateY(-2px);
+  opacity: 0.9;
+}
+
+
+/* =========================
+   EMPTY STATE
+========================= */
+
+.locations-empty {
+  padding: 70px 30px;
+
+  text-align: center;
+
+  border-radius: 24px;
+
+  background: rgba(15, 42, 67, 0.03);
+}
+
+.locations-empty h2 {
+  margin-bottom: 10px;
+}
+
+.locations-empty p {
+  margin: 0;
+  opacity: 0.65;
+}
+
+
+/* =========================================================
+   LOCATION DETAILS PAGE
+========================================================= */
+
+.location-show-page {
+  min-height: 70vh;
+}
+
+.location-show {
+  padding: 80px 0 100px;
+}
+
+.location-show-card {
+  max-width: 760px;
+
+  margin: 0 auto;
+
+  padding: 42px;
+
+  border-radius: 26px;
+
+  background: #fff;
+
+  border: 1px solid rgba(15, 42, 67, 0.08);
+
+  box-shadow:
+    0 18px 55px rgba(15, 42, 67, 0.08);
+}
+
+
+.location-show-header {
+  display: flex;
+
+  align-items: flex-start;
+  justify-content: space-between;
+
+  gap: 20px;
+
+  padding-bottom: 28px;
+
+  border-bottom:
+    1px solid rgba(15, 42, 67, 0.08);
+}
+
+
+.location-show-header h1 {
+  margin: 0;
+
+  font-size: clamp(32px, 5vw, 48px);
+  font-weight: 900;
+
+  letter-spacing: -1.5px;
+}
+
+
+.location-show-content {
+  display: grid;
+
+  grid-template-columns:
+    repeat(2, minmax(0, 1fr));
+
+  gap: 25px;
+
+  padding: 32px 0;
+}
+
+
+.location-show-item {
+  display: flex;
+
+  flex-direction: column;
+
+  gap: 7px;
+
+  padding: 20px;
+
+  border-radius: 16px;
+
+  background: rgba(15, 42, 67, 0.035);
+}
+
+
+.location-show-item span {
+  font-size: 10px;
+  font-weight: 800;
+
+  text-transform: uppercase;
+  letter-spacing: 1.2px;
+
+  opacity: 0.5;
+}
+
+
+.location-show-item strong {
+  font-size: 15px;
+  line-height: 1.5;
+}
+
+
+.location-show-actions {
+  display: flex;
+
+  flex-wrap: wrap;
+
+  gap: 10px;
+
+  padding-top: 8px;
+}
+
+
+.location-show-actions .location-card-button,
+.location-show-actions .location-edit-btn,
+.location-show-actions form {
+  flex: 1;
+}
+
+
+.location-edit-btn,
+.location-delete-btn {
+  display: inline-flex;
+
+  align-items: center;
+  justify-content: center;
+
+  min-height: 44px;
+
+  padding: 11px 18px;
+
+  border: 0;
+  border-radius: 999px;
+
+  font-family: inherit;
+
+  font-size: 13px;
+  font-weight: 800;
+
+  text-decoration: none;
+
+  cursor: pointer;
+}
+
+
+.location-edit-btn {
+  background: #f4e6df;
+  color: #6d4034;
+}
+
+
+.location-delete-btn {
+  width: 100%;
+
+  background: #f7dddd;
+  color: #a53d3d;
+}
+
+
+/* =========================================================
+   ADMIN LOCATION MANAGEMENT
+========================================================= */
+
+.location-admin-grid {
+  display: grid;
+
+  grid-template-columns:
+    repeat(2, minmax(0, 1fr));
+
+  gap: 22px;
+}
+
+
+.location-admin-card {
+  padding: 26px;
+
+  border-radius: 20px;
+
+  background: #fff;
+
+  border: 1px solid rgba(15, 42, 67, 0.08);
+
+  box-shadow:
+    0 10px 35px rgba(15, 42, 67, 0.06);
+}
+
+
+.location-card-top {
+  display: flex;
+
+  justify-content: space-between;
+  align-items: flex-start;
+
+  gap: 15px;
+
+  margin-bottom: 24px;
+}
+
+
+.location-admin-card h2 {
+  margin: 0;
+
+  font-size: 24px;
+  font-weight: 900;
+}
+
+
+.location-admin-info {
+  display: flex;
+
+  flex-direction: column;
+
+  gap: 15px;
+
+  margin-bottom: 25px;
+}
+
+
+.location-admin-info strong {
+  display: block;
+
+  margin-bottom: 4px;
+
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+
+  opacity: 0.5;
+}
+
+
+.location-admin-info p {
+  margin: 0;
+
+  font-size: 14px;
+  line-height: 1.5;
+}
+
+
+.location-card-actions {
+  display: grid;
+
+  grid-template-columns:
+    1fr 1fr 1fr;
+
+  gap: 8px;
+}
+
+
+.location-view-btn,
+.location-edit-btn,
+.location-delete-btn {
+  display: flex;
+
+  align-items: center;
+  justify-content: center;
+
+  min-height: 42px;
+
+  padding: 9px 12px;
+
+  border: 0;
+  border-radius: 10px;
+
+  font-family: inherit;
+
+  font-size: 12px;
+  font-weight: 800;
+
+  text-decoration: none;
+
+  cursor: pointer;
+}
+
+
+.location-view-btn {
+  background: rgba(15, 42, 67, 0.07);
+  color: var(--navy, #0f2a43);
+}
+
+
+.location-card-actions .location-edit-btn {
+  background: #f4e6df;
+  color: #6d4034;
+}
+
+
+.location-card-actions .location-delete-btn {
+  background: #f7dddd;
+  color: #a53d3d;
+}
+
+
+.location-card-actions form {
+  margin: 0;
+}
+
+
+.location-card-actions form button {
+  width: 100%;
+}
+
+
+/* =========================================================
+   ADMIN FORM
+========================================================= */
+
+.admin-cancel-link {
+  display: block;
+
+  margin-top: 16px;
+
+  text-align: center;
+
+  font-size: 13px;
+  font-weight: 700;
+
+  text-decoration: none;
+
+  opacity: 0.65;
+}
+
+
+.admin-cancel-link:hover {
+  opacity: 1;
+}
+
+
+/* =========================================================
+   RESPONSIVE
+========================================================= */
+
+@media (max-width: 1000px) {
+
+  .locations-grid {
+    grid-template-columns:
+      repeat(2, minmax(0, 1fr));
+  }
+
+  .location-admin-grid {
+    grid-template-columns: 1fr;
+  }
+
+}
+
+
+@media (max-width: 700px) {
+
+  .locations-hero {
+    padding: 60px 0 45px;
+  }
+
+  .locations-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .location-show {
+    padding: 50px 0 70px;
+  }
+
+  .location-show-card {
+    padding: 26px 20px;
+  }
+
+  .location-show-header {
+    flex-direction: column;
+  }
+
+  .location-show-content {
+    grid-template-columns: 1fr;
+  }
+
+  .location-show-actions {
+    flex-direction: column;
+  }
+
+  .location-show-actions .location-card-button,
+  .location-show-actions .location-edit-btn,
+  .location-show-actions form {
+    width: 100%;
+    flex: auto;
+  }
+
+}
+
+
+@media (max-width: 500px) {
+
+  .location-card {
+    padding: 23px;
+  }
+
+  .location-card-header {
+    flex-direction: column;
+  }
+
+  .location-card-top {
+    flex-direction: column;
+  }
+
+  .location-card-actions {
+    grid-template-columns: 1fr;
+  }
+
+}
+
+.admin-sidebar-logo {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 10px 20px 30px;
+}
+
+.admin-sidebar-logo img {
+  width: 150px;
+  max-width: 100%;
+  height: auto;
+  display: block;
+}

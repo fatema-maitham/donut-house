@@ -2,10 +2,12 @@
 <html lang="en">
 
 <head>
+
     <meta charset="UTF-8">
+
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>Add Location - Donut House</title>
+    <title>Add Location | Donut House</title>
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -14,10 +16,10 @@
         rel="stylesheet">
 
     <link rel="stylesheet" href="/stylesheets/style.css">
+
 </head>
 
 <body>
-
 
     <div class="admin-layout">
 
@@ -30,8 +32,9 @@
                     <h1>Add Location</h1>
 
                     <p class="admin-form-subtitle">
-                        Add a new Donut House location.
+                        Add a new Donut House pickup location.
                     </p>
+
 
                     <form action="/locations" method="POST" class="admin-form">
 
@@ -41,11 +44,27 @@
 
                         <input type="text" id="name" name="name" placeholder="e.g. Seef District" required>
 
+
                         <label for="address">
                             Address
                         </label>
 
-                        <input type="text" id="address" name="address" placeholder="Enter address" required>
+                        <input type="text" id="address" name="address" placeholder="e.g. Road 2819, Seef" required>
+
+
+                        <label for="city">
+                            City
+                        </label>
+
+                        <input type="text" id="city" name="city" placeholder="e.g. Manama" required>
+
+
+                        <label for="phone">
+                            Phone
+                        </label>
+
+                        <input type="tel" id="phone" name="phone" placeholder="+973 1700 1192" required>
+
 
                         <label for="openingTime">
                             Opening Time
@@ -53,11 +72,30 @@
 
                         <input type="text" id="openingTime" name="openingTime" placeholder="9:00 AM" required>
 
+
                         <label for="closingTime">
                             Closing Time
                         </label>
 
                         <input type="text" id="closingTime" name="closingTime" placeholder="10:00 PM" required>
+
+
+                        <label for="available">
+                            Availability
+                        </label>
+
+                        <select id="available" name="available">
+
+                            <option value="true">
+                                Open
+                            </option>
+
+                            <option value="false">
+                                Closed
+                            </option>
+
+                        </select>
+
 
                         <button type="submit" class="admin-button">
                             Add Location
@@ -70,8 +108,6 @@
             </main>
 
     </div>
-
-    <%- include('../partials/_footer.ejs') %>
 
 </body>
 
