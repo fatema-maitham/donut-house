@@ -1153,3 +1153,79 @@ nav a:hover::after {
     font-size: 30px;
   }
 }
+
+/* PRICE & ACTION CONTAINER */
+.priceRow {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-top: 15px;
+}
+
+.buttons {
+  display: flex;
+  align-items: center;
+}
+
+/* AMOUNT TEXT STYLING */
+.amount {
+  color: #f26d5c;
+  font-size: 1.778em;
+  font-weight: 700;
+  margin: 0 .3em;
+  line-height: 1em;
+}
+
+/* BUTTON BASICS (NO BACKGROUND HOVER SHIFT) */
+.btn-action {
+  font-family: Avenir, sans-serif;
+  background-color: #f26d5c;
+  font-weight: 700;
+  line-height: 1em;
+  border-style: none;
+  border-width: 0;
+  color: #fff;
+  cursor: pointer;
+  display: inline-block;
+  position: relative;
+  -webkit-appearance: none;
+  border-radius: 2em !important;
+  font-size: 18px;
+  box-shadow: 0 4px 16px 0 rgba(89, 64, 45, .16);
+  outline: 0;
+  text-decoration: none;
+  width: 56px;
+  height: 56px;
+  padding: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transition: transform 0.2s ease;
+}
+
+/* MINUS LOGIC */
+.btn-action.min::after {
+  content: "";
+  width: 16px;
+  height: 4px;
+  background: #ffffff;
+  display: block;
+}
+
+/* PLUS LOGIC */
+.btn-action.plus::before,
+.btn-action.plus::after {
+  content: "";
+  position: absolute;
+  background: #ffffff;
+}
+
+.btn-action.plus::before {
+  width: 16px;
+  height: 4px;
+}
+
+.btn-action.plus::after {
+  width: 4px;
+  height: 16px;
+}

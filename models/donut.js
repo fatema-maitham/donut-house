@@ -19,7 +19,7 @@ const donutSchema = new mongoose.Schema({
     category: {
         type: String,
         required: true,
-        enum: ['classic', 'special', 'box'],
+        enum: ['classic', 'special', 'box', 'weekend'], // Added weekend here
     },
 
     image: {

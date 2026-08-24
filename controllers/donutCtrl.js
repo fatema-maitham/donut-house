@@ -1,12 +1,28 @@
 const Donut = require('../models/donut');
+const User = require('../models/user');
 
 // Show all available donuts
 const index = async (req, res) => {
     try {
         const donuts = await Donut.find({ available: true });
 
+        const cartQuantities = {};
+
+        if (req.session.user) {
+            const currentUser = await User.findById(req.session.user._id).select('cart');
+
+            if (currentUser && currentUser.cart) {
+                currentUser.cart.forEach((item) => {
+                    if (item.donutId) {
+                        cartQuantities[item.donutId.toString()] = item.quantity;
+                    }
+                });
+            }
+        }
+
         res.render('donuts/index.ejs', {
             donuts,
+            cartQuantities,
         });
     } catch (err) {
         console.log(err);
@@ -40,7 +56,7 @@ const newDonut = async (req, res) => {
 // Create donut
 const create = async (req, res) => {
     try {
-        const donut = await Donut.create({
+        await Donut.create({
             name: req.body.name,
             description: req.body.description,
             price: req.body.price,
@@ -89,7 +105,6 @@ const update = async (req, res) => {
         donut.category = req.body.category;
         donut.available = req.body.available === 'true';
 
-        // Only update image if a new one was uploaded
         if (req.file) {
             donut.image = req.file.path;
         }
@@ -107,7 +122,6 @@ const update = async (req, res) => {
 const deleteDonut = async (req, res) => {
     try {
         await Donut.findByIdAndDelete(req.params.id);
-
         res.redirect('/donuts');
     } catch (err) {
         console.log(err);
