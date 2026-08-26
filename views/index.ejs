@@ -4,7 +4,6 @@
 <head>
 
   <meta charset="UTF-8">
-
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
   <title>Donut House</title>
@@ -27,7 +26,9 @@
     <main>
 
 
-      <!-- HERO -->
+      <!-- =========================
+         HERO
+    ========================== -->
 
       <header class="hero home-hero">
 
@@ -54,8 +55,9 @@
       </header>
 
 
-
-      <!-- MOST POPULAR -->
+      <!-- =========================
+         MOST POPULAR
+    ========================== -->
 
       <section class="home-popular">
 
@@ -89,7 +91,6 @@
               <% donuts.slice(0, 3).forEach(donut=> { %>
 
                 <article class="home-popular-card">
-
 
                   <!-- DONUT IMAGE -->
 
@@ -175,55 +176,215 @@
       </section>
 
 
-      <!-- CUSTOMER REVIEWS -->
+      <!-- =========================
+         SPECIAL DONUTS
+    ========================== -->
+
+      <section class="home-special">
+
+        <div class="container">
+
+          <div class="home-section-header">
+
+            <div>
+
+              <h2>
+                Special Donuts
+              </h2>
+
+              <p>
+                Limited-time flavors made to make your day a little sweeter.
+              </p>
+
+            </div>
+
+
+
+          </div>
+
+
+          <% const specialDonuts=donuts ? donuts.filter(donut=>
+            donut.category === 'special'
+            ).slice(0, 3)
+            : [];
+            %>
+
+
+            <% if (specialDonuts.length> 0) { %>
+
+              <div class="home-popular-grid">
+
+                <% specialDonuts.forEach(donut=> { %>
+
+                  <article class="home-popular-card">
+
+                    <!-- IMAGE -->
+
+                    <a href="/donuts/<%= donut._id %>" class="home-popular-image" aria-label="View <%= donut.name %>">
+
+                      <% if (donut.image) { %>
+
+                        <img src="<%= donut.image %>" alt="<%= donut.name %>">
+
+                        <% } %>
+
+                    </a>
+
+
+                    <!-- CARD -->
+
+                    <div class="home-popular-base">
+
+                      <div class="home-popular-meta">
+
+                        <span>
+                          Monthly Special
+                        </span>
+
+                      </div>
+
+
+                      <a href="/donuts/<%= donut._id %>" class="home-popular-name">
+                        <%= donut.name %>
+                      </a>
+
+
+                      <div class="home-popular-bottom">
+
+                        <span class="home-popular-price">
+                          BD <%= Number(donut.price).toFixed(3) %>
+                        </span>
+
+
+                        <form action="/cart/add/<%= donut._id %>" method="POST" class="add-to-cart-form">
+
+                          <button type="submit" class="add-to-cart-btn" aria-label="Add <%= donut.name %> to cart">
+
+                            <img src="/images/cart.png" alt="">
+
+                          </button>
+
+                        </form>
+
+                      </div>
+
+                    </div>
+
+                  </article>
+
+                  <% }) %>
+
+              </div>
+
+
+              <% } else { %>
+
+                <div class="home-no-donuts">
+
+                  <h3>
+                    New specials are coming soon.
+                  </h3>
+
+                  <p>
+                    Check back soon for our latest limited-time donuts.
+                  </p>
+
+                  <a href="/donuts" class="home-primary-button">
+                    View Menu
+                  </a>
+
+                </div>
+
+                <% } %>
+
+        </div>
+
+      </section>
+
+
+      <!-- =========================
+         CUSTOMER REVIEWS
+    ========================== -->
+
       <section class="home-reviews">
+
         <div class="container">
 
           <div class="home-reviews-header">
-            <h2>What Our Customers Say</h2>
-            <p>Sweet words from our donut lovers.</p>
+
+            <h2>
+              What Our Customers Say
+            </h2>
+
+            <p>
+              Sweet words from our donut lovers.
+            </p>
+
           </div>
+
 
           <div class="home-review-grid">
 
             <article class="home-review-card">
-              <div class="home-review-stars">★★★★★</div>
+
+              <div class="home-review-stars">
+                ★★★★★
+              </div>
+
               <p class="home-review-text">
                 “The best donuts I’ve ever had! So fresh, soft, and delicious.”
               </p>
+
               <div class="home-review-name">
                 Sayed Mohammed
               </div>
+
             </article>
 
+
             <article class="home-review-card">
-              <div class="home-review-stars">★★★★★</div>
+
+              <div class="home-review-stars">
+                ★★★★★
+              </div>
+
               <p class="home-review-text">
                 “I’m obsessed with the flavors. You can really taste how fresh they are!”
               </p>
+
               <div class="home-review-name">
                 Hassan
               </div>
+
             </article>
 
+
             <article class="home-review-card">
-              <div class="home-review-stars">★★★★★</div>
+
+              <div class="home-review-stars">
+                ★★★★★
+              </div>
+
               <p class="home-review-text">
                 “The perfect treat with my coffee. I’ll definitely be ordering again.”
               </p>
+
               <div class="home-review-name">
                 Zainab
               </div>
+
             </article>
 
           </div>
 
         </div>
+
       </section>
 
 
-
-      <!-- ABOUT -->
+      <!-- =========================
+         ABOUT
+    ========================== -->
 
       <section class="home-about">
 
@@ -255,7 +416,6 @@
 
 
     <%- include('./partials/_footer.ejs') %>
-
 
 </body>
 

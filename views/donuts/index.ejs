@@ -2,9 +2,7 @@
 <html lang="en">
 
 <head>
-
     <meta charset="UTF-8">
-
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
     <title>Menu | Donut House</title>
@@ -16,7 +14,6 @@
         rel="stylesheet">
 
     <link rel="stylesheet" href="/stylesheets/style.css">
-
 </head>
 
 <body>
@@ -27,9 +24,7 @@
 
             <div class="container">
 
-
                 <!-- MENU INTRO -->
-
                 <div class="menuIntro" id="menu">
 
                     <div class="menuIntroTitle">
@@ -128,24 +123,24 @@
 
 
                                                                 <!-- PRICE + CART -->
+
                                                                 <div class="price">
 
                                                                     <div class="price-val">
                                                                         BD <%= donut.price.toFixed(3) %>
                                                                     </div>
 
-                                                                    <form action="/cart/add/<%= donut._id %>"
-                                                                        method="POST" class="add-to-cart-form">
 
-                                                                        <button type="submit" class="add-to-cart-btn">
+                                                                    <!-- ADD TO CART -->
 
-                                                                            <img src="/images/cart.png"
-                                                                                alt="Add to cart"
-                                                                                class="add-to-cart-icon">
+                                                                    <a href="/cart/add/<%= donut._id %>"
+                                                                        class="add-to-cart-btn"
+                                                                        aria-label="Add <%= donut.name %> to cart">
 
-                                                                        </button>
+                                                                        <img src="/images/cart.png" alt="Add to cart"
+                                                                            class="add-to-cart-icon">
 
-                                                                    </form>
+                                                                    </a>
 
                                                                 </div>
 
@@ -202,11 +197,9 @@
         </main>
 
 
-        <script>
+        <!-- CARD FLIP SCRIPT -->
 
-            /* =========================
-               CARD FLIP
-            ========================= */
+        <script>
 
             const cards = document.querySelectorAll("[data-card]");
 
@@ -214,9 +207,7 @@
             function closeAll() {
 
                 cards.forEach(card => {
-
                     card.classList.remove("flipped");
-
                 });
 
             }
@@ -285,162 +276,8 @@
             document.addEventListener("keydown", event => {
 
                 if (event.key === "Escape") {
-
                     closeAll();
-
                 }
-
-            });
-
-
-            /* =========================
-               CART
-            ========================= */
-
-            document.querySelectorAll(".price").forEach(priceBox => {
-
-                const plus =
-                    priceBox.querySelector(".plus");
-
-                const min =
-                    priceBox.querySelector(".min");
-
-                const amount =
-                    priceBox.querySelector(".amount");
-
-
-                if (!plus || !min || !amount) {
-
-                    return;
-
-                }
-
-
-                /* ADD */
-
-                plus.addEventListener("click", async event => {
-
-                    event.preventDefault();
-                    event.stopPropagation();
-
-                    const donutId =
-                        plus.dataset.pid;
-
-
-                    try {
-
-                        const response = await fetch(
-                            `/cart/add/${donutId}`,
-                            {
-                                method: "GET"
-                            }
-                        );
-
-
-                        if (!response.ok) {
-
-                            throw new Error(
-                                "Could not add item"
-                            );
-
-                        }
-
-
-                        let quantity =
-                            parseInt(amount.textContent) || 0;
-
-                        quantity++;
-
-
-                        amount.textContent =
-                            `${quantity}x`;
-
-                        amount.hidden = false;
-
-
-                        min.disabled = false;
-
-                        min.classList.add("visible");
-
-
-                    } catch (error) {
-
-                        console.error(error);
-
-                    }
-
-                });
-
-
-                /* REMOVE */
-
-                min.addEventListener("click", async event => {
-
-                    event.preventDefault();
-                    event.stopPropagation();
-
-
-                    if (min.disabled) {
-
-                        return;
-
-                    }
-
-
-                    const donutId =
-                        min.dataset.pid;
-
-
-                    try {
-
-                        const response = await fetch(
-                            `/cart/decrease/${donutId}`,
-                            {
-                                method: "GET"
-                            }
-                        );
-
-
-                        if (!response.ok) {
-
-                            throw new Error(
-                                "Could not remove item"
-                            );
-
-                        }
-
-
-                        let quantity =
-                            parseInt(amount.textContent) || 0;
-
-                        quantity--;
-
-
-                        if (quantity <= 0) {
-
-                            amount.textContent = "";
-
-                            amount.hidden = true;
-
-                            min.disabled = true;
-
-                            min.classList.remove("visible");
-
-                        } else {
-
-                            amount.textContent =
-                                `${quantity}x`;
-
-                        }
-
-
-                    } catch (error) {
-
-                        console.error(error);
-
-                    }
-
-                });
 
             });
 

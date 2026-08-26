@@ -1,43 +1,23 @@
 const express = require('express');
+
 const router = express.Router();
 
 const cartCtrl = require('../controllers/cartController');
 const isSignedIn = require('../middleware/isSignedIn');
 
-
-// ============================================
-// CART PAGE
-// ============================================
-
+// Cart page
 router.get('/', isSignedIn, cartCtrl.index);
 
-
-// ============================================
-// ADD DONUT
-// ============================================
-
+// Add donut
 router.get('/add/:id', isSignedIn, cartCtrl.addToCart);
 
-
-// ============================================
-// INCREASE
-// ============================================
-
+// Increase quantity
 router.get('/increase/:id', isSignedIn, cartCtrl.increase);
 
-
-// ============================================
-// DECREASE
-// ============================================
-
+// Decrease quantity
 router.get('/decrease/:id', isSignedIn, cartCtrl.decrease);
 
-
-// ============================================
-// REMOVE
-// ============================================
-
+// Remove donut
 router.get('/remove/:id', isSignedIn, cartCtrl.remove);
-
 
 module.exports = router;

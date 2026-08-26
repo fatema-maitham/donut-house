@@ -1,16 +1,14 @@
 const User = require('../models/user');
 const Donut = require('../models/donut');
 
-// Redirect back to the page the user came from
+// Redirect back
 const redirectBack = (req, res, fallback = '/donuts') => {
     const referrer = req.get('Referrer');
-
     res.redirect(referrer || fallback);
 };
 
-
 // ============================================
-// ADD DONUT TO CART
+// ADD DONUT
 // ============================================
 
 const addToCart = async (req, res) => {
@@ -21,40 +19,33 @@ const addToCart = async (req, res) => {
             return res.status(404).send('User not found');
         }
 
-        const donutId = req.params.id;
-
-        // Make sure donut exists
-        const donut = await Donut.findById(donutId);
+        const donut = await Donut.findById(req.params.id);
 
         if (!donut) {
             return res.status(404).send('Donut not found');
         }
 
-        // Find existing item
         const existingItem = user.cart.find(
-            item => item.donutId.toString() === donutId
+            item => item.donutId.toString() === req.params.id
         );
 
         if (existingItem) {
             existingItem.quantity += 1;
         } else {
             user.cart.push({
-                donutId: donutId,
+                donutId: donut._id,
                 quantity: 1
             });
         }
 
         await user.save();
 
-        // Stay on Menu page
         redirectBack(req, res, '/donuts');
-
     } catch (err) {
         console.error('ADD TO CART ERROR:', err);
         res.status(500).send('Something went wrong');
     }
 };
-
 
 // ============================================
 // SHOW CART
@@ -73,16 +64,14 @@ const index = async (req, res) => {
             cart: user.cart,
             user: user
         });
-
     } catch (err) {
         console.error('CART INDEX ERROR:', err);
         res.status(500).send('Something went wrong');
     }
 };
 
-
 // ============================================
-// INCREASE QUANTITY
+// INCREASE
 // ============================================
 
 const increase = async (req, res) => {
@@ -105,17 +94,15 @@ const increase = async (req, res) => {
 
         await user.save();
 
-        redirectBack(req, res, '/cart');
-
+        res.redirect('/cart');
     } catch (err) {
         console.error('INCREASE CART ERROR:', err);
         res.status(500).send('Something went wrong');
     }
 };
 
-
 // ============================================
-// DECREASE QUANTITY
+// DECREASE
 // ============================================
 
 const decrease = async (req, res) => {
@@ -131,7 +118,7 @@ const decrease = async (req, res) => {
         );
 
         if (!item) {
-            return redirectBack(req, res, '/donuts');
+            return res.redirect('/cart');
         }
 
         if (item.quantity > 1) {
@@ -145,17 +132,15 @@ const decrease = async (req, res) => {
 
         await user.save();
 
-        redirectBack(req, res, '/donuts');
-
+        res.redirect('/cart');
     } catch (err) {
         console.error('DECREASE CART ERROR:', err);
         res.status(500).send('Something went wrong');
     }
 };
 
-
 // ============================================
-// REMOVE ENTIRE ITEM
+// REMOVE
 // ============================================
 
 const remove = async (req, res) => {
@@ -173,14 +158,12 @@ const remove = async (req, res) => {
 
         await user.save();
 
-        redirectBack(req, res, '/cart');
-
+        res.redirect('/cart');
     } catch (err) {
         console.error('REMOVE CART ERROR:', err);
         res.status(500).send('Something went wrong');
     }
 };
-
 
 module.exports = {
     addToCart,

@@ -7,6 +7,12 @@
 
     <title>Order Details | Donut House</title>
 
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+    <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@300;400;600;700;800;900&display=swap"
+        rel="stylesheet">
+
     <link rel="stylesheet" href="/stylesheets/style.css">
 </head>
 
@@ -14,82 +20,174 @@
 
     <%- include('../partials/_navbar.ejs') %>
 
-        <main>
 
-            <section class="section">
+        <!-- =========================
+         ORDER DETAILS
+    ========================== -->
 
-                <div class="container">
+        <main class="order-details-page">
+
+            <div class="container">
+
+                <!-- PAGE TITLE -->
+
+                <div class="order-details-header">
+
 
                     <h1 class="sectionTitle">
                         Order Details
                     </h1>
 
-                    <div class="cardBase">
+                </div>
+
+
+                <!-- ORDER CARD -->
+
+                <div class="cardBase order-details-card">
+
+                    <!-- ORDER NUMBER -->
+
+                    <div class="order-heading">
 
                         <h2>
                             Order #<%= order._id %>
                         </h2>
 
-                        <p>
-                            <strong>Status:</strong>
+                        <span class="order-status">
                             <%= order.status %>
-                        </p>
+                        </span>
 
-                        <p>
-                            <strong>Location:</strong>
-                            <%= order.location.name %>
-                        </p>
+                    </div>
 
-                        <hr>
 
-                        <h2>Items</h2>
+                    <!-- ORDER INFORMATION -->
+
+                    <div class="order-info">
+
+                        <div class="order-info-row">
+
+                            <span class="order-info-label">
+                                Status
+                            </span>
+
+                            <strong>
+                                <%= order.status %>
+                            </strong>
+
+                        </div>
+
+
+                        <div class="order-info-row">
+
+                            <span class="order-info-label">
+                                Pickup Location
+                            </span>
+
+                            <strong>
+                                <%= order.location ? order.location.name : 'Location no longer available' %>
+                            </strong>
+
+                        </div>
+
+                    </div>
+
+
+                    <hr>
+
+
+                    <!-- ITEMS -->
+
+                    <h2 class="order-items-title">
+                        Items
+                    </h2>
+
+
+                    <div class="order-items">
 
                         <% order.items.forEach(item=> { %>
 
-                            <div style="margin: 20px 0;">
+                            <div class="order-item">
 
-                                <h3>
-                                    <%= item.donut.name %>
-                                </h3>
+                                <div class="order-item-info">
 
-                                <p>
-                                    Quantity: <%= item.quantity %>
-                                </p>
+                                    <h3>
+                                        <%= item.donut ? item.donut.name : 'Donut no longer available' %>
+                                    </h3>
 
-                                <p>
-                                    Price:
-                                    BD <%= item.price.toFixed(3) %>
-                                </p>
 
-                                <p>
-                                    Subtotal:
-                                    BD <%= (item.price * item.quantity).toFixed(3) %>
-                                </p>
+                                    <p>
+                                        Quantity:
+
+                                        <strong>
+                                            <%= item.quantity %>
+                                        </strong>
+                                    </p>
+
+
+                                    <p>
+                                        Price:
+
+                                        <strong>
+                                            BD <%= Number(item.price).toFixed(3) %>
+                                        </strong>
+                                    </p>
+
+                                </div>
+
+
+                                <div class="order-item-subtotal">
+
+                                    <span>
+                                        Subtotal
+                                    </span>
+
+                                    <strong>
+                                        BD <%= ( Number(item.price) * Number(item.quantity) ).toFixed(3) %>
+                                    </strong>
+
+                                </div>
 
                             </div>
 
                             <% }) %>
 
-                                <hr>
+                    </div>
 
-                                <h2>
-                                    Total:
-                                    BD <%= order.total.toFixed(3) %>
-                                </h2>
 
-                                <br>
+                    <hr>
 
-                                <a href="/orders">
-                                    Back to My Orders
-                                </a>
+
+                    <!-- TOTAL -->
+
+                    <div class="order-total">
+
+                        <span>
+                            Total
+                        </span>
+
+                        <strong>
+                            BD <%= Number(order.total).toFixed(3) %>
+                        </strong>
+
+                    </div>
+
+
+                    <!-- BACK BUTTON -->
+
+                    <div class="order-actions">
+
+                        <a href="/orders" class="order-back-button">
+                            Back to My Orders
+                        </a>
 
                     </div>
 
                 </div>
 
-            </section>
+            </div>
 
         </main>
+
 
         <%- include('../partials/_footer.ejs') %>
 

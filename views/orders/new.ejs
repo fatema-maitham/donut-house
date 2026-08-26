@@ -1,5 +1,4 @@
 <!DOCTYPE html>
-
 <html lang="en">
 
 <head>
@@ -7,47 +6,100 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
     <title>Checkout | Donut House</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+    <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@300;400;600;700;800;900&display=swap"
+        rel="stylesheet">
+
+    <link rel="stylesheet" href="/stylesheets/style.css">
 </head>
 
 <body>
 
     <%- include('../partials/_navbar.ejs') %>
 
-        <h1>Checkout</h1>
+        <main class="checkout-page">
 
-        <h2>Choose a Location</h2>
+            <div class="container">
 
-        <form action="/orders" method="POST">
+                <!-- PAGE HEADER -->
+                <div class="checkout-header">
 
-            <% locations.forEach(location=> { %>
+                    <h1>
+                        Checkout
+                    </h1>
 
-                <div>
-
-                    <input type="radio" id="<%= location._id %>" name="location" value="<%= location._id %>" required>
-
-                    <label for="<%= location._id %>">
-                        <%= location.name %> -
-                            <%= location.address %>,
-                                <%= location.city %>
-                    </label>
+                    <p>
+                        Choose where you would like to pick up your donuts.
+                    </p>
 
                 </div>
 
-                <% }) %>
 
-                    <br>
+                <!-- PICKUP SECTION -->
+                <section class="checkout-card">
 
-                    <button type="submit">
-                        Place Order
-                    </button>
 
-        </form>
 
-        <br>
 
-        <a href="/cart">
-            Back to Cart
-        </a>
+                    <form action="/orders" method="POST">
+
+                        <div class="location-options">
+
+                            <% locations.forEach(location=> { %>
+
+                                <label class="location-option" for="<%= location._id %>">
+
+                                    <input type="radio" id="<%= location._id %>" name="location"
+                                        value="<%= location._id %>" required>
+
+                                    <div class="location-option-content">
+
+                                        <h3>
+                                            <%= location.name %>
+                                        </h3>
+
+                                        <p>
+                                            <%= location.address %>,
+                                                <%= location.city %>
+                                        </p>
+
+                                    </div>
+
+                                    <span class="location-check">
+                                        ✓
+                                    </span>
+
+                                </label>
+
+                                <% }) %>
+
+                        </div>
+
+
+                        <!-- ACTIONS -->
+                        <div class="checkout-actions">
+
+                            <a href="/cart" class="checkout-back-button">
+                                Back to Cart
+                            </a>
+
+                            <button type="submit" class="checkout-place-button">
+                                Place Order
+                            </button>
+
+                        </div>
+
+                    </form>
+
+                </section>
+
+            </div>
+
+        </main>
+
 
         <%- include('../partials/_footer.ejs') %>
 
