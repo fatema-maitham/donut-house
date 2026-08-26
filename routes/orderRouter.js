@@ -7,8 +7,7 @@ const orderCtrl = require('../controllers/orderCtrl');
 const isSignedIn = require('../middleware/isSignedIn');
 const isAdmin = require('../middleware/isAdmin');
 
-
-// CUSTOMER
+// CUSTOMER ORDERS
 
 router.get('/', isSignedIn, orderCtrl.index);
 
@@ -19,9 +18,14 @@ router.post('/', isSignedIn, orderCtrl.create);
 router.put('/:id/cancel', isSignedIn, orderCtrl.cancel);
 
 
-// ADMIN
+// ADMIN ORDERS
 
-router.get('/admin', isSignedIn, isAdmin, orderCtrl.adminIndex);
+router.get(
+    '/admin',
+    isSignedIn,
+    isAdmin,
+    orderCtrl.adminIndex
+);
 
 router.put(
     '/admin/:id/status',
@@ -30,6 +34,13 @@ router.put(
     orderCtrl.updateStatus
 );
 
-router.get('/:id', isSignedIn, orderCtrl.show);
+
+// SINGLE ORDER
+
+router.get(
+    '/:id',
+    isSignedIn,
+    orderCtrl.show
+);
 
 module.exports = router;

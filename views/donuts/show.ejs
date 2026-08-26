@@ -2,92 +2,140 @@
 <html lang="en">
 
 <head>
+
     <meta charset="UTF-8">
+
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
     <title>
         <%= donut.name %> | Donut House
     </title>
 
+
     <link rel="preconnect" href="https://fonts.googleapis.com">
+
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 
     <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@300;400;600;700;800;900&display=swap"
         rel="stylesheet">
 
     <link rel="stylesheet" href="/stylesheets/style.css">
+
 </head>
+
 
 <body>
 
     <%- include('../partials/_navbar.ejs') %>
 
-        <main>
 
-            <section class="infoSection">
+        <main class="donut-show-page">
+
+            <section class="donut-show-section">
 
                 <div class="container">
 
-                    <div class="infoBlock">
 
-                        <!-- Donut Image -->
-                        <div class="infoImg">
+                    <!-- BACK TO MENU -->
+
+                    <a href="/donuts" class="donut-back-link">
+                        ← Back to Menu
+                    </a>
+
+
+                    <!-- PRODUCT -->
+
+                    <div class="donut-show-grid">
+
+
+                        <!-- IMAGE -->
+
+                        <div class="donut-show-image">
 
                             <img src="<%= donut.image %>" alt="<%= donut.name %>">
 
                         </div>
 
 
-                        <!-- Donut Information -->
-                        <div>
+                        <!-- DETAILS -->
 
-                            <h2>
-                                <%= donut.name %>
-                            </h2>
+                        <div class="donut-show-details">
 
-                            <p>
-                                <strong>Category:</strong>
+
+                            <span class="donut-show-category">
                                 <%= donut.category %>
-                            </p>
+                            </span>
 
-                            <p>
-                                <strong>Price:</strong>
+
+                            <h1>
+                                <%= donut.name %>
+                            </h1>
+
+
+                            <div class="donut-show-price">
                                 BD <%= donut.price.toFixed(3) %>
-                            </p>
+                            </div>
 
-                            <p style="margin-top: 14px;">
+
+                            <p class="donut-show-description">
                                 <%= donut.description %>
                             </p>
 
 
-                            <% if (user) { %>
-
-                                <form action="/cart/add/<%= donut._id %>" method="POST" style="margin-top: 24px;">
-
-                                    <button type="submit">
-                                        Add to Cart
-                                    </button>
-
-                                </form>
-
-                                <% } else { %>
-
-                                    <p style="margin-top: 24px;">
-                                        Please log in to add items to your cart.
-                                    </p>
-
-                                    <a href="/auth/login">
-                                        Login
-                                    </a>
-
-                                    <% } %>
+                            <div class="donut-show-divider"></div>
 
 
-                                        <br>
+                            <div class="donut-show-availability">
 
-                                        <a href="/donuts">
-                                            Back to Menu
+                                <% if (donut.available) { %>
+
+                                    <span class="availability-dot"></span>
+
+                                    Available
+
+                                    <% } else { %>
+
+                                        <span class="availability-dot unavailable"></span>
+
+                                        Currently unavailable
+
+                                        <% } %>
+
+                            </div>
+
+
+                            <% if (donut.available) { %>
+
+
+                                <% if (user) { %>
+
+                                    <form action="/cart/add/<%= donut._id %>" method="POST" class="donut-add-form">
+
+                                        <button type="submit" class="donut-add-button">
+                                            Add to Cart
+                                        </button>
+
+                                    </form>
+
+
+                                    <% } else { %>
+
+                                        <a href="/auth/sign-in" class="donut-add-button">
+                                            Login to Order
                                         </a>
+
+                                        <% } %>
+
+
+                                            <% } %>
+
+
+                                                <div class="donut-show-note">
+
+                                                    Freshly baked and made to order.
+
+                                                </div>
+
 
                         </div>
 
@@ -99,7 +147,9 @@
 
         </main>
 
+
         <%- include('../partials/_footer.ejs') %>
+
 
 </body>
 

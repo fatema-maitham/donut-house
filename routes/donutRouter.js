@@ -1,4 +1,5 @@
 const express = require('express');
+
 const router = express.Router();
 
 const multer = require('multer');
@@ -11,8 +12,13 @@ const donutCtrl = require('../controllers/donutCtrl');
 const isSignedIn = require('../middleware/isSignedIn');
 const isAdmin = require('../middleware/isAdmin');
 
-// ADMIN — create
-router.get('/new', isSignedIn, isAdmin, donutCtrl.newDonut);
+// ADMIN — add donut
+router.get(
+    '/new',
+    isSignedIn,
+    isAdmin,
+    donutCtrl.newDonut
+);
 
 router.post(
     '/',
@@ -22,11 +28,19 @@ router.post(
     donutCtrl.create
 );
 
-// PUBLIC
-router.get('/', donutCtrl.index);
+// CUSTOMER + ADMIN — view donuts
+router.get(
+    '/',
+    donutCtrl.index
+);
 
-// ADMIN — edit
-router.get('/:id/edit', isSignedIn, isAdmin, donutCtrl.edit);
+// ADMIN — edit donut
+router.get(
+    '/:id/edit',
+    isSignedIn,
+    isAdmin,
+    donutCtrl.edit
+);
 
 router.put(
     '/:id',
@@ -36,7 +50,7 @@ router.put(
     donutCtrl.update
 );
 
-// ADMIN — delete
+// ADMIN — delete donut
 router.delete(
     '/:id',
     isSignedIn,
@@ -44,7 +58,10 @@ router.delete(
     donutCtrl.deleteDonut
 );
 
-// PUBLIC — one donut
-router.get('/:id', donutCtrl.show);
+// CUSTOMER + ADMIN — view one donut
+router.get(
+    '/:id',
+    donutCtrl.show
+);
 
 module.exports = router;

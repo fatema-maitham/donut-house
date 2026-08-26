@@ -3,39 +3,51 @@ const Donut = require('../models/donut');
 const Location = require('../models/location');
 const User = require('../models/user');
 
-// GET user's orders
+
+// =========================================================
+// CUSTOMER - VIEW MY ORDERS
+// =========================================================
+
 const index = async (req, res) => {
     try {
         const orders = await Order.find({
             user: req.session.user._id,
         })
             .populate('location')
-            .populate('items.donut');
+            .populate('items.donut')
+            .sort({ createdAt: -1 });
 
         res.render('orders/index.ejs', {
             orders,
         });
+
     } catch (err) {
         console.log(err);
-        res.send('Something went wrong');
+        res.status(500).send('Something went wrong');
     }
 };
 
-// GET one order
+
+// =========================================================
+// CUSTOMER - VIEW ONE ORDER
+// =========================================================
+
 const show = async (req, res) => {
     try {
         const order = await Order.findById(req.params.id)
             .populate('location')
-            .populate('items.donut');
+            .populate('items.donut')
+            .populate('user');
 
         if (!order) {
-            return res.send('Order not found');
+            return res.status(404).send('Order not found');
         }
 
-        // Customer can only see their own order
+        // Customers can only see their own orders.
+        // Admins can see any order.
         if (
             req.session.user.role !== 'admin' &&
-            order.user.toString() !== req.session.user._id.toString()
+            order.user._id.toString() !== req.session.user._id.toString()
         ) {
             return res.status(403).send('Access denied');
         }
@@ -43,13 +55,18 @@ const show = async (req, res) => {
         res.render('orders/show.ejs', {
             order,
         });
+
     } catch (err) {
         console.log(err);
-        res.send('Something went wrong');
+        res.status(500).send('Something went wrong');
     }
 };
 
-// GET checkout page
+
+// =========================================================
+// CUSTOMER - CHECKOUT PAGE
+// =========================================================
+
 const newOrder = async (req, res) => {
     try {
         const locations = await Location.find({
@@ -59,16 +76,23 @@ const newOrder = async (req, res) => {
         res.render('orders/new.ejs', {
             locations,
         });
+
     } catch (err) {
         console.log(err);
-        res.send('Something went wrong');
+        res.status(500).send('Something went wrong');
     }
 };
 
-// CREATE order from cart
+
+// =========================================================
+// CUSTOMER - CREATE ORDER
+// =========================================================
+
 const create = async (req, res) => {
     try {
-        const user = await User.findById(req.session.user._id);
+        const user = await User.findById(
+            req.session.user._id
+        );
 
         if (!user) {
             return res.status(404).send('User not found');
@@ -78,20 +102,30 @@ const create = async (req, res) => {
             return res.send('Your cart is empty');
         }
 
+
         // Validate pickup location
+
         const selectedLocation = await Location.findOne({
             _id: req.body.location,
             available: true,
         });
 
         if (!selectedLocation) {
-            return res.status(400).send('Invalid pickup location');
+            return res.status(400).send(
+                'Invalid pickup location'
+            );
         }
+
+
+        // Create order items
 
         const items = [];
 
         for (const cartItem of user.cart) {
-            const donut = await Donut.findById(cartItem.donutId);
+
+            const donut = await Donut.findById(
+                cartItem.donutId
+            );
 
             if (!donut) {
                 continue;
@@ -104,14 +138,24 @@ const create = async (req, res) => {
             });
         }
 
+
         if (items.length === 0) {
-            return res.send('No valid items in cart');
+            return res.send(
+                'No valid items in cart'
+            );
         }
 
+
+        // Calculate total
+
         const total = items.reduce(
-            (sum, item) => sum + item.price * item.quantity,
+            (sum, item) =>
+                sum + item.price * item.quantity,
             0
         );
+
+
+        // Create order
 
         const order = await Order.create({
             user: user._id,
@@ -120,75 +164,131 @@ const create = async (req, res) => {
             total,
         });
 
+
         // Clear cart
+
         user.cart = [];
+
         await user.save();
 
-        res.redirect(`/orders/${order._id}`);
+
+        // Send customer to order details
+
+        res.redirect(
+            `/orders/${order._id}`
+        );
+
     } catch (err) {
         console.log(err);
-        res.send('Something went wrong');
+        res.status(500).send(
+            'Something went wrong'
+        );
     }
 };
 
-// CANCEL order
+
+// =========================================================
+// CUSTOMER - CANCEL ORDER
+// =========================================================
+
 const cancel = async (req, res) => {
     try {
-        const order = await Order.findById(req.params.id);
+
+        const order = await Order.findById(
+            req.params.id
+        );
 
         if (!order) {
-            return res.send('Order not found');
+            return res.status(404).send(
+                'Order not found'
+            );
         }
 
-        // Make sure customer owns the order
+
+        // Make sure customer owns order
+
         if (
             req.session.user.role !== 'admin' &&
-            order.user.toString() !== req.session.user._id.toString()
+            order.user.toString() !==
+            req.session.user._id.toString()
         ) {
-            return res.status(403).send('Access denied');
+            return res.status(403).send(
+                'Access denied'
+            );
         }
 
+
         // Only pending orders can be cancelled
+
         if (order.status !== 'pending') {
-            return res.send('This order can no longer be cancelled');
+            return res.send(
+                'This order can no longer be cancelled'
+            );
         }
+
 
         order.status = 'cancelled';
 
         await order.save();
 
-        res.redirect(`/orders/${order._id}`);
+
+        res.redirect(
+            `/orders/${order._id}`
+        );
+
     } catch (err) {
         console.log(err);
-        res.send('Something went wrong');
+        res.status(500).send(
+            'Something went wrong'
+        );
     }
 };
 
-// ADMIN - see all orders
+
+// =========================================================
+// ADMIN - VIEW ALL ORDERS
+// =========================================================
+
 const adminIndex = async (req, res) => {
     try {
+
         const orders = await Order.find({})
             .populate('user')
             .populate('location')
-            .populate('items.donut');
+            .populate('items.donut')
+            .sort({ createdAt: -1 });
+
 
         res.render('orders/admin-index.ejs', {
             orders,
         });
+
     } catch (err) {
         console.log(err);
-        res.send('Something went wrong');
+        res.status(500).send(
+            'Something went wrong'
+        );
     }
 };
 
-// ADMIN - update order status
+
+// =========================================================
+// ADMIN - UPDATE ORDER STATUS
+// =========================================================
+
 const updateStatus = async (req, res) => {
     try {
-        const order = await Order.findById(req.params.id);
+
+        const order = await Order.findById(
+            req.params.id
+        );
 
         if (!order) {
-            return res.send('Order not found');
+            return res.status(404).send(
+                'Order not found'
+            );
         }
+
 
         const validStatuses = [
             'pending',
@@ -198,20 +298,40 @@ const updateStatus = async (req, res) => {
             'cancelled',
         ];
 
-        if (!validStatuses.includes(req.body.status)) {
-            return res.status(400).send('Invalid order status');
+
+        if (
+            !validStatuses.includes(
+                req.body.status
+            )
+        ) {
+            return res.status(400).send(
+                'Invalid order status'
+            );
         }
+
 
         order.status = req.body.status;
 
         await order.save();
 
+
+        // IMPORTANT:
+        // Go back to admin Manage Orders page
+
         res.redirect('/orders/admin');
+
     } catch (err) {
         console.log(err);
-        res.send('Something went wrong');
+        res.status(500).send(
+            'Something went wrong'
+        );
     }
 };
+
+
+// =========================================================
+// EXPORTS
+// =========================================================
 
 module.exports = {
     index,

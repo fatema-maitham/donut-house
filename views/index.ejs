@@ -5,7 +5,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-  <title>Donut House</title>
+  <title>Menu | Donut House</title>
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -20,30 +20,154 @@
 
   <%- include('./partials/_navbar.ejs') %>
 
-
-    <!-- HERO -->
-    <header class="hero">
+    <main>
 
       <div class="container">
 
-        <div class="heroCard">
+        <!-- MENU INTRO -->
 
-          <div class="heroTitle">
-            Donuts, But Better.
+        <div class="menuIntro" id="menu">
+
+          <div class="menuIntroTitle">
+            Menu
           </div>
 
-          <div class="heroSub">
-            Freshly baked. Fully plant-based. Made to crave.
-          </div>
+          <p class="menuIntroText">
+            Choose from a selection of our Classic, Charity or Special Donuts.<br>
+            Handmade daily for you!
+          </p>
 
         </div>
 
+
+        <!-- CATEGORIES -->
+
+        <% const categories=[ { key: 'box' , title: 'Boxes' }, { key: 'special' , title: 'Monthly Specials' }, {
+          key: 'classic' , title: 'Standard Donuts' }, { key: 'weekend' , title: 'Weekend Specials' } ]; %>
+
+
+          <% categories.forEach(cat=> { %>
+
+            <% const filteredDonuts=donuts.filter( donut=> donut.category === cat.key
+              ); %>
+
+
+              <% if (filteredDonuts.length> 0) { %>
+
+                <section class="section">
+
+                  <div class="sectionTitle">
+                    <%= cat.title %>
+                  </div>
+
+
+                  <div class="grid">
+
+                    <% filteredDonuts.forEach(donut=> { %>
+
+                      <article class="card">
+
+                        <div class="cardInner">
+
+                          <!-- FRONT -->
+
+                          <div class="face front">
+
+                            <!-- DONUT IMAGE -->
+
+                            <div class="donutFloat">
+
+                              <img src="<%= donut.image %>" alt="<%= donut.name %>">
+
+                            </div>
+
+
+                            <!-- CARD -->
+
+                            <div class="cardBase">
+
+                              <!-- CATEGORY + INFO -->
+
+                              <div class="metaRow">
+
+                                <small>
+                                  <%= cat.title %>
+                                </small>
+
+                                <a href="/donuts/<%= donut._id %>" class="infoBtn" aria-label="View <%= donut.name %>">
+
+                                  +
+
+                                </a>
+
+                              </div>
+
+
+                              <!-- NAME -->
+
+                              <div class="name">
+                                <%= donut.name %>
+                              </div>
+
+
+                              <!-- DESCRIPTION -->
+
+                              <% if (donut.description) { %>
+
+                                <div class="backText muted">
+                                  <%= donut.description %>
+                                </div>
+
+                                <% } %>
+
+
+                                  <!-- PRICE + CART -->
+
+                                  <div class="price">
+
+                                    <div class="price-val">
+                                      BD <%= Number(donut.price).toFixed(3) %>
+                                    </div>
+
+
+                                    <form action="/cart/add/<%= donut._id %>" method="POST" class="add-to-cart-form">
+
+                                      <button type="submit" class="add-to-cart-btn"
+                                        aria-label="Add <%= donut.name %> to cart">
+
+                                        <img src="/images/cart.png" alt="">
+
+                                      </button>
+
+                                    </form>
+
+                                  </div>
+
+                            </div>
+
+                          </div>
+
+                        </div>
+
+                      </article>
+
+                      <% }) %>
+
+                  </div>
+
+                </section>
+
+                <% } %>
+
+                  <% }) %>
+
       </div>
 
-    </header>
+    </main>
 
 
     <%- include('./partials/_footer.ejs') %>
+
 
 </body>
 

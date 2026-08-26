@@ -1,5 +1,4 @@
 <!DOCTYPE html>
-
 <html lang="en">
 
 <head>
@@ -11,7 +10,6 @@
     <title>Menu | Donut House</title>
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
-
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 
     <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@300;400;600;700;800;900&display=swap"
@@ -21,11 +19,9 @@
 
 </head>
 
-
 <body>
 
     <%- include('../partials/_navbar.ejs') %>
-
 
         <main>
 
@@ -41,17 +37,15 @@
                     </div>
 
                     <p class="menuIntroText">
-
-                        Choose from a selection of our Classic, Charity or Special Donuts.<br>
-
+                        Choose from a selection of our Classic, Charity or Special Donuts.
+                        <br>
                         Handmade daily for you!
-
                     </p>
 
                 </div>
 
 
-                <!-- DYNAMIC SECTIONS -->
+                <!-- CATEGORIES -->
 
                 <% const categories=[ { key: 'box' , title: 'Boxes' }, { key: 'special' , title: 'Monthly Specials' }, {
                     key: 'classic' , title: 'Standard Donuts' }, { key: 'weekend' , title: 'Weekend Specials' } ]; %>
@@ -60,323 +54,389 @@
                     <% categories.forEach(cat=> { %>
 
                         <% const filteredDonuts=donuts.filter( donut=> donut.category === cat.key
-                            );
-                            %>
+                            ); %>
 
 
                             <% if (filteredDonuts.length> 0) { %>
 
-
                                 <section class="section">
 
-
                                     <div class="sectionTitle">
-
                                         <%= cat.title %>
-
                                     </div>
 
 
                                     <div class="grid">
 
-
                                         <% filteredDonuts.forEach(donut=> { %>
 
-
-                                            <article class="card" data-card>
-
-
-                                                <div class="cardInner">
+                                            <% const quantity=cartQuantities[donut._id.toString()] || 0; %>
 
 
-                                                    <!-- FRONT SIDE -->
+                                                <article class="card" data-card>
 
-                                                    <div class="face front">
+                                                    <div class="cardInner">
 
 
-                                                        <div class="donutFloat">
+                                                        <!-- FRONT -->
 
-                                                            <img src="<%= donut.image %>" alt="<%= donut.name %>">
+                                                        <div class="face front">
+
+
+                                                            <!-- CLICKABLE DONUT -->
+
+                                                            <a href="/donuts/<%= donut._id %>"
+                                                                class="donutFloat donut-card-link"
+                                                                aria-label="View <%= donut.name %>">
+
+                                                                <img src="<%= donut.image %>" alt="<%= donut.name %>">
+
+                                                            </a>
+
+
+                                                            <!-- CARD -->
+
+                                                            <div class="cardBase">
+
+
+                                                                <!-- CATEGORY + INFO -->
+
+                                                                <div class="metaRow">
+
+                                                                    <small>
+                                                                        <%= cat.title %>
+                                                                    </small>
+
+
+                                                                    <button class="infoBtn" type="button" data-open
+                                                                        data-desc="<%= donut.description %>"
+                                                                        data-trace="May contain traces of peanuts, nuts, and tree nuts."
+                                                                        data-allergens="Allergens: wheat, gluten, soy"
+                                                                        aria-label="Open product info">
+                                                                        i
+                                                                    </button>
+
+                                                                </div>
+
+
+                                                                <!-- CLICKABLE NAME -->
+
+                                                                <a href="/donuts/<%= donut._id %>"
+                                                                    class="name donut-name-link">
+                                                                    <%= donut.name %>
+                                                                </a>
+
+
+                                                                <!-- PRICE + CART -->
+                                                                <div class="price">
+                                                                    <div class="price-val">
+                                                                        BD <%= donut.price.toFixed(3) %>
+                                                                    </div>
+
+                                                                    <form action="/cart/add/<%= donut._id %>"
+                                                                        method="POST">
+                                                                        <button type="submit" class="add-to-cart-btn">
+                                                                            Add to Cart
+                                                                        </button>
+                                                                    </form>
+                                                                </div>
+
+                                                            </div>
 
                                                         </div>
 
 
-                                                        <div class="cardBase">
+                                                        <!-- BACK -->
+
+                                                        <div class="face back" aria-hidden="true">
+
+                                                            <div class="backTop">
+
+                                                                <div class="backTitle">
+                                                                    Product info
+                                                                </div>
 
 
-                                                            <div class="metaRow">
-
-                                                                <small style="text-transform: uppercase;">
-
-                                                                    <%= cat.title %>
-
-                                                                </small>
-
-
-                                                                <button class="infoBtn" type="button" data-open
-                                                                    data-desc="<%= donut.description %>"
-                                                                    data-trace="May contain traces of peanuts, nuts, and tree nuts."
-                                                                    data-allergens="Allergens: wheat, gluten, soy"
-                                                                    aria-label="Open product info">
-                                                                    i
+                                                                <button class="closeBtn" type="button" data-close
+                                                                    aria-label="Close">
+                                                                    &times;
                                                                 </button>
 
                                                             </div>
 
 
-                                                            <div class="name">
-
-                                                                <%= donut.name %>
-
-                                                            </div>
+                                                            <div class="backText" data-bdesc></div>
 
 
-                                                            <!-- PRICE + CART -->
-
-                                                            <div class="priceRow">
+                                                            <div class="backText muted" data-btrace></div>
 
 
-                                                                <div class="price">
-
-                                                                    BD <%= donut.price.toFixed(3) %>
-
-                                                                </div>
-
-
-                                                                <% if (user) { %>
-
-
-                                                                    <% const cartItem=user.cart ? user.cart.find(item=>
-                                                                        item.donutId &&
-                                                                        item.donutId.toString() === donut._id.toString()
-                                                                        )
-                                                                        : null;
-
-                                                                        const quantity = cartItem
-                                                                        ? cartItem.quantity
-                                                                        : 0;
-                                                                        %>
-
-
-                                                                        <div class="buttons">
-
-
-                                                                            <% if (quantity> 0) { %>
-
-
-                                                                                <a href="/cart/decrease/<%= donut._id %>"
-                                                                                    class="btn-action min"
-                                                                                    aria-label="Remove one">
-                                                                                    −
-                                                                                </a>
-
-
-                                                                                <div class="amount">
-
-                                                                                    <%= quantity %>x
-
-                                                                                </div>
-
-
-                                                                                <% } %>
-
-
-                                                                                    <a href="/cart/add/<%= donut._id %>"
-                                                                                        class="btn-action plus"
-                                                                                        aria-label="Add one">
-                                                                                        +
-                                                                                    </a>
-
-
-                                                                        </div>
-
-
-                                                                        <% } else { %>
-
-
-                                                                            <div class="buttons">
-
-
-                                                                                <a href="/auth/sign-in"
-                                                                                    class="btn-action plus"
-                                                                                    aria-label="Login to Order">
-                                                                                    +
-                                                                                </a>
-
-
-                                                                            </div>
-
-
-                                                                            <% } %>
-
-
-                                                            </div>
-
+                                                            <div class="backText bold" data-ballergens></div>
 
                                                         </div>
 
                                                     </div>
 
+                                                </article>
 
-                                                    <!-- BACK SIDE -->
-
-                                                    <div class="face back" aria-hidden="true">
-
-
-                                                        <div class="backTop">
-
-
-                                                            <div class="backTitle">
-
-                                                                Product info
-
-                                                            </div>
-
-
-                                                            <button class="closeBtn" type="button" data-close
-                                                                aria-label="Close">
-                                                                &times;
-                                                            </button>
-
-
-                                                        </div>
-
-
-                                                        <div class="backText" data-bdesc></div>
-
-
-                                                        <div class="backText muted" data-btrace></div>
-
-
-                                                        <div class="backText bold" data-ballergens></div>
-
-
-                                                    </div>
-
-
-                                                </div>
-
-
-                                            </article>
-
-
-                                            <% }) %>
-
+                                                <% }) %>
 
                                     </div>
 
-
                                 </section>
-
 
                                 <% } %>
 
-
                                     <% }) %>
-
 
             </div>
 
         </main>
 
 
-        <%- include('../partials/_footer.ejs') %>
+        <script>
+
+            /* =========================
+               CARD FLIP
+            ========================= */
+
+            const cards = document.querySelectorAll("[data-card]");
 
 
-            <script>
-
-                const cards = document.querySelectorAll("[data-card]");
-
-
-                function closeAll() {
-
-                    cards.forEach(card => {
-
-                        card.classList.remove("flipped");
-
-                    });
-
-                }
-
-
-                function cleanText(s) {
-
-                    return (s || "")
-                        .replace(/\\\n/g, "\n")
-                        .replace(/\r\n/g, "\n");
-
-                }
-
+            function closeAll() {
 
                 cards.forEach(card => {
 
+                    card.classList.remove("flipped");
 
-                    const openBtn =
-                        card.querySelector("[data-open]");
+                });
 
-
-                    const closeBtn =
-                        card.querySelector("[data-close]");
+            }
 
 
-                    const bDesc =
-                        card.querySelector("[data-bdesc]");
+            function cleanText(text) {
+
+                return (text || "")
+                    .replace(/\\\n/g, "\n")
+                    .replace(/\r\n/g, "\n");
+
+            }
 
 
-                    const bTrace =
-                        card.querySelector("[data-btrace]");
+            cards.forEach(card => {
+
+                const openBtn =
+                    card.querySelector("[data-open]");
+
+                const closeBtn =
+                    card.querySelector("[data-close]");
+
+                const bDesc =
+                    card.querySelector("[data-bdesc]");
+
+                const bTrace =
+                    card.querySelector("[data-btrace]");
+
+                const bAll =
+                    card.querySelector("[data-ballergens]");
 
 
-                    const bAll =
-                        card.querySelector("[data-ballergens]");
+                openBtn?.addEventListener("click", event => {
 
+                    event.preventDefault();
+                    event.stopPropagation();
 
-                    openBtn?.addEventListener("click", () => {
+                    closeAll();
 
+                    bDesc.textContent =
+                        cleanText(openBtn.dataset.desc);
 
-                        closeAll();
+                    bTrace.textContent =
+                        cleanText(openBtn.dataset.trace);
 
+                    bAll.textContent =
+                        cleanText(openBtn.dataset.allergens);
 
-                        bDesc.textContent =
-                            cleanText(openBtn.dataset.desc);
-
-
-                        bTrace.textContent =
-                            cleanText(openBtn.dataset.trace);
-
-
-                        bAll.textContent =
-                            cleanText(openBtn.dataset.allergens);
-
-
-                        card.classList.add("flipped");
-
-                    });
-
-
-                    closeBtn?.addEventListener("click", () => {
-
-                        card.classList.remove("flipped");
-
-                    });
-
+                    card.classList.add("flipped");
 
                 });
 
 
-                document.addEventListener("keydown", (e) => {
+                closeBtn?.addEventListener("click", event => {
+
+                    event.preventDefault();
+                    event.stopPropagation();
+
+                    card.classList.remove("flipped");
+
+                });
+
+            });
 
 
-                    if (e.key === "Escape") {
+            document.addEventListener("keydown", event => {
 
-                        closeAll();
+                if (event.key === "Escape") {
+
+                    closeAll();
+
+                }
+
+            });
+
+
+            /* =========================
+               CART
+            ========================= */
+
+            document.querySelectorAll(".price").forEach(priceBox => {
+
+                const plus =
+                    priceBox.querySelector(".plus");
+
+                const min =
+                    priceBox.querySelector(".min");
+
+                const amount =
+                    priceBox.querySelector(".amount");
+
+
+                if (!plus || !min || !amount) {
+
+                    return;
+
+                }
+
+
+                /* ADD */
+
+                plus.addEventListener("click", async event => {
+
+                    event.preventDefault();
+                    event.stopPropagation();
+
+                    const donutId =
+                        plus.dataset.pid;
+
+
+                    try {
+
+                        const response = await fetch(
+                            `/cart/add/${donutId}`,
+                            {
+                                method: "GET"
+                            }
+                        );
+
+
+                        if (!response.ok) {
+
+                            throw new Error(
+                                "Could not add item"
+                            );
+
+                        }
+
+
+                        let quantity =
+                            parseInt(amount.textContent) || 0;
+
+                        quantity++;
+
+
+                        amount.textContent =
+                            `${quantity}x`;
+
+                        amount.hidden = false;
+
+
+                        min.disabled = false;
+
+                        min.classList.add("visible");
+
+
+                    } catch (error) {
+
+                        console.error(error);
+
+                    }
+
+                });
+
+
+                /* REMOVE */
+
+                min.addEventListener("click", async event => {
+
+                    event.preventDefault();
+                    event.stopPropagation();
+
+
+                    if (min.disabled) {
+
+                        return;
 
                     }
 
 
+                    const donutId =
+                        min.dataset.pid;
+
+
+                    try {
+
+                        const response = await fetch(
+                            `/cart/decrease/${donutId}`,
+                            {
+                                method: "GET"
+                            }
+                        );
+
+
+                        if (!response.ok) {
+
+                            throw new Error(
+                                "Could not remove item"
+                            );
+
+                        }
+
+
+                        let quantity =
+                            parseInt(amount.textContent) || 0;
+
+                        quantity--;
+
+
+                        if (quantity <= 0) {
+
+                            amount.textContent = "";
+
+                            amount.hidden = true;
+
+                            min.disabled = true;
+
+                            min.classList.remove("visible");
+
+                        } else {
+
+                            amount.textContent =
+                                `${quantity}x`;
+
+                        }
+
+
+                    } catch (error) {
+
+                        console.error(error);
+
+                    }
+
                 });
 
-            </script>
+            });
+
+        </script>
 
 
 </body>

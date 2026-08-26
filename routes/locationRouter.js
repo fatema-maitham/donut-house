@@ -8,14 +8,6 @@ const isSignedIn = require('../middleware/isSignedIn');
 const isAdmin = require('../middleware/isAdmin');
 
 // =========================
-// CUSTOMER + ADMIN
-// =========================
-
-router.get('/', locationController.index);
-
-router.get('/:id', locationController.show);
-
-// =========================
 // ADMIN ONLY
 // =========================
 
@@ -53,5 +45,13 @@ router.delete(
     isAdmin,
     locationController.destroy
 );
+
+// =========================
+// CUSTOMER + ADMIN
+// =========================
+
+router.get('/', locationController.index);
+
+router.get('/:id', locationController.show);
 
 module.exports = router;

@@ -4,70 +4,223 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Manage Orders | Admin</title>
 
-    <title>Manage Orders - Donut House</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@300;400;600;700;800;900&display=swap"
+        rel="stylesheet">
 
     <link rel="stylesheet" href="/stylesheets/style.css">
 </head>
 
 <body>
 
-
     <div class="admin-layout">
 
         <%- include('../partials/_adminSidebar.ejs') %>
 
-            <main class="admin-content">
+            <main class="admin-content orders-admin-page">
 
                 <div class="admin-page-header">
-
                     <div>
                         <h1>Manage Orders</h1>
-
-                        <p>
-                            View customer orders.
-                        </p>
+                        <p>View, update, and manage customer orders.</p>
                     </div>
-
                 </div>
 
+                <% if (!orders || orders.length===0) { %>
 
-                <div class="admin-cards">
+                    <div class="orders-empty">
+                        <h2>No orders yet</h2>
+                        <p>Customer orders will appear here once they place an order.</p>
+                    </div>
 
-                    <% orders.forEach(order=> { %>
+                    <% } else { %>
 
-                        <div class="admin-card">
+                        <div class="orders-admin-list">
 
-                            <h2>
-                                Order
-                            </h2>
+                            <% orders.forEach(order=> { %>
 
-                            <p>
-                                <strong>Customer:</strong>
-                                <%= order.user.username %>
-                            </p>
+                                <article class="order-admin-card">
 
-                            <p>
-                                <strong>Status:</strong>
-                                <%= order.status %>
-                            </p>
+                                    <div class="order-admin-header">
 
-                            <p>
-                                <strong>Total:</strong>
-                                BD <%= order.total %>
-                            </p>
+                                        <div>
+                                            <span class="order-number">
+                                                ORDER #<%= order._id.toString().slice(-6).toUpperCase() %>
+                                            </span>
+
+                                            <h2>
+                                                Order Details
+                                            </h2>
+                                        </div>
+
+                                        <span class="order-status
+                                <%= order.status === 'Pending' ? 'status-pending' : '' %>
+                                <%= order.status === 'Preparing' ? 'status-preparing' : '' %>
+                                <%= order.status === 'Ready' ? 'status-ready' : '' %>
+                                <%= order.status === 'Completed' ? 'status-completed' : '' %>
+                                <%= order.status === 'Cancelled' ? 'status-cancelled' : '' %>
+                            ">
+                                            <%= order.status %>
+                                        </span>
+
+                                    </div>
+
+
+                                    <div class="order-admin-body">
+
+                                        <div class="order-section">
+
+                                            <h3>Customer</h3>
+
+                                            <div class="order-customer">
+
+                                                <strong>
+                                                    <%= order.user ? order.user.username : 'Unknown Customer' %>
+                                                </strong>
+
+                                                <% if (order.user && order.user.email) { %>
+                                                    <span>
+                                                        <%= order.user.email %>
+                                                    </span>
+                                                    <% } %>
+
+                                            </div>
+
+                                        </div>
+
+
+                                        <div class="order-section">
+
+                                            <h3>Order Items</h3>
+
+                                            <% if (order.items && order.items.length> 0) { %>
+
+                                                <div class="order-items">
+
+                                                    <% order.items.forEach(item=> { %>
+
+                                                        <div class="order-item">
+
+                                                            <div class="order-item-info">
+
+                                                                <strong>
+                                                                    <%= item.donut ? item.donut.name : 'Donut' %>
+                                                                </strong>
+
+                                                                <span>
+                                                                    Quantity: <%= item.quantity %>
+                                                                </span>
+
+                                                            </div>
+
+                                                            <strong class="order-item-price">
+                                                                BD
+                                                                <%= item.donut ? (item.donut.price *
+                                                                    item.quantity).toFixed(3) : '0.000' %>
+                                                            </strong>
+
+                                                        </div>
+
+                                                        <% }) %>
+
+                                                </div>
+
+                                                <% } else { %>
+
+                                                    <p class="order-no-items">
+                                                        No item information available.
+                                                    </p>
+
+                                                    <% } %>
+
+                                        </div>
+
+
+                                        <div class="order-summary">
+
+                                            <div class="order-summary-row">
+                                                <span>Order Total</span>
+
+                                                <strong>
+                                                    BD <%= Number(order.total || 0).toFixed(3) %>
+                                                </strong>
+                                            </div>
+
+                                        </div>
+
+
+                                        <div class="order-section order-update-section">
+
+                                            <h3>Update Status</h3>
+
+                                            <form action="/orders/admin/<%= order._id %>/status?_method=PUT"
+                                                method="POST" class="order-status-form">
+                                                <select name="status">
+                                                    <option value="pending" <%=order.status==='pending' ? 'selected'
+                                                        : '' %>>
+                                                        Pending
+                                                    </option>
+
+                                                    <option value="preparing" <%=order.status==='preparing' ? 'selected'
+                                                        : '' %>>
+                                                        Preparing
+                                                    </option>
+
+                                                    <option value="ready" <%=order.status==='ready' ? 'selected' : '' %>
+                                                        >
+                                                        Ready
+                                                    </option>
+
+                                                    <option value="completed" <%=order.status==='completed' ? 'selected'
+                                                        : '' %>>
+                                                        Completed
+                                                    </option>
+
+                                                    <option value="cancelled" <%=order.status==='cancelled' ? 'selected'
+                                                        : '' %>>
+                                                        Cancelled
+                                                    </option>
+                                                </select>
+
+                                                <button type="submit">
+                                                    Update Status
+                                                </button>
+                                            </form>
+
+                                        </div>
+
+                                    </div>
+
+
+                                    <div class="order-admin-footer">
+
+                                        <span class="order-date">
+                                            Order ID:
+                                            <%= order._id %>
+                                        </span>
+
+                                        <form action="/orders/<%= order._id %>?_method=DELETE" method="POST"
+                                            onsubmit="return confirm('Delete this order?');">
+                                            <button type="submit" class="order-delete-btn">
+                                                Delete Order
+                                            </button>
+                                        </form>
+
+                                    </div>
+
+                                </article>
+
+                                <% }) %>
 
                         </div>
 
-                        <% }) %>
-
-                </div>
+                        <% } %>
 
             </main>
 
     </div>
 
-
 </body>
-
-</html>

@@ -18,31 +18,46 @@
 
 <body>
 
-    <%- include('../partials/_navbar.ejs') %>
+    <% if (user && user.role==='admin' ) { %>
 
-        <% if (user && user.role==='admin' ) { %>
-
-            <!-- =========================
+        <!-- =========================
          ADMIN LOCATIONS
     ========================== -->
 
-            <div class="admin-layout">
+        <div class="admin-layout">
 
-                <%- include('../partials/_adminSidebar.ejs') %>
+            <%- include('../partials/_adminSidebar.ejs') %>
 
-                    <main class="admin-content">
+                <main class="admin-content">
 
-                        <div class="admin-page-header">
+                    <div class="admin-page-header">
 
-                            <div>
-                                <span class="location-label">DONUT HOUSE</span>
+                        <div>
+                            <span class="location-label">DONUT HOUSE</span>
 
-                                <h1>Locations</h1>
+                            <h1>Locations</h1>
 
-                                <p>
-                                    Manage your Donut House pickup locations.
-                                </p>
-                            </div>
+                            <p>
+                                Manage your Donut House pickup locations.
+                            </p>
+                        </div>
+
+                        <a href="/locations/new" class="admin-button admin-button-link">
+                            + Add Location
+                        </a>
+
+                    </div>
+
+
+                    <% if (locations.length===0) { %>
+
+                        <div class="admin-empty">
+
+                            <h2>No locations yet</h2>
+
+                            <p>
+                                Add your first Donut House pickup location.
+                            </p>
 
                             <a href="/locations/new" class="admin-button admin-button-link">
                                 Add Location
@@ -50,150 +65,136 @@
 
                         </div>
 
+                        <% } else { %>
 
-                        <% if (locations.length===0) { %>
+                            <div class="location-admin-grid">
 
-                            <div class="admin-empty">
+                                <% locations.forEach(location=> { %>
 
-                                <h2>No locations yet</h2>
+                                    <article class="location-admin-card">
 
-                                <p>
-                                    Add your first Donut House pickup location.
-                                </p>
+                                        <div class="location-card-top">
 
-                                <a href="/locations/new" class="admin-button admin-button-link">
-                                    Add Location
-                                </a>
+                                            <div>
+
+                                                <span class="location-label">
+                                                    DONUT HOUSE
+                                                </span>
+
+                                                <h2>
+                                                    <%= location.name %>
+                                                </h2>
+
+                                            </div>
+
+                                            <span class="location-status <%= location.available
+                                        ? 'location-open'
+                                        : 'location-closed' %>">
+                                                <%= location.available ? 'Open' : 'Closed' %>
+                                            </span>
+
+                                        </div>
+
+
+                                        <div class="location-admin-info">
+
+                                            <div class="location-admin-row">
+
+                                                <span class="location-admin-icon">
+                                                    📍
+                                                </span>
+
+                                                <div>
+                                                    <strong>Address</strong>
+
+                                                    <p>
+                                                        <%= location.address %>,
+                                                            <%= location.city %>
+                                                    </p>
+                                                </div>
+
+                                            </div>
+
+
+                                            <div class="location-admin-row">
+
+                                                <span class="location-admin-icon">
+                                                    🕐
+                                                </span>
+
+                                                <div>
+                                                    <strong>Opening Hours</strong>
+
+                                                    <p>
+                                                        <%= location.openingTime %>
+                                                            –
+                                                            <%= location.closingTime %>
+                                                    </p>
+                                                </div>
+
+                                            </div>
+
+
+                                            <div class="location-admin-row">
+
+                                                <span class="location-admin-icon">
+                                                    ☎
+                                                </span>
+
+                                                <div>
+                                                    <strong>Phone</strong>
+
+                                                    <p>
+                                                        <%= location.phone %>
+                                                    </p>
+                                                </div>
+
+                                            </div>
+
+                                        </div>
+
+
+                                        <div class="location-card-actions">
+
+                                            <a href="/locations/<%= location._id %>" class="location-view-btn">
+                                                View
+                                            </a>
+
+                                            <a href="/locations/<%= location._id %>/edit" class="location-edit-btn">
+                                                Edit
+                                            </a>
+
+                                            <form action="/locations/<%= location._id %>?_method=DELETE" method="POST"
+                                                onsubmit="return confirm('Delete this location?');">
+
+                                                <button type="submit" class="location-delete-btn">
+                                                    Delete
+                                                </button>
+
+                                            </form>
+
+                                        </div>
+
+                                    </article>
+
+                                    <% }) %>
 
                             </div>
 
-                            <% } else { %>
+                            <% } %>
 
-                                <div class="location-admin-grid">
+                </main>
 
-                                    <% locations.forEach(location=> { %>
-
-                                        <article class="location-admin-card">
-
-                                            <div class="location-card-top">
-
-                                                <div>
-
-                                                    <span class="location-label">
-                                                        DONUT HOUSE
-                                                    </span>
-
-                                                    <h2>
-                                                        <%= location.name %>
-                                                    </h2>
-
-                                                </div>
-
-                                                <span
-                                                    class="location-status <%= location.available ? 'location-open' : 'location-closed' %>">
-                                                    <%= location.available ? 'Open' : 'Closed' %>
-                                                </span>
-
-                                            </div>
+        </div>
 
 
-                                            <div class="location-admin-info">
+        <% } else { %>
 
-                                                <div class="location-admin-row">
-
-                                                    <span class="location-admin-icon">
-                                                        📍
-                                                    </span>
-
-                                                    <div>
-                                                        <strong>Address</strong>
-
-                                                        <p>
-                                                            <%= location.address %>,
-                                                                <%= location.city %>
-                                                        </p>
-                                                    </div>
-
-                                                </div>
-
-
-                                                <div class="location-admin-row">
-
-                                                    <span class="location-admin-icon">
-                                                        🕐
-                                                    </span>
-
-                                                    <div>
-                                                        <strong>Opening Hours</strong>
-
-                                                        <p>
-                                                            <%= location.openingTime %>
-                                                                –
-                                                                <%= location.closingTime %>
-                                                        </p>
-                                                    </div>
-
-                                                </div>
-
-
-                                                <div class="location-admin-row">
-
-                                                    <span class="location-admin-icon">
-                                                        ☎
-                                                    </span>
-
-                                                    <div>
-                                                        <strong>Phone</strong>
-
-                                                        <p>
-                                                            <%= location.phone %>
-                                                        </p>
-                                                    </div>
-
-                                                </div>
-
-                                            </div>
-
-
-                                            <div class="location-card-actions">
-
-                                                <a href="/locations/<%= location._id %>" class="location-view-btn">
-                                                    View
-                                                </a>
-
-                                                <a href="/locations/<%= location._id %>/edit" class="location-edit-btn">
-                                                    Edit
-                                                </a>
-
-                                                <form action="/locations/<%= location._id %>?_method=DELETE"
-                                                    method="POST" onsubmit="return confirm('Delete this location?');">
-
-                                                    <button type="submit" class="location-delete-btn">
-                                                        Delete
-                                                    </button>
-
-                                                </form>
-
-                                            </div>
-
-                                        </article>
-
-                                        <% }) %>
-
-                                </div>
-
-                                <% } %>
-
-                    </main>
-
-            </div>
-
-
-            <% } else { %>
-
-                <!-- =========================
+            <!-- =========================
          CUSTOMER LOCATIONS
     ========================== -->
+
+            <%- include('../partials/_navbar.ejs') %>
 
                 <main class="locations-page">
 
@@ -259,8 +260,9 @@
 
                                                     </div>
 
-                                                    <span
-                                                        class="location-status <%= location.available ? 'location-open' : 'location-closed' %>">
+                                                    <span class="location-status <%= location.available
+                                            ? 'location-open'
+                                            : 'location-closed' %>">
                                                         <%= location.available ? 'Open' : 'Closed' %>
                                                     </span>
 
@@ -356,10 +358,8 @@
 
                 </main>
 
+
                 <% } %>
-
-
-                    <%- include('../partials/_footer.ejs') %>
 
 </body>
 
