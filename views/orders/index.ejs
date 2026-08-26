@@ -20,70 +20,137 @@
 
     <%- include('../partials/_navbar.ejs') %>
 
-        <main>
+        <main class="my-orders-page">
 
-            <section class="section">
+            <div class="container">
 
-                <div class="container">
+                <!-- PAGE HEADER -->
 
-                    <h1 class="sectionTitle">
+                <div class="orders-header">
+
+                    <h1>
                         My Orders
                     </h1>
 
-                    <% if (orders.length===0) { %>
+                    <p>
+                        View your previous Donut House orders.
+                    </p>
+
+                </div>
+
+
+
+
+                <% if (orders.length===0) { %>
+
+                    <!-- EMPTY -->
+
+                    <section class="my-orders-empty">
+
+                        <h2>
+                            No orders yet
+                        </h2>
 
                         <p>
                             You haven't placed any orders yet.
                         </p>
 
-                        <br>
-
-                        <a href="/donuts">
+                        <a href="/donuts" class="my-orders-button">
                             Start Shopping
                         </a>
 
-                        <% } else { %>
+                    </section>
+
+
+                    <% } else { %>
+
+                        <!-- ORDERS -->
+
+                        <div class="my-orders-list">
 
                             <% orders.forEach(order=> { %>
 
-                                <div class="cardBase" style="position: relative; margin-bottom: 20px;">
+                                <article class="my-order-card">
 
-                                    <h2>
-                                        Order #<%= order._id %>
-                                    </h2>
+                                    <!-- TOP -->
 
-                                    <p style="margin-top: 10px;">
-                                        <strong>Status:</strong>
-                                        <%= order.status %>
-                                    </p>
+                                    <div class="my-order-top">
 
-                                    <p>
-                                        <strong>Total:</strong>
-                                        BD <%= order.total.toFixed(3) %>
-                                    </p>
+                                        <div>
 
-                                    <p>
-                                        <strong>Date:</strong>
-                                        <%= order.createdAt.toLocaleDateString() %>
-                                    </p>
+                                            <span class="my-order-label">
+                                                ORDER
+                                            </span>
 
-                                    <br>
+                                            <h2>
+                                                #<%= order._id %>
+                                            </h2>
 
-                                    <a href="/orders/<%= order._id %>">
-                                        View Order
-                                    </a>
+                                        </div>
 
-                                </div>
+                                        <span class="my-order-status">
+                                            <%= order.status %>
+                                        </span>
+
+                                    </div>
+
+
+                                    <!-- INFORMATION -->
+
+                                    <div class="my-order-info">
+
+                                        <div class="my-order-info-row">
+
+                                            <span>
+                                                Total
+                                            </span>
+
+                                            <strong>
+                                                BD <%= order.total.toFixed(3) %>
+                                            </strong>
+
+                                        </div>
+
+
+                                        <div class="my-order-info-row">
+
+                                            <span>
+                                                Date
+                                            </span>
+
+                                            <strong>
+                                                <%= order.createdAt.toLocaleDateString() %>
+                                            </strong>
+
+                                        </div>
+
+                                    </div>
+
+
+                                    <!-- BUTTON -->
+
+                                    <div class="my-order-action">
+
+                                        <a href="/orders/<%= order._id %>" class="my-orders-button">
+
+                                            View Order
+
+                                        </a>
+
+                                    </div>
+
+                                </article>
 
                                 <% }) %>
 
-                                    <% } %>
+                        </div>
 
-                </div>
+                        <% } %>
 
-            </section>
+            </div>
 
         </main>
+
 
         <%- include('../partials/_footer.ejs') %>
 

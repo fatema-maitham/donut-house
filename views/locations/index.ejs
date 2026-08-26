@@ -20,10 +20,6 @@
 
     <% if (user && user.role==='admin' ) { %>
 
-        <!-- =========================
-             ADMIN LOCATIONS
-        ========================== -->
-
         <div class="admin-layout">
 
             <%- include('../partials/_adminSidebar.ejs') %>
@@ -33,16 +29,14 @@
                     <div class="admin-page-header">
 
                         <div>
-                            <span class="location-label">
-                                DONUT HOUSE
-                            </span>
+
 
                             <h1>
                                 Locations
                             </h1>
 
                             <p>
-                                Manage your Donut House pickup locations.
+                                Manage your pickup locations.
                             </p>
                         </div>
 
@@ -55,17 +49,17 @@
 
                     <% if (locations.length===0) { %>
 
-                        <div class="admin-empty">
+                        <div class="simple-location-empty">
 
                             <h2>
                                 No locations yet
                             </h2>
 
                             <p>
-                                Add your first Donut House pickup location.
+                                Add your first pickup location.
                             </p>
 
-                            <a href="/locations/new" class="admin-button admin-button-link">
+                            <a href="/locations/new" class="simple-location-button">
                                 Add Location
                             </a>
 
@@ -73,19 +67,17 @@
 
                         <% } else { %>
 
-                            <div class="location-admin-grid">
+                            <div class="simple-location-list">
 
                                 <% locations.forEach(location=> { %>
 
-                                    <article class="location-admin-card">
+                                    <article class="simple-location-card">
 
-                                        <div class="location-card-top">
+                                        <div class="simple-location-top">
 
                                             <div>
 
-                                                <span class="location-label">
-                                                    DONUT HOUSE
-                                                </span>
+
 
                                                 <h2>
                                                     <%= location.name %>
@@ -95,98 +87,41 @@
 
                                             <span
                                                 class="location-status <%= location.available ? 'location-open' : 'location-closed' %>">
-
                                                 <%= location.available ? 'Open' : 'Closed' %>
-
                                             </span>
 
                                         </div>
 
+                                        <p>
+                                            <strong>Address:</strong>
+                                            <%= location.address %>, <%= location.city %>
+                                        </p>
 
-                                        <div class="location-admin-info">
+                                        <p>
+                                            <strong>Hours:</strong>
+                                            <%= location.openingTime %> – <%= location.closingTime %>
+                                        </p>
 
-                                            <div class="location-admin-row">
+                                        <p>
+                                            <strong>Phone:</strong>
+                                            <%= location.phone %>
+                                        </p>
 
-                                                <span class="location-admin-icon">
-                                                    📍
-                                                </span>
+                                        <div class="simple-location-actions">
 
-                                                <div>
-
-                                                    <strong>
-                                                        Address
-                                                    </strong>
-
-                                                    <p>
-                                                        <%= location.address %>,
-                                                            <%= location.city %>
-                                                    </p>
-
-                                                </div>
-
-                                            </div>
-
-
-                                            <div class="location-admin-row">
-
-                                                <span class="location-admin-icon">
-                                                    🕐
-                                                </span>
-
-                                                <div>
-
-                                                    <strong>
-                                                        Opening Hours
-                                                    </strong>
-
-                                                    <p>
-                                                        <%= location.openingTime %>
-                                                            –
-                                                            <%= location.closingTime %>
-                                                    </p>
-
-                                                </div>
-
-                                            </div>
-
-
-                                            <div class="location-admin-row">
-
-                                                <span class="location-admin-icon">
-                                                    ☎
-                                                </span>
-
-                                                <div>
-
-                                                    <strong>
-                                                        Phone
-                                                    </strong>
-
-                                                    <p>
-                                                        <%= location.phone %>
-                                                    </p>
-
-                                                </div>
-
-                                            </div>
-
-                                        </div>
-
-
-                                        <div class="location-card-actions">
-
-                                            <a href="/locations/<%= location._id %>" class="location-view-btn">
+                                            <a href="/locations/<%= location._id %>" class="simple-location-button">
                                                 View
                                             </a>
 
-                                            <a href="/locations/<%= location._id %>/edit" class="location-edit-btn">
+                                            <a href="/locations/<%= location._id %>/edit"
+                                                class="simple-location-button">
                                                 Edit
                                             </a>
 
                                             <form action="/locations/<%= location._id %>?_method=DELETE" method="POST"
                                                 onsubmit="return confirm('Delete this location?');">
 
-                                                <button type="submit" class="location-delete-btn">
+                                                <button type="submit" class="simple-location-delete">
                                                     Delete
                                                 </button>
 
@@ -206,172 +141,102 @@
 
         </div>
 
-
         <% } else { %>
-
-            <!-- =========================
-             CUSTOMER LOCATIONS
-        ========================== -->
 
             <%- include('../partials/_navbar.ejs') %>
 
-                <main class="locations-page">
+                <main class="simple-locations-page">
 
-                    <section class="locations-section">
+                    <div class="container">
 
-                        <div class="container">
-
-                            <% if (locations.length===0) { %>
-
-                                <div class="locations-empty">
-
-                                    <h2>
-                                        No locations available
-                                    </h2>
-
-                                    <p>
-                                        Check back soon for a Donut House near you.
-                                    </p>
-
-                                </div>
-
-                                <% } else { %>
-
-                                    <div class="locations-grid">
-
-                                        <% locations.forEach(location=> { %>
-
-                                            <article class="location-card">
-
-                                                <div class="location-card-header">
-
-                                                    <div>
-
-                                                        <span class="location-label">
-                                                            DONUT HOUSE
-                                                        </span>
-
-                                                        <h2>
-                                                            <%= location.name %>
-                                                        </h2>
-
-                                                    </div>
-
-                                                    <span class="location-status location-status-js"
-                                                        data-opening="<%= location.openingTime %>"
-                                                        data-closing="<%= location.closingTime %>">
-
-                                                    </span>
-
-                                                </div>
+                        <div class="simple-locations-header">
 
 
-                                                <div class="location-details">
+                            <h1>
+                                Locations
+                            </h1>
 
-                                                    <!-- ADDRESS -->
-
-                                                    <div class="location-detail">
-
-                                                        <span class="location-detail-icon">
-                                                            📍
-                                                        </span>
-
-                                                        <div>
-
-                                                            <span class="location-detail-title">
-                                                                Address
-                                                            </span>
-
-                                                            <p>
-                                                                <%= location.address %>,
-                                                                    <%= location.city %>
-                                                            </p>
-
-                                                        </div>
-
-                                                    </div>
-
-
-                                                    <!-- HOURS -->
-
-                                                    <div class="location-detail">
-
-                                                        <span class="location-detail-icon">
-                                                            🕐
-                                                        </span>
-
-                                                        <div>
-
-                                                            <span class="location-detail-title">
-                                                                Opening Hours
-                                                            </span>
-
-                                                            <p>
-                                                                <%= location.openingTime %>
-                                                                    –
-                                                                    <%= location.closingTime %>
-                                                            </p>
-
-                                                        </div>
-
-                                                    </div>
-
-
-                                                    <!-- PHONE -->
-
-                                                    <div class="location-detail">
-
-                                                        <span class="location-detail-icon">
-                                                            ☎
-                                                        </span>
-
-                                                        <div>
-
-                                                            <span class="location-detail-title">
-                                                                Phone
-                                                            </span>
-
-                                                            <p>
-                                                                <%= location.phone %>
-                                                            </p>
-
-                                                        </div>
-
-                                                    </div>
-
-                                                </div>
-
-
-                                                <a href="/locations/<%= location._id %>" class="location-card-button">
-
-                                                    View Location
-
-                                                    <span>
-                                                        →
-                                                    </span>
-
-                                                </a>
-
-                                            </article>
-
-                                            <% }) %>
-
-                                    </div>
-
-                                    <% } %>
+                            <p>
+                                Find your nearest Donut House.
+                            </p>
 
                         </div>
 
-                    </section>
+
+                        <% if (locations.length===0) { %>
+
+                            <div class="simple-location-empty">
+
+                                <h2>
+                                    No locations available
+                                </h2>
+
+                                <p>
+                                    Check back soon for a Donut House near you.
+                                </p>
+
+                            </div>
+
+                            <% } else { %>
+
+                                <div class="simple-location-list">
+
+                                    <% locations.forEach(location=> { %>
+
+                                        <article class="simple-location-card">
+
+                                            <div class="simple-location-top">
+
+                                                <div>
+
+
+
+                                                    <h2>
+                                                        <%= location.name %>
+                                                    </h2>
+
+                                                </div>
+
+                                                <span class="location-status location-status-js"
+                                                    data-opening="<%= location.openingTime %>"
+                                                    data-closing="<%= location.closingTime %>">
+                                                </span>
+
+                                            </div>
+
+                                            <p>
+                                                <strong>Address:</strong>
+                                                <%= location.address %>, <%= location.city %>
+                                            </p>
+
+                                            <p>
+                                                <strong>Hours:</strong>
+                                                <%= location.openingTime %> – <%= location.closingTime %>
+                                            </p>
+
+                                            <p>
+                                                <strong>Phone:</strong>
+                                                <%= location.phone %>
+                                            </p>
+
+                                            <a href="/locations/<%= location._id %>" class="simple-location-button">
+                                                View Location
+                                            </a>
+
+                                        </article>
+
+                                        <% }) %>
+
+                                </div>
+
+                                <% } %>
+
+                    </div>
 
                 </main>
 
                 <% } %>
 
-
-                    <!-- =========================
-         OPEN / CLOSED
-    ========================== -->
 
                     <script>
 
@@ -381,20 +246,16 @@
 
                             time = time.trim().toUpperCase();
 
-                            let hours;
-                            let minutes;
-
                             if (time.includes("AM") || time.includes("PM")) {
 
                                 const parts = time.split(" ");
-
                                 const clock = parts[0];
                                 const period = parts[1];
 
                                 const clockParts = clock.split(":");
 
-                                hours = parseInt(clockParts[0]);
-                                minutes = parseInt(clockParts[1]) || 0;
+                                let hours = parseInt(clockParts[0]);
+                                const minutes = parseInt(clockParts[1]) || 0;
 
                                 if (period === "PM" && hours !== 12) {
                                     hours += 12;
@@ -404,41 +265,35 @@
                                     hours = 0;
                                 }
 
-                            } else {
-
-                                const parts = time.split(":");
-
-                                hours = parseInt(parts[0]);
-                                minutes = parseInt(parts[1]) || 0;
-
+                                return hours * 60 + minutes;
                             }
 
-                            return (hours * 60) + minutes;
+                            const parts = time.split(":");
+
+                            return (
+                                parseInt(parts[0]) * 60 +
+                                (parseInt(parts[1]) || 0)
+                            );
                         }
 
 
-                        document.querySelectorAll(".location-status-js")
+                        document
+                            .querySelectorAll(".location-status-js")
                             .forEach(status => {
 
                                 const opening =
-                                    convertToMinutes(
-                                        status.dataset.opening
-                                    );
+                                    convertToMinutes(status.dataset.opening);
 
                                 const closing =
-                                    convertToMinutes(
-                                        status.dataset.closing
-                                    );
+                                    convertToMinutes(status.dataset.closing);
 
                                 const now = new Date();
 
                                 const current =
-                                    (now.getHours() * 60) +
+                                    now.getHours() * 60 +
                                     now.getMinutes();
 
-
-                                let isOpen = false;
-
+                                let isOpen;
 
                                 if (opening <= closing) {
 
@@ -448,36 +303,24 @@
 
                                 } else {
 
-                                    // Handles hours that pass midnight
-
                                     isOpen =
                                         current >= opening ||
                                         current < closing;
-
                                 }
 
+                                status.textContent =
+                                    isOpen ? "Open" : "Closed";
 
-                                if (isOpen) {
-
-                                    status.textContent = "Open";
-
-                                    status.classList.add("location-open");
-
-                                    status.classList.remove("location-closed");
-
-                                } else {
-
-                                    status.textContent = "Closed";
-
-                                    status.classList.add("location-closed");
-
-                                    status.classList.remove("location-open");
-
-                                }
+                                status.classList.add(
+                                    isOpen ? "location-open" : "location-closed"
+                                );
 
                             });
 
                     </script>
+
+
+                    <%- include('../partials/_footer.ejs') %>
 
 </body>
 
