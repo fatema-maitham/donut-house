@@ -1,121 +1,16 @@
 /* ============================================
    DONUT HOUSE
-   CARD FLIP + FLYING DONUT CART ANIMATION
-   Works on MENU + HOME
+   FAST FLYING DONUT CART ANIMATION
+   Works on HOME + MENU
 ============================================ */
 
 document.addEventListener("DOMContentLoaded", () => {
-
-
-    /* ============================================
-       CARD FLIP — MENU PAGE
-    ============================================ */
-
-    const cards =
-        document.querySelectorAll("[data-card]");
-
-
-    function closeAllCards() {
-
-        cards.forEach(card => {
-            card.classList.remove("flipped");
-        });
-
-    }
-
-
-    function cleanText(text) {
-
-        return (text || "")
-            .replace(/\\\n/g, "\n")
-            .replace(/\r\n/g, "\n");
-
-    }
-
-
-    cards.forEach(card => {
-
-        const openBtn =
-            card.querySelector("[data-open]");
-
-        const closeBtn =
-            card.querySelector("[data-close]");
-
-        const bDesc =
-            card.querySelector("[data-bdesc]");
-
-        const bTrace =
-            card.querySelector("[data-btrace]");
-
-        const bAll =
-            card.querySelector("[data-ballergens]");
-
-
-        /* OPEN PRODUCT INFO */
-
-        openBtn?.addEventListener("click", event => {
-
-            event.preventDefault();
-            event.stopPropagation();
-
-            closeAllCards();
-
-            if (bDesc) {
-                bDesc.textContent =
-                    cleanText(openBtn.dataset.desc);
-            }
-
-            if (bTrace) {
-                bTrace.textContent =
-                    cleanText(openBtn.dataset.trace);
-            }
-
-            if (bAll) {
-                bAll.textContent =
-                    cleanText(openBtn.dataset.allergens);
-            }
-
-            card.classList.add("flipped");
-
-        });
-
-
-        /* CLOSE PRODUCT INFO */
-
-        closeBtn?.addEventListener("click", event => {
-
-            event.preventDefault();
-            event.stopPropagation();
-
-            card.classList.remove("flipped");
-
-        });
-
-    });
-
-
-    /* ESC = CLOSE CARD */
-
-    document.addEventListener("keydown", event => {
-
-        if (event.key === "Escape") {
-            closeAllCards();
-        }
-
-    });
-
-
-
-    /* ============================================
-       FLYING DONUT — HOME + MENU
-    ============================================ */
 
     const forms =
         document.querySelectorAll(".add-to-cart-form");
 
     const cartLink =
         document.querySelector('nav a[href="/cart"]');
-
 
     if (!forms.length || !cartLink) {
         return;
@@ -128,10 +23,8 @@ document.addEventListener("DOMContentLoaded", () => {
 
             event.preventDefault();
 
-
             const button =
                 form.querySelector(".add-to-cart-btn");
-
 
             if (!button) {
                 form.submit();
@@ -140,50 +33,37 @@ document.addEventListener("DOMContentLoaded", () => {
 
 
             /* ========================================
-               FIND ACTUAL DONUT IMAGE
+               FIND ACTUAL DONUT
             ======================================== */
 
             let donutImage = null;
 
-
-            /* MENU PAGE */
-
+            /* MENU */
             const menuCard =
                 form.closest("[data-card]");
 
             if (menuCard) {
-
                 donutImage =
                     menuCard.querySelector(
                         ".donut-card-link img"
                     );
-
             }
 
-
-            /* HOME PAGE */
-
+            /* HOME */
             if (!donutImage) {
 
                 const homeCard =
-                    form.closest(
-                        ".home-popular-card"
-                    );
+                    form.closest(".home-popular-card");
 
                 if (homeCard) {
-
                     donutImage =
                         homeCard.querySelector(
                             ".home-popular-image img"
                         );
-
                 }
-
             }
 
-
             /* FALLBACK */
-
             if (
                 !donutImage &&
                 button.dataset.donutImage
@@ -194,35 +74,124 @@ document.addEventListener("DOMContentLoaded", () => {
 
                 donutImage.src =
                     button.dataset.donutImage;
-
             }
 
-
-            if (
-                !donutImage ||
-                !donutImage.src
-            ) {
-
-                console.warn(
-                    "Donut image not found."
-                );
-
+            if (!donutImage || !donutImage.src) {
                 form.submit();
-
                 return;
             }
 
 
             /* ========================================
-               SAVE DONUT POSITION
+               GET POSITIONS IMMEDIATELY
             ======================================== */
 
             const donutRect =
                 donutImage.getBoundingClientRect();
 
+            const cartRect =
+                cartLink.getBoundingClientRect();
+
+
+            const startX =
+                donutRect.left +
+                donutRect.width / 2;
+
+            const startY =
+                donutRect.top +
+                donutRect.height / 2;
+
+            const endX =
+                cartRect.left +
+                cartRect.width / 2;
+
+            const endY =
+                cartRect.top +
+                cartRect.height / 2;
+
 
             /* ========================================
-               ADD TO CART
+               CREATE DONUT IMMEDIATELY
+            ======================================== */
+
+            const flyingDonut =
+                document.createElement("img");
+
+            flyingDonut.src =
+                donutImage.src;
+
+            flyingDonut.className =
+                "flying-donut";
+
+            flyingDonut.alt = "";
+
+            flyingDonut.style.left =
+                `${startX}px`;
+
+            flyingDonut.style.top =
+                `${startY}px`;
+
+            document.body.appendChild(
+                flyingDonut
+            );
+
+
+            /* ========================================
+               FORCE START POSITION
+            ======================================== */
+
+            flyingDonut.offsetWidth;
+
+
+            /* ========================================
+               FLY — FAST
+            ======================================== */
+
+            flyingDonut.style.left =
+                `${endX}px`;
+
+            flyingDonut.style.top =
+                `${endY}px`;
+
+            flyingDonut.style.transform =
+                "translate(-50%, -50%) scale(0.15)";
+
+            flyingDonut.style.opacity =
+                "0";
+
+
+            /* ========================================
+               CART BOUNCE
+            ======================================== */
+
+            setTimeout(() => {
+
+                cartLink.classList.add(
+                    "cart-bounce"
+                );
+
+                setTimeout(() => {
+
+                    cartLink.classList.remove(
+                        "cart-bounce"
+                    );
+
+                }, 350);
+
+            }, 300);
+
+
+            /* ========================================
+               REMOVE
+            ======================================== */
+
+            setTimeout(() => {
+                flyingDonut.remove();
+            }, 450);
+
+
+            /* ========================================
+               ADD TO CART IN BACKGROUND
             ======================================== */
 
             try {
@@ -232,7 +201,6 @@ document.addEventListener("DOMContentLoaded", () => {
                         form.action,
                         {
                             method: "POST",
-
                             headers: {
                                 "X-Requested-With":
                                     "XMLHttpRequest"
@@ -240,131 +208,11 @@ document.addEventListener("DOMContentLoaded", () => {
                         }
                     );
 
-
                 if (!response.ok) {
-
                     throw new Error(
                         "Could not add donut to cart"
                     );
-
                 }
-
-
-                /* ========================================
-                   CREATE FLYING DONUT
-                ======================================== */
-
-                const flyingDonut =
-                    document.createElement("img");
-
-
-                flyingDonut.src =
-                    donutImage.src;
-
-                flyingDonut.className =
-                    "flying-donut";
-
-                flyingDonut.alt = "";
-
-
-                /* ========================================
-                   START OVER ACTUAL DONUT
-                ======================================== */
-
-                const startX =
-                    donutRect.left +
-                    donutRect.width / 2;
-
-                const startY =
-                    donutRect.top +
-                    donutRect.height / 2;
-
-
-                flyingDonut.style.left =
-                    `${startX} px`;
-
-                flyingDonut.style.top =
-                    `${startY} px`;
-
-
-                document.body.appendChild(
-                    flyingDonut
-                );
-
-
-                /* ========================================
-                   FIND CART POSITION
-                ======================================== */
-
-                const cartRect =
-                    cartLink.getBoundingClientRect();
-
-
-                const endX =
-                    cartRect.left +
-                    cartRect.width / 2;
-
-                const endY =
-                    cartRect.top +
-                    cartRect.height / 2;
-
-
-                /* ========================================
-                   FORCE START POSITION
-                ======================================== */
-
-                flyingDonut.offsetWidth;
-
-
-                /* ========================================
-                   FLY TO CART
-                ======================================== */
-
-                flyingDonut.style.left =
-                    `${endX} px`;
-
-                flyingDonut.style.top =
-                    `${endY} px`;
-
-                flyingDonut.style.transform =
-                    "translate(-50%, -50%) scale(0.2)";
-
-                flyingDonut.style.opacity =
-                    "0";
-
-
-                /* ========================================
-                   CART BOUNCE
-                ======================================== */
-
-                setTimeout(() => {
-
-                    cartLink.classList.add(
-                        "cart-bounce"
-                    );
-
-
-                    setTimeout(() => {
-
-                        cartLink.classList.remove(
-                            "cart-bounce"
-                        );
-
-                    }, 450);
-
-                }, 550);
-
-
-                /* ========================================
-                   REMOVE FLYING DONUT
-                ======================================== */
-
-                setTimeout(() => {
-
-                    flyingDonut.remove();
-
-                }, 750);
-
 
             } catch (error) {
 
@@ -373,8 +221,9 @@ document.addEventListener("DOMContentLoaded", () => {
                     error
                 );
 
-                form.submit();
-
+                /* Only reload if request actually fails */
+                window.location.href =
+                    form.action;
             }
 
         });
@@ -382,4 +231,3 @@ document.addEventListener("DOMContentLoaded", () => {
     });
 
 });
-
