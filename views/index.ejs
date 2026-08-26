@@ -2,10 +2,12 @@
 <html lang="en">
 
 <head>
+
   <meta charset="UTF-8">
+
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-  <title>Menu | Donut House</title>
+  <title>Donut House</title>
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -14,154 +16,240 @@
     rel="stylesheet">
 
   <link rel="stylesheet" href="/stylesheets/style.css">
+
 </head>
 
 <body>
 
   <%- include('./partials/_navbar.ejs') %>
 
+
     <main>
 
-      <div class="container">
 
-        <!-- MENU INTRO -->
+      <!-- HERO -->
 
-        <div class="menuIntro" id="menu">
+      <header class="hero home-hero">
 
-          <div class="menuIntroTitle">
-            Menu
+        <div class="container">
+
+          <div class="heroCard">
+
+            <h1 class="heroTitle">
+              Donuts, But Better.
+            </h1>
+
+            <p class="heroSub">
+              Freshly baked. Fully plant-based. Made to crave.
+            </p>
+
+            <a href="/donuts" class="home-primary-button">
+              View Menu
+            </a>
+
           </div>
-
-          <p class="menuIntroText">
-            Choose from a selection of our Classic, Charity or Special Donuts.<br>
-            Handmade daily for you!
-          </p>
 
         </div>
 
-
-        <!-- CATEGORIES -->
-
-        <% const categories=[ { key: 'box' , title: 'Boxes' }, { key: 'special' , title: 'Monthly Specials' }, {
-          key: 'classic' , title: 'Standard Donuts' }, { key: 'weekend' , title: 'Weekend Specials' } ]; %>
+      </header>
 
 
-          <% categories.forEach(cat=> { %>
 
-            <% const filteredDonuts=donuts.filter( donut=> donut.category === cat.key
-              ); %>
+      <!-- MOST POPULAR -->
 
+      <section class="home-popular">
 
-              <% if (filteredDonuts.length> 0) { %>
+        <div class="container">
 
-                <section class="section">
+          <div class="home-section-header">
 
-                  <div class="sectionTitle">
-                    <%= cat.title %>
-                  </div>
+            <div>
 
+              <h2>
+                Most Popular
+              </h2>
 
-                  <div class="grid">
+              <p>
+                The donuts our customers keep coming back for.
+              </p>
 
-                    <% filteredDonuts.forEach(donut=> { %>
+            </div>
 
-                      <article class="card">
+            <a href="/donuts" class="home-view-all">
+              View All
+            </a>
 
-                        <div class="cardInner">
-
-                          <!-- FRONT -->
-
-                          <div class="face front">
-
-                            <!-- DONUT IMAGE -->
-
-                            <div class="donutFloat">
-
-                              <img src="<%= donut.image %>" alt="<%= donut.name %>">
-
-                            </div>
+          </div>
 
 
-                            <!-- CARD -->
+          <% if (donuts && donuts.length> 0) { %>
 
-                            <div class="cardBase">
+            <div class="home-popular-grid">
 
-                              <!-- CATEGORY + INFO -->
+              <% donuts.slice(0, 3).forEach(donut=> { %>
 
-                              <div class="metaRow">
-
-                                <small>
-                                  <%= cat.title %>
-                                </small>
-
-                                <a href="/donuts/<%= donut._id %>" class="infoBtn" aria-label="View <%= donut.name %>">
-
-                                  +
-
-                                </a>
-
-                              </div>
+                <article class="home-popular-card">
 
 
-                              <!-- NAME -->
+                  <!-- DONUT IMAGE -->
 
-                              <div class="name">
-                                <%= donut.name %>
-                              </div>
+                  <a href="/donuts/<%= donut._id %>" class="home-popular-image" aria-label="View <%= donut.name %>">
 
+                    <% if (donut.image) { %>
 
-                              <!-- DESCRIPTION -->
+                      <img src="<%= donut.image %>" alt="<%= donut.name %>">
 
-                              <% if (donut.description) { %>
+                      <% } %>
 
-                                <div class="backText muted">
-                                  <%= donut.description %>
-                                </div>
-
-                                <% } %>
+                  </a>
 
 
-                                  <!-- PRICE + CART -->
+                  <!-- CARD -->
 
-                                  <div class="price">
+                  <div class="home-popular-base">
 
-                                    <div class="price-val">
-                                      BD <%= Number(donut.price).toFixed(3) %>
-                                    </div>
+                    <div class="home-popular-meta">
+
+                      <span>
+                        <%= donut.category %>
+                      </span>
+
+                    </div>
 
 
-                                    <form action="/cart/add/<%= donut._id %>" method="POST" class="add-to-cart-form">
+                    <a href="/donuts/<%= donut._id %>" class="home-popular-name">
+                      <%= donut.name %>
+                    </a>
 
-                                      <button type="submit" class="add-to-cart-btn"
-                                        aria-label="Add <%= donut.name %> to cart">
 
-                                        <img src="/images/cart.png" alt="">
+                    <div class="home-popular-bottom">
 
-                                      </button>
+                      <span class="home-popular-price">
+                        BD <%= Number(donut.price).toFixed(3) %>
+                      </span>
 
-                                    </form>
 
-                                  </div>
+                      <form action="/cart/add/<%= donut._id %>" method="POST" class="add-to-cart-form">
 
-                            </div>
+                        <button type="submit" class="add-to-cart-btn" aria-label="Add <%= donut.name %> to cart">
 
-                          </div>
+                          <img src="/images/cart.png" alt="">
 
-                        </div>
+                        </button>
 
-                      </article>
+                      </form>
 
-                      <% }) %>
+                    </div>
 
                   </div>
 
-                </section>
+                </article>
 
-                <% } %>
+                <% }) %>
 
-                  <% }) %>
+            </div>
 
-      </div>
+
+            <% } else { %>
+
+              <div class="home-no-donuts">
+
+                <h3>
+                  Our donuts are coming soon.
+                </h3>
+
+                <p>
+                  Check out our menu to see what's available.
+                </p>
+
+                <a href="/donuts" class="home-primary-button">
+                  View Menu
+                </a>
+
+              </div>
+
+              <% } %>
+
+        </div>
+
+      </section>
+
+
+      <!-- CUSTOMER REVIEWS -->
+      <section class="home-reviews">
+        <div class="container">
+
+          <div class="home-reviews-header">
+            <h2>What Our Customers Say</h2>
+            <p>Sweet words from our donut lovers.</p>
+          </div>
+
+          <div class="home-review-grid">
+
+            <article class="home-review-card">
+              <div class="home-review-stars">★★★★★</div>
+              <p class="home-review-text">
+                “The best donuts I’ve ever had! So fresh, soft, and delicious.”
+              </p>
+              <div class="home-review-name">
+                Sayed Mohammed
+              </div>
+            </article>
+
+            <article class="home-review-card">
+              <div class="home-review-stars">★★★★★</div>
+              <p class="home-review-text">
+                “I’m obsessed with the flavors. You can really taste how fresh they are!”
+              </p>
+              <div class="home-review-name">
+                Hassan
+              </div>
+            </article>
+
+            <article class="home-review-card">
+              <div class="home-review-stars">★★★★★</div>
+              <p class="home-review-text">
+                “The perfect treat with my coffee. I’ll definitely be ordering again.”
+              </p>
+              <div class="home-review-name">
+                Zainab
+              </div>
+            </article>
+
+          </div>
+
+        </div>
+      </section>
+
+
+
+      <!-- ABOUT -->
+
+      <section class="home-about">
+
+        <div class="container">
+
+          <div class="home-about-content">
+
+            <h2>
+              A better kind of donut.
+            </h2>
+
+            <p>
+              At Donut House, we believe donuts should be delicious,
+              fresh, and made with better ingredients.
+            </p>
+
+            <a href="/about" class="home-primary-button">
+              About Us
+            </a>
+
+          </div>
+
+        </div>
+
+      </section>
+
 
     </main>
 

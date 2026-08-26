@@ -21,8 +21,8 @@
     <% if (user && user.role==='admin' ) { %>
 
         <!-- =========================
-         ADMIN LOCATIONS
-    ========================== -->
+             ADMIN LOCATIONS
+        ========================== -->
 
         <div class="admin-layout">
 
@@ -33,9 +33,13 @@
                     <div class="admin-page-header">
 
                         <div>
-                            <span class="location-label">DONUT HOUSE</span>
+                            <span class="location-label">
+                                DONUT HOUSE
+                            </span>
 
-                            <h1>Locations</h1>
+                            <h1>
+                                Locations
+                            </h1>
 
                             <p>
                                 Manage your Donut House pickup locations.
@@ -53,7 +57,9 @@
 
                         <div class="admin-empty">
 
-                            <h2>No locations yet</h2>
+                            <h2>
+                                No locations yet
+                            </h2>
 
                             <p>
                                 Add your first Donut House pickup location.
@@ -87,10 +93,11 @@
 
                                             </div>
 
-                                            <span class="location-status <%= location.available
-                                        ? 'location-open'
-                                        : 'location-closed' %>">
+                                            <span
+                                                class="location-status <%= location.available ? 'location-open' : 'location-closed' %>">
+
                                                 <%= location.available ? 'Open' : 'Closed' %>
+
                                             </span>
 
                                         </div>
@@ -105,12 +112,16 @@
                                                 </span>
 
                                                 <div>
-                                                    <strong>Address</strong>
+
+                                                    <strong>
+                                                        Address
+                                                    </strong>
 
                                                     <p>
                                                         <%= location.address %>,
                                                             <%= location.city %>
                                                     </p>
+
                                                 </div>
 
                                             </div>
@@ -123,13 +134,17 @@
                                                 </span>
 
                                                 <div>
-                                                    <strong>Opening Hours</strong>
+
+                                                    <strong>
+                                                        Opening Hours
+                                                    </strong>
 
                                                     <p>
                                                         <%= location.openingTime %>
                                                             –
                                                             <%= location.closingTime %>
                                                     </p>
+
                                                 </div>
 
                                             </div>
@@ -142,11 +157,15 @@
                                                 </span>
 
                                                 <div>
-                                                    <strong>Phone</strong>
+
+                                                    <strong>
+                                                        Phone
+                                                    </strong>
 
                                                     <p>
                                                         <%= location.phone %>
                                                     </p>
+
                                                 </div>
 
                                             </div>
@@ -191,34 +210,12 @@
         <% } else { %>
 
             <!-- =========================
-         CUSTOMER LOCATIONS
-    ========================== -->
+             CUSTOMER LOCATIONS
+        ========================== -->
 
             <%- include('../partials/_navbar.ejs') %>
 
                 <main class="locations-page">
-
-                    <section class="locations-hero">
-
-                        <div class="container">
-
-                            <span class="locations-eyebrow">
-                                FIND US
-                            </span>
-
-                            <h1>
-                                Come Find Us.
-                            </h1>
-
-                            <p>
-                                Visit your nearest Donut House and pick up
-                                your favorite donuts fresh and ready.
-                            </p>
-
-                        </div>
-
-                    </section>
-
 
                     <section class="locations-section">
 
@@ -260,16 +257,18 @@
 
                                                     </div>
 
-                                                    <span class="location-status <%= location.available
-                                            ? 'location-open'
-                                            : 'location-closed' %>">
-                                                        <%= location.available ? 'Open' : 'Closed' %>
+                                                    <span class="location-status location-status-js"
+                                                        data-opening="<%= location.openingTime %>"
+                                                        data-closing="<%= location.closingTime %>">
+
                                                     </span>
 
                                                 </div>
 
 
                                                 <div class="location-details">
+
+                                                    <!-- ADDRESS -->
 
                                                     <div class="location-detail">
 
@@ -293,6 +292,8 @@
                                                     </div>
 
 
+                                                    <!-- HOURS -->
+
                                                     <div class="location-detail">
 
                                                         <span class="location-detail-icon">
@@ -315,6 +316,8 @@
 
                                                     </div>
 
+
+                                                    <!-- PHONE -->
 
                                                     <div class="location-detail">
 
@@ -340,8 +343,13 @@
 
 
                                                 <a href="/locations/<%= location._id %>" class="location-card-button">
+
                                                     View Location
-                                                    <span>→</span>
+
+                                                    <span>
+                                                        →
+                                                    </span>
+
                                                 </a>
 
                                             </article>
@@ -358,8 +366,118 @@
 
                 </main>
 
-
                 <% } %>
+
+
+                    <!-- =========================
+         OPEN / CLOSED
+    ========================== -->
+
+                    <script>
+
+                        function convertToMinutes(time) {
+
+                            if (!time) return null;
+
+                            time = time.trim().toUpperCase();
+
+                            let hours;
+                            let minutes;
+
+                            if (time.includes("AM") || time.includes("PM")) {
+
+                                const parts = time.split(" ");
+
+                                const clock = parts[0];
+                                const period = parts[1];
+
+                                const clockParts = clock.split(":");
+
+                                hours = parseInt(clockParts[0]);
+                                minutes = parseInt(clockParts[1]) || 0;
+
+                                if (period === "PM" && hours !== 12) {
+                                    hours += 12;
+                                }
+
+                                if (period === "AM" && hours === 12) {
+                                    hours = 0;
+                                }
+
+                            } else {
+
+                                const parts = time.split(":");
+
+                                hours = parseInt(parts[0]);
+                                minutes = parseInt(parts[1]) || 0;
+
+                            }
+
+                            return (hours * 60) + minutes;
+                        }
+
+
+                        document.querySelectorAll(".location-status-js")
+                            .forEach(status => {
+
+                                const opening =
+                                    convertToMinutes(
+                                        status.dataset.opening
+                                    );
+
+                                const closing =
+                                    convertToMinutes(
+                                        status.dataset.closing
+                                    );
+
+                                const now = new Date();
+
+                                const current =
+                                    (now.getHours() * 60) +
+                                    now.getMinutes();
+
+
+                                let isOpen = false;
+
+
+                                if (opening <= closing) {
+
+                                    isOpen =
+                                        current >= opening &&
+                                        current < closing;
+
+                                } else {
+
+                                    // Handles hours that pass midnight
+
+                                    isOpen =
+                                        current >= opening ||
+                                        current < closing;
+
+                                }
+
+
+                                if (isOpen) {
+
+                                    status.textContent = "Open";
+
+                                    status.classList.add("location-open");
+
+                                    status.classList.remove("location-closed");
+
+                                } else {
+
+                                    status.textContent = "Closed";
+
+                                    status.classList.add("location-closed");
+
+                                    status.classList.remove("location-open");
+
+                                }
+
+                            });
+
+                    </script>
 
 </body>
 

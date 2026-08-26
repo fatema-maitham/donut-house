@@ -129,16 +129,24 @@
 
                                                                 <!-- PRICE + CART -->
                                                                 <div class="price">
+
                                                                     <div class="price-val">
                                                                         BD <%= donut.price.toFixed(3) %>
                                                                     </div>
 
                                                                     <form action="/cart/add/<%= donut._id %>"
-                                                                        method="POST">
+                                                                        method="POST" class="add-to-cart-form">
+
                                                                         <button type="submit" class="add-to-cart-btn">
-                                                                            Add to Cart
+
+                                                                            <img src="/images/cart.png"
+                                                                                alt="Add to cart"
+                                                                                class="add-to-cart-icon">
+
                                                                         </button>
+
                                                                     </form>
+
                                                                 </div>
 
                                                             </div>

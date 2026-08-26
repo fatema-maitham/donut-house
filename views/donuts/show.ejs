@@ -11,9 +11,7 @@
         <%= donut.name %> | Donut House
     </title>
 
-
     <link rel="preconnect" href="https://fonts.googleapis.com">
-
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 
     <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@300;400;600;700;800;900&display=swap"
@@ -23,30 +21,26 @@
 
 </head>
 
-
 <body>
 
     <%- include('../partials/_navbar.ejs') %>
 
-
-        <main class="donut-show-page">
+        <main>
 
             <section class="donut-show-section">
 
                 <div class="container">
 
-
                     <!-- BACK TO MENU -->
 
-                    <a href="/donuts" class="donut-back-link">
+                    <a href="/donuts" class="donut-back-menu">
                         ← Back to Menu
                     </a>
 
 
-                    <!-- PRODUCT -->
+                    <!-- DONUT DETAILS -->
 
                     <div class="donut-show-grid">
-
 
                         <!-- IMAGE -->
 
@@ -61,81 +55,46 @@
 
                         <div class="donut-show-details">
 
-
-                            <span class="donut-show-category">
+                            <div class="donut-show-category">
                                 <%= donut.category %>
-                            </span>
-
+                            </div>
 
                             <h1>
                                 <%= donut.name %>
                             </h1>
 
-
                             <div class="donut-show-price">
-                                BD <%= donut.price.toFixed(3) %>
+                                BD <%= Number(donut.price).toFixed(3) %>
                             </div>
-
 
                             <p class="donut-show-description">
                                 <%= donut.description %>
                             </p>
 
 
-                            <div class="donut-show-divider"></div>
+                            <% if (user) { %>
 
+                                <form action="/cart/add/<%= donut._id %>" method="POST" class="donut-add-form">
 
-                            <div class="donut-show-availability">
+                                    <button type="submit" class="donut-add-button">
+                                        Add to Cart
+                                    </button>
 
-                                <% if (donut.available) { %>
+                                </form>
 
-                                    <span class="availability-dot"></span>
+                                <% } else { %>
 
-                                    Available
+                                    <div class="donut-login-message">
 
-                                    <% } else { %>
+                                        Please log in to add this donut to your cart.
 
-                                        <span class="availability-dot unavailable"></span>
-
-                                        Currently unavailable
-
-                                        <% } %>
-
-                            </div>
-
-
-                            <% if (donut.available) { %>
-
-
-                                <% if (user) { %>
-
-                                    <form action="/cart/add/<%= donut._id %>" method="POST" class="donut-add-form">
-
-                                        <button type="submit" class="donut-add-button">
-                                            Add to Cart
-                                        </button>
-
-                                    </form>
-
-
-                                    <% } else { %>
-
-                                        <a href="/auth/sign-in" class="donut-add-button">
-                                            Login to Order
+                                        <a href="/auth/login">
+                                            Login
                                         </a>
 
-                                        <% } %>
+                                    </div>
 
-
-                                            <% } %>
-
-
-                                                <div class="donut-show-note">
-
-                                                    Freshly baked and made to order.
-
-                                                </div>
-
+                                    <% } %>
 
                         </div>
 
@@ -147,9 +106,7 @@
 
         </main>
 
-
         <%- include('../partials/_footer.ejs') %>
-
 
 </body>
 
