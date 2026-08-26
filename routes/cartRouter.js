@@ -3,13 +3,14 @@ const express = require('express');
 const router = express.Router();
 
 const cartCtrl = require('../controllers/cartController');
+
 const isSignedIn = require('../middleware/isSignedIn');
 
 // Cart page
 router.get('/', isSignedIn, cartCtrl.index);
 
 // Add donut
-router.get('/add/:id', isSignedIn, cartCtrl.addToCart);
+router.post('/add/:id', isSignedIn, cartCtrl.addToCart);
 
 // Increase quantity
 router.get('/increase/:id', isSignedIn, cartCtrl.increase);
