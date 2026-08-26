@@ -1,230 +1,348 @@
 # 🍩 Donut House
 
-Donut House is a full-stack donut ordering web application where customers can browse donuts, place orders, and manage their orders. Administrators can manage donuts, locations, and customer orders.
+Donut House is a full-stack donut ordering web application where customers can browse donuts, add items to their cart, place orders, view their order history, and find pickup locations. Administrators can manage donuts, locations, and customer orders through an admin dashboard.
 
 ## ✨ Features
 
 ### 👤 Authentication
-- Sign up and log in
-- Session-based authentication
-- Customer and admin roles
-- Secure logout
+
+* Sign up and log in
+* Session-based authentication
+* Customer and admin roles
+* Secure logout
+* Customer profile management
 
 ### 🍩 Donut Menu
-- Browse all available donuts
-- View individual donut details
-- View donut images hosted with Cloudinary
-- Admins can create, edit, and delete donuts
 
-### 🛒 Orders
-- Create donut orders
-- Select donut quantities
-- Calculate order totals
-- View order history
-- View individual order details
-- Admins can view and manage customer orders
-- Update order status
+* Browse available donuts
+* View individual donut details
+* View donut images hosted with Cloudinary
+* Add donuts to the cart
+* Admins can create, edit, and delete donuts
+
+### 🛒 Cart
+
+* Add donuts to the cart
+* Change donut quantities
+* Remove donuts from the cart
+* View the current cart
+* Calculate the cart total
+
+### 📦 Orders
+
+* Create orders from the cart
+* Select a pickup location
+* Calculate order totals
+* View previous orders
+* View individual order details
+* View order status
+* Cancel orders when allowed
+* Admins can view all customer orders
+* Admins can update order status
+* Admins can delete orders
 
 ### 📍 Locations
-- View Donut House locations
-- Admins can create, edit, and delete locations
+
+* View Donut House pickup locations
+* View individual location details
+* Display opening and closing hours
+* Show whether a location is currently open or closed
+* Admins can create, edit, and delete locations
+
+### 🛠️ Admin Dashboard
+
+* View total orders
+* View total donuts
+* View total locations
+* View total customers
+* Manage orders
+* Manage donuts
+* Manage locations
+
+---
 
 ## 👥 User Roles
 
 ### Customer
-- Browse donuts
-- View donut details
-- Place orders
-- View their orders
-- View locations
+
+* Browse donuts
+* View donut details
+* Add donuts to the cart
+* Manage cart quantities
+* Place orders
+* Select a pickup location
+* View previous orders
+* View order details and status
+* View Donut House locations
 
 ### Admin
-- Manage donuts
-- Manage locations
-- View all orders
-- Update order status
+
+* Access the admin dashboard
+* Create, edit, and delete donuts
+* Create, edit, and delete locations
+* View all customer orders
+* Update order status
+* Delete orders
+
+---
 
 ## 📝 Planning
- 
-### User Stories
- 
-**Customer / General User Stories**
-- AAG, I can view the home/landing page explaining what Donut House offers.
-- AAU, I can sign up and log in to my account.
-- AAU, I can log out of my account.
-- AAU, I can view and edit my profile.
-- AAG, I can view all available donuts.
-- AAG, I can view the details of a specific donut.
-- AAU, I can create a donut order.
-- AAU, I can add donuts to my order.
-- AAU, I can change the quantity of donuts in my order.
-- AAU, I can remove donuts from my order.
-- AAU, I can view my current order before placing it.
-- AAU, I can place an order.
-- AAU, I can view my previous orders.
-- AAU, I can view the details and status of a specific order.
-- AAU, I can cancel an order if it has not been processed.
-- AAG, I can view the available Donut House locations.
-- AAG, I can view the details of a specific location.
-- AAU, I can select a location for my order.
-- AAU, I can delete my account and its associated orders.
 
-**Admin User Stories**
-- AA, I can create a new donut.
-- AA, I can edit a donut.
-- AA, I can delete a donut.
-- AA, I can create a Donut House location.
-- AA, I can edit a location.
-- AA, I can delete a location.
-- AA, I can view all customer orders.
-- AA, I can update an order's status.
- 
-### ERD (Entity Relationship Diagram)
- 
+### Customer / General User Stories
+
+* As a general user, I can view the home page explaining what Donut House offers.
+* As a user, I can sign up and log in to my account.
+* As a user, I can log out of my account.
+* As a user, I can view and edit my profile.
+* As a general user, I can view all available donuts.
+* As a general user, I can view the details of a specific donut.
+* As a user, I can add donuts to my cart.
+* As a user, I can change the quantity of donuts in my cart.
+* As a user, I can remove donuts from my cart.
+* As a user, I can view my current cart before placing an order.
+* As a user, I can select a pickup location.
+* As a user, I can place an order.
+* As a user, I can view my previous orders.
+* As a user, I can view the details and status of a specific order.
+* As a user, I can cancel an order if it has not been processed.
+* As a general user, I can view available Donut House locations.
+* As a general user, I can view the details of a specific location.
+
+### Admin User Stories
+
+* As an admin, I can access an admin dashboard.
+* As an admin, I can view order statistics.
+* As an admin, I can create a new donut.
+* As an admin, I can edit a donut.
+* As an admin, I can delete a donut.
+* As an admin, I can create a Donut House location.
+* As an admin, I can edit a location.
+* As an admin, I can delete a location.
+* As an admin, I can view all customer orders.
+* As an admin, I can update an order's status.
+* As an admin, I can delete an order.
+
+---
+
+## 🗺️ ERD
+
 ![Donut House ERD](./docs/erd.png)
- 
- 
-### Wireframes
- 
+
+---
+
+## 🖼️ Wireframes
+
 ![Donut House Wireframes](./docs/wireframes.png)
 
+---
 
 ## 🗄️ Data Models
 
-**User** — Stores account information and user role.
+### User
 
-**Donut** — Stores donut name, description, price, category, and Cloudinary image URL.
+Stores customer and administrator account information, including username, email, password, role, and cart information.
 
-**Order** — Stores the customer, location, order items, total, and order status.
+### Donut
 
-**OrderItem** — Stores the donut, quantity, and price for each item in an order.
+Stores donut information including name, description, price, category, availability, and Cloudinary image URL.
 
-**Location** — Stores store name, address, phone number, and opening hours.
+### Order
 
-## 🍩 Donuts Routes
+Stores the customer, pickup location, order items, total, and order status.
+
+### OrderItem
+
+Stores the donut, quantity, and price for each item in an order.
+
+### Location
+
+Stores the pickup location name, address, city, phone number, opening hours, closing hours, and availability.
+
+---
+
+## 🍩 Donut Routes
 
 | HTTP Method | Route              | Action | Description                          |
-|-------------|---------------------|--------|---------------------------------------|
-| GET         | /donuts             | Index  | Displays all available donuts         |
-| GET         | /donuts/new          | New    | Shows a form to create a new donut    |
-| POST        | /donuts             | Create | Creates a new donut                   |
-| GET         | /donuts/:id          | Show   | Displays details of a specific donut  |
-| GET         | /donuts/:id/edit     | Edit   | Shows a form to edit a donut          |
-| PUT         | /donuts/:id          | Update | Updates a specific donut              |
-| DELETE      | /donuts/:id          | Delete | Deletes a specific donut              |
+| ----------- | ------------------ | ------ | ------------------------------------ |
+| GET         | `/donuts`          | Index  | Displays all available donuts        |
+| GET         | `/donuts/new`      | New    | Shows a form to create a donut       |
+| POST        | `/donuts`          | Create | Creates a new donut                  |
+| GET         | `/donuts/:id`      | Show   | Displays details of a specific donut |
+| GET         | `/donuts/:id/edit` | Edit   | Shows a form to edit a donut         |
+| PUT         | `/donuts/:id`      | Update | Updates a specific donut             |
+| DELETE      | `/donuts/:id`      | Delete | Deletes a specific donut             |
+
+---
 
 ## 🛒 Cart Routes
 
-| HTTP Method | Route            | Action | Description                          |
-|-------------|--------------------|--------|----------------------------------------|
-| GET         | /cart              | Index  | Displays the user's shopping cart      |
-| POST        | /cart/:donutId      | Add    | Adds a donut to the cart               |
-| PUT         | /cart/:donutId      | Update | Updates the quantity of a donut        |
-| DELETE      | /cart/:donutId      | Remove | Removes a donut from the cart          |
+| HTTP Method | Route            | Action | Description                       |
+| ----------- | ---------------- | ------ | --------------------------------- |
+| GET         | `/cart`          | Index  | Displays the user's shopping cart |
+| POST        | `/cart/:donutId` | Add    | Adds a donut to the cart          |
+| PUT         | `/cart/:donutId` | Update | Updates the quantity of a donut   |
+| DELETE      | `/cart/:donutId` | Remove | Removes a donut from the cart     |
 
-## 📦 Orders Routes
+---
 
-| HTTP Method | Route            | Action        | Description                              |
-|-------------|--------------------|----------------|--------------------------------------------|
-| GET         | /orders            | Index          | Displays the logged-in user's orders       |
-| GET         | /orders/:id         | Show           | Displays details of a specific order       |
-| POST        | /orders            | Create         | Creates an order from the user's cart      |
-| GET         | /orders/admin       | Admin Orders   | Allows admins to view all customer orders  |
-| PUT         | /orders/:id         | Update         | Updates an order's status                  |
+## 📦 Order Routes
 
-## 📍 Locations Routes
+| HTTP Method | Route                      | Action        | Description                           |
+| ----------- | -------------------------- | ------------- | ------------------------------------- |
+| GET         | `/orders`                  | Index         | Displays the logged-in user's orders  |
+| GET         | `/orders/:id`              | Show          | Displays details of a specific order  |
+| POST        | `/orders`                  | Create        | Creates an order from the user's cart |
+| PUT         | `/orders/:id`              | Update        | Updates an order                      |
+| DELETE      | `/orders/:id`              | Delete        | Deletes an order                      |
+| GET         | `/orders/admin`            | Admin Index   | Displays all customer orders          |
+| PUT         | `/orders/admin/:id/status` | Update Status | Updates an order's status             |
 
-| HTTP Method | Route              | Action | Description                          |
-|-------------|----------------------|--------|----------------------------------------|
-| GET         | /locations           | Index  | Displays all pickup locations          |
-| GET         | /locations/new        | New    | Shows a form to create a location      |
-| POST        | /locations           | Create | Creates a new pickup location          |
-| GET         | /locations/:id/edit   | Edit   | Shows a form to edit a location        |
-| PUT         | /locations/:id        | Update | Updates a pickup location               |
-| DELETE      | /locations/:id        | Delete | Deletes a pickup location               |
+---
+
+## 📍 Location Routes
+
+| HTTP Method | Route                 | Action | Description                             |
+| ----------- | --------------------- | ------ | --------------------------------------- |
+| GET         | `/locations`          | Index  | Displays all pickup locations           |
+| GET         | `/locations/new`      | New    | Shows a form to create a location       |
+| POST        | `/locations`          | Create | Creates a new pickup location           |
+| GET         | `/locations/:id`      | Show   | Displays details of a specific location |
+| GET         | `/locations/:id/edit` | Edit   | Shows a form to edit a location         |
+| PUT         | `/locations/:id`      | Update | Updates a pickup location               |
+| DELETE      | `/locations/:id`      | Delete | Deletes a pickup location               |
+
+---
 
 ## 👤 Authentication Routes
 
-| HTTP Method | Route            | Action     | Description                                |
-|-------------|--------------------|------------|----------------------------------------------|
-| GET         | /auth/sign-up       | Sign Up    | Displays the registration form                |
-| POST        | /auth/sign-up       | Register   | Creates a new customer account                |
-| GET         | /auth/sign-in       | Sign In    | Displays the login form                       |
-| POST        | /auth/sign-in       | Login      | Logs in the user and starts a session         |
-| GET         | /auth/sign-out      | Logout     | Logs out the user and destroys the session    |
+| HTTP Method | Route            | Action   | Description                                |
+| ----------- | ---------------- | -------- | ------------------------------------------ |
+| GET         | `/auth/sign-up`  | Sign Up  | Displays the registration form             |
+| POST        | `/auth/sign-up`  | Register | Creates a new customer account             |
+| GET         | `/auth/sign-in`  | Sign In  | Displays the login form                    |
+| POST        | `/auth/sign-in`  | Login    | Logs in the user and starts a session      |
+| GET         | `/auth/sign-out` | Logout   | Logs out the user and destroys the session |
+
+---
 
 ## 🛠️ Technologies
-- Node.js
-- Express.js
-- MongoDB
-- Mongoose
-- EJS
-- HTML
-- CSS
-- JavaScript
-- Express Session
-- bcrypt
-- Cloudinary
-- Git & GitHub
+
+* Node.js
+* Express.js
+* MongoDB
+* Mongoose
+* EJS
+* HTML5
+* CSS3
+* JavaScript
+* Express Session
+* bcrypt
+* Cloudinary
+* Git
+* GitHub
+
+---
 
 ## 📁 Project Structure
 
 ```text
 donut-house/
 │
-├── controllers/
-│   ├── authController.js
-│   ├── donutController.js
-│   ├── orderController.js
-│   └── locationController.js
+├── config/                     # Application configuration
+│   ├── cloudinary.js           # Cloudinary image upload configuration
+│   └── database.js             # MongoDB database connection
 │
-├── models/
-│   ├── User.js
-│   ├── Donut.js
-│   ├── Order.js
-│   ├── OrderItem.js
-│   └── Location.js
+├── controllers/                # Handles application logic
+│   ├── authCtrl.js             # Authentication logic
+│   ├── adminCtrl.js            # Admin dashboard logic
+│   └── other controller files  # Donut, order, cart, and location logic
 │
-├── routes/
-│   ├── authRoutes.js
-│   ├── donutRoutes.js
-│   ├── orderRoutes.js
-│   └── locationRoutes.js
+├── docs/                       # Project documentation
+│   ├── erd.png                 # Entity Relationship Diagram
+│   └── wireframes.png          # Application wireframes
 │
-├── middleware/
-│   ├── isLoggedIn.js
-│   └── isAdmin.js
+├── middleware/                # Authentication and authorization middleware
 │
-├── views/
-│   ├── partials/
-│   ├── auth/
-│   ├── donuts/
-│   ├── orders/
-│   ├── locations/
-│   └── index.ejs
+├── models/                    # MongoDB/Mongoose data models
+│   ├── User.js                 # User account and role data
+│   ├── Donut.js                # Donut menu data
+│   ├── Order.js                # Customer order data
+│   ├── OrderItem.js            # Individual items within an order
+│   └── Location.js             # Pickup location data
 │
-├── public/
-│   ├── css/
-│   │   └── style.css
-│   └── js/
-│       └── app.js
+├── public/                    # Static files
+│   ├── stylesheets/            # CSS files
+│   ├── images/                 # Website images
+│   └── javascript/             # Client-side JavaScript
 │
-├── config/
+├── routes/                    # Application URL routes
+│   ├── aboutRouter.js          # About page routes
+│   ├── adminRouter.js          # Admin dashboard routes
+│   ├── cartRouter.js           # Shopping cart routes
+│   ├── donutRouter.js          # Donut routes
+│   ├── locationRouter.js       # Location routes
+│   ├── orderRouter.js          # Order routes
+│   └── pagesRouter.js          # General page routes
 │
-├── .env
-├── .gitignore
-├── package.json
-├── package-lock.json
-├── server.js
-└── README.md
+├── views/                     # EJS templates
+│   │
+│   ├── about/                  # About page
+│   │   └── index.ejs
+│   │
+│   ├── admin/                  # Admin dashboard pages
+│   │   ├── index.ejs           # Admin dashboard
+│   │   ├── edit.ejs            # Admin edit page
+│   │   └── new.ejs             # Admin creation page
+│   │
+│   ├── auth/                   # Authentication pages
+│   │   ├── index.ejs
+│   │   ├── show.ejs
+│   │   └── new.ejs
+│   │
+│   ├── cart/                   # Shopping cart pages
+│   │   ├── index.ejs
+│   │   ├── show.ejs
+│   │   └── new.ejs
+│   │
+│   ├── donuts/                 # Donut pages
+│   │   ├── index.ejs           # Donut menu
+│   │   ├── show.ejs            # Donut details
+│   │   ├── edit.ejs            # Edit donut
+│   │   └── new.ejs             # Add donut
+│   │
+│   ├── locations/              # Location pages
+│   │   ├── index.ejs           # All locations
+│   │   ├── show.ejs            # Location details
+│   │   ├── edit.ejs            # Edit location
+│   │   └── new.ejs             # Add location
+│   │
+│   ├── orders/                 # Order pages
+│   │   ├── index.ejs           # Customer order history
+│   │   ├── show.ejs            # Order details
+│   │   ├── edit.ejs            # Edit/update order
+│   │   └── new.ejs             # Create order
+│   │
+│   └── partials/               # Reusable EJS components
+│       ├── _navbar.ejs         # Main navigation bar
+│       ├── _footer.ejs         # Website footer
+│       └── _adminSidebar.ejs   # Admin navigation sidebar
+│
+├── .env                        # Environment variables
+├── .gitignore                  # Files ignored by Git
+├── package.json                # Project dependencies and scripts
+├── package-lock.json           # Locked dependency versions
+├── server.js                   # Main application/server file
+└── README.md                   # Project documentation
 ```
+
+---
 
 ## 🚀 Getting Started
 
 ### 1. Clone the repository
 
 ```bash
-git clone https://github.com/fatema-maitham/donut-house
+git clone https://github.com/fatema-maitham/donut-house.git
 cd donut-house
 ```
 
@@ -234,7 +352,7 @@ cd donut-house
 npm install
 ```
 
-### 3. Create `.env`
+### 3. Create a `.env` file
 
 ```env
 MONGODB_URI=your_mongodb_connection_string
@@ -256,23 +374,31 @@ The application will run at:
 http://localhost:3000
 ```
 
+---
+
 ## 🎯 Project Goal
 
-The goal of Donut House is to build a complete full-stack application that demonstrates:
+The goal of Donut House is to build a complete full-stack web application that demonstrates:
 
-- Authentication
-- Authorization
-- CRUD operations
-- MongoDB relationships
-- Session management
-- Image uploads with Cloudinary
-- Customer ordering
-- Admin management
+* Authentication and authorization
+* Role-based access control
+* CRUD operations
+* MongoDB and Mongoose relationships
+* Session management
+* Shopping cart functionality
+* Customer ordering
+* Pickup location management
+* Admin management
+* Image uploads using Cloudinary
+* Responsive web design
+
+---
 
 ## 📌 Future Improvements
 
-- Online payment integration
-- Order notifications
-- Customer reviews and ratings
-- Order tracking
-- Search and filtering
+* Online payment integration
+* Order notifications
+* Customer reviews and ratings
+* Order tracking
+* Search and filtering
+* More advanced customer account features
