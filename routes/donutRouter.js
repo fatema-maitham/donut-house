@@ -3,6 +3,7 @@ const express = require('express');
 const router = express.Router();
 
 const multer = require('multer');
+
 const { storage } = require('../config/cloudinary');
 
 const upload = multer({ storage });
@@ -10,9 +11,26 @@ const upload = multer({ storage });
 const donutCtrl = require('../controllers/donutCtrl');
 
 const isSignedIn = require('../middleware/isSignedIn');
+
 const isAdmin = require('../middleware/isAdmin');
 
-// ADMIN — add donut
+
+// ============================================
+// ADMIN — ALL DONUTS
+// ============================================
+
+router.get(
+    '/admin',
+    isSignedIn,
+    isAdmin,
+    donutCtrl.adminIndex
+);
+
+
+// ============================================
+// ADMIN — ADD DONUT
+// ============================================
+
 router.get(
     '/new',
     isSignedIn,
@@ -28,13 +46,21 @@ router.post(
     donutCtrl.create
 );
 
-// CUSTOMER + ADMIN — view donuts
+
+// ============================================
+// CUSTOMER + ADMIN — VIEW DONUTS
+// ============================================
+
 router.get(
     '/',
     donutCtrl.index
 );
 
-// ADMIN — edit donut
+
+// ============================================
+// ADMIN — EDIT DONUT
+// ============================================
+
 router.get(
     '/:id/edit',
     isSignedIn,
@@ -50,7 +76,11 @@ router.put(
     donutCtrl.update
 );
 
-// ADMIN — delete donut
+
+// ============================================
+// ADMIN — DELETE DONUT
+// ============================================
+
 router.delete(
     '/:id',
     isSignedIn,
@@ -58,10 +88,15 @@ router.delete(
     donutCtrl.deleteDonut
 );
 
-// CUSTOMER + ADMIN — view one donut
+
+// ============================================
+// CUSTOMER + ADMIN — VIEW ONE DONUT
+// ============================================
+
 router.get(
     '/:id',
     donutCtrl.show
 );
+
 
 module.exports = router;

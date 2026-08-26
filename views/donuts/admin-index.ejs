@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>All Donuts | Donut House</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+    <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@300;400;600;700;800;900&display=swap"
+        rel="stylesheet">
+
+    <link rel="stylesheet" href="/stylesheets/style.css">
+</head>
+
+<body>
+
+    <div class="admin-layout">
+
+        <%- include('../partials/_adminSidebar.ejs') %>
+
+            <main class="admin-content">
+
+                <!-- HEADER -->
+
+                <div class="admin-page-header">
+
+                    <div>
+
+                        <span class="location-label">
+                            DONUT HOUSE
+                        </span>
+
+                        <h1>
+                            All Donuts
+                        </h1>
+
+                        <p>
+                            Manage all donuts available in your Donut House menu.
+                        </p>
+
+                    </div>
+
+                    <a href="/donuts/new" class="admin-button admin-button-link">
+
+                        + Add Donut
+
+                    </a>
+
+                </div>
+
+
+                <!-- DONUTS -->
+
+                <% if (donuts.length===0) { %>
+
+                    <div class="admin-empty">
+
+                        <h2>
+                            No donuts yet
+                        </h2>
+
+                        <p>
+                            Add your first donut to the menu.
+                        </p>
+
+                        <a href="/donuts/new" class="admin-button admin-button-link">
+
+                            + Add Donut
+
+                        </a>
+
+                    </div>
+
+                    <% } else { %>
+
+
+                        <div class="admin-donut-grid">
+
+                            <% donuts.forEach(donut=> { %>
+
+                                <article class="admin-donut-card">
+
+                                    <!-- IMAGE -->
+
+                                    <div class="admin-donut-image">
+
+                                        <img src="<%= donut.image %>" alt="<%= donut.name %>">
+
+                                    </div>
+
+
+                                    <!-- INFO -->
+
+                                    <div class="admin-donut-info">
+
+                                        <span class="location-label">
+                                            <%= donut.category %>
+                                        </span>
+
+                                        <h2>
+                                            <%= donut.name %>
+                                        </h2>
+
+                                        <p>
+                                            <%= donut.description %>
+                                        </p>
+
+                                        <strong class="admin-donut-price">
+                                            BD <%= donut.price.toFixed(3) %>
+                                        </strong>
+
+                                    </div>
+
+
+                                    <!-- ACTIONS -->
+
+                                    <div class="admin-donut-actions">
+
+                                        <a href="/donuts/<%= donut._id %>" class="admin-view-btn">
+
+                                            View
+
+                                        </a>
+
+                                        <a href="/donuts/<%= donut._id %>/edit" class="admin-edit-btn">
+
+                                            Edit
+
+                                        </a>
+
+                                        <form action="/donuts/<%= donut._id %>?_method=DELETE" method="POST"
+                                            onsubmit="return confirm('Delete this donut?');">
+
+                                            <button type="submit" class="admin-delete-btn">
+
+                                                Delete
+
+                                            </button>
+
+                                        </form>
+
+                                    </div>
+
+                                </article>
+
+                                <% }) %>
+
+                        </div>
+
+                        <% } %>
+
+            </main>
+
+    </div>
+
+</body>
+
+</html>
