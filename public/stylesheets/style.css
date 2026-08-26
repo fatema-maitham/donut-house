@@ -13222,6 +13222,547 @@ nav a:hover::after {
   min-height: 100vh;
 }
 
+
+
+
+/* ============================================
+   ADMIN — MANAGE ORDERS
+============================================ */
+
+.orders-admin-page {
+  padding-bottom: 70px;
+}
+
+
+/* ============================================
+   ORDERS LIST
+============================================ */
+
+.orders-admin-list {
+  display: flex;
+  flex-direction: column;
+  gap: 22px;
+  max-width: 950px;
+}
+
+
+/* ============================================
+   ORDER CARD
+============================================ */
+
+.order-admin-card {
+  background: #ffffff;
+  border: 1px solid rgba(15, 42, 67, .08);
+  border-radius: 18px;
+  box-shadow: 0 12px 28px rgba(15, 42, 67, .08);
+  overflow: hidden;
+}
+
+
+/* ============================================
+   ORDER HEADER
+============================================ */
+
+.order-admin-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  gap: 20px;
+
+  padding: 24px 28px;
+
+  border-bottom: 1px solid rgba(15, 42, 67, .08);
+}
+
+.order-number {
+  display: block;
+
+  margin-bottom: 6px;
+
+  color: rgba(15, 42, 67, .50);
+
+  font-size: 11px;
+  font-weight: 900;
+
+  letter-spacing: 1px;
+}
+
+.order-admin-header h2 {
+  margin: 0;
+
+  color: var(--navy);
+
+  font-size: 22px;
+  font-weight: 900;
+}
+
+
+/* ============================================
+   STATUS
+============================================ */
+
+.order-admin-header .order-status {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+
+  padding: 7px 13px;
+
+  border-radius: 999px;
+
+  font-size: 11px;
+  font-weight: 900;
+
+  white-space: nowrap;
+}
+
+.status-pending {
+  background: #fff1d6;
+  color: #9a6b20;
+}
+
+.status-preparing {
+  background: #fff1f5;
+  color: var(--navy);
+}
+
+.status-ready {
+  background: #e8f5ee;
+  color: #397553;
+}
+
+.status-completed {
+  background: #e7f0f8;
+  color: var(--navy);
+}
+
+.status-cancelled {
+  background: #fff0f0;
+  color: #b04d4d;
+}
+
+
+/* ============================================
+   BODY
+============================================ */
+
+.order-admin-body {
+  padding: 26px 28px;
+}
+
+.order-section {
+  margin-bottom: 25px;
+}
+
+.order-section h3 {
+  margin: 0 0 12px;
+
+  color: var(--navy);
+
+  font-size: 14px;
+  font-weight: 900;
+}
+
+
+/* ============================================
+   CUSTOMER
+============================================ */
+
+.order-customer {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.order-customer strong {
+  color: var(--navy);
+
+  font-size: 15px;
+  font-weight: 900;
+}
+
+.order-customer span {
+  color: rgba(15, 42, 67, .60);
+
+  font-size: 13px;
+  font-weight: 600;
+}
+
+
+/* ============================================
+   ORDER ITEMS
+============================================ */
+
+.order-items {
+  display: flex;
+  flex-direction: column;
+
+  gap: 8px;
+}
+
+.order-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  gap: 20px;
+
+  padding: 13px 15px;
+
+  background: var(--bg);
+
+  border: 1px solid rgba(15, 42, 67, .07);
+
+  border-radius: 10px;
+}
+
+.order-item-info {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.order-item-info strong {
+  color: var(--navy);
+
+  font-size: 14px;
+  font-weight: 900;
+}
+
+.order-item-info span {
+  color: rgba(15, 42, 67, .55);
+
+  font-size: 12px;
+  font-weight: 700;
+}
+
+.order-item-price {
+  flex-shrink: 0;
+
+  color: var(--navy);
+
+  font-size: 13px;
+  font-weight: 900;
+}
+
+.order-no-items {
+  margin: 0;
+
+  color: rgba(15, 42, 67, .55);
+
+  font-size: 13px;
+  font-weight: 600;
+}
+
+
+/* ============================================
+   ORDER SUMMARY
+============================================ */
+
+.order-summary {
+  margin: 25px 0;
+
+  padding-top: 20px;
+
+  border-top: 1px solid rgba(15, 42, 67, .10);
+}
+
+.order-summary-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  gap: 20px;
+}
+
+.order-summary-row span {
+  color: var(--navy);
+
+  font-size: 16px;
+  font-weight: 800;
+}
+
+.order-summary-row strong {
+  color: var(--navy);
+
+  font-size: 20px;
+  font-weight: 900;
+}
+
+
+/* ============================================
+   UPDATE STATUS
+============================================ */
+
+.order-update-section {
+  margin-bottom: 0;
+
+  padding-top: 20px;
+
+  border-top: 1px solid rgba(15, 42, 67, .10);
+}
+
+.order-status-form {
+  display: flex;
+  align-items: center;
+
+  gap: 10px;
+}
+
+.order-status-form select {
+  min-height: 42px;
+
+  padding: 0 12px;
+
+  border: 1px solid rgba(15, 42, 67, .16);
+
+  border-radius: 10px;
+
+  background: #ffffff;
+
+  color: var(--navy);
+
+  font-family: 'Manrope', sans-serif;
+
+  font-size: 13px;
+  font-weight: 700;
+
+  outline: none;
+}
+
+.order-status-form select:focus {
+  border-color: #f26f5f;
+
+  box-shadow: 0 0 0 3px rgba(242, 111, 95, .12);
+}
+
+.order-status-form button {
+  min-height: 42px;
+
+  padding: 0 17px;
+
+  border: 0;
+
+  border-radius: 10px;
+
+  background: var(--navy);
+
+  color: #ffffff;
+
+  font-family: 'Manrope', sans-serif;
+
+  font-size: 13px;
+  font-weight: 900;
+
+  cursor: pointer;
+
+  transition: .2s ease;
+}
+
+.order-status-form button:hover {
+  background: #f26f5f;
+
+  transform: translateY(-1px);
+}
+
+
+/* ============================================
+   FOOTER
+============================================ */
+
+.order-admin-footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  gap: 20px;
+
+  padding: 18px 28px;
+
+  background: #faf8f5;
+
+  border-top: 1px solid rgba(15, 42, 67, .08);
+}
+
+.order-date {
+  color: rgba(15, 42, 67, .50);
+
+  font-size: 11px;
+  font-weight: 700;
+
+  word-break: break-all;
+}
+
+.order-delete-btn {
+  min-height: 38px;
+
+  padding: 0 15px;
+
+  border: 1px solid #e4b6c0;
+
+  border-radius: 999px;
+
+  background: #ffffff;
+
+  color: #c65c72;
+
+  font-family: 'Manrope', sans-serif;
+
+  font-size: 12px;
+  font-weight: 800;
+
+  cursor: pointer;
+
+  transition: .2s ease;
+}
+
+.order-delete-btn:hover {
+  background: #fff3f5;
+}
+
+
+/* ============================================
+   EMPTY
+============================================ */
+
+.orders-empty {
+  padding: 35px;
+
+  background: #ffffff;
+
+  border: 1px solid rgba(15, 42, 67, .08);
+
+  border-radius: 16px;
+
+  box-shadow: 0 10px 25px rgba(15, 42, 67, .07);
+}
+
+.orders-empty h2 {
+  margin: 0 0 8px;
+
+  color: var(--navy);
+
+  font-size: 24px;
+  font-weight: 900;
+}
+
+.orders-empty p {
+  margin: 0;
+
+  color: rgba(15, 42, 67, .60);
+
+  font-size: 14px;
+  font-weight: 600;
+}
+
+
+/* ============================================
+   MOBILE
+============================================ */
+
+@media (max-width: 700px) {
+
+  .order-admin-header {
+    align-items: flex-start;
+
+    flex-direction: column;
+
+    padding: 22px;
+  }
+
+  .order-admin-body {
+    padding: 22px;
+  }
+
+  .order-item {
+    align-items: flex-start;
+  }
+
+  .order-item-info {
+    align-items: flex-start;
+
+    flex-direction: column;
+
+    gap: 3px;
+  }
+
+  .order-status-form {
+    align-items: stretch;
+
+    flex-direction: column;
+  }
+
+  .order-status-form select,
+  .order-status-form button {
+    width: 100%;
+  }
+
+  .order-admin-footer {
+    align-items: flex-start;
+
+    flex-direction: column;
+
+    padding: 18px 22px;
+  }
+
+  .order-delete-btn {
+    width: 100%;
+  }
+
+}
+
+/* ============================================
+   ORDER ITEM IMAGE
+============================================ */
+
+.order-item-left {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+
+  min-width: 0;
+}
+
+.order-item-image {
+  width: 55px;
+  height: 55px;
+
+  flex-shrink: 0;
+
+  overflow: hidden;
+
+
+}
+
+.order-item-image img {
+  width: 100%;
+  height: 100%;
+
+  display: block;
+
+  object-fit: cover;
+}
+
+
+/* MOBILE */
+
+@media (max-width: 700px) {
+
+  .order-item-left {
+    width: 100%;
+  }
+
+  .order-item-image {
+    width: 50px;
+    height: 50px;
+  }
+
+}
+
+
+
+
 /* ============================================
    FAST FLYING DONUT
 ============================================ */

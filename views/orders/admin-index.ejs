@@ -104,25 +104,37 @@
 
                                                         <div class="order-item">
 
-                                                            <div class="order-item-info">
+                                                            <div class="order-item-left">
 
-                                                                <strong>
-                                                                    <%= item.donut ? item.donut.name : 'Donut' %>
-                                                                </strong>
+                                                                <% if (item.donut && item.donut.image) { %>
+                                                                    <div class="order-item-image">
+                                                                        <img src="<%= item.donut.image %>"
+                                                                            alt="<%= item.donut.name %>">
+                                                                    </div>
+                                                                    <% } %>
 
-                                                                <span>
-                                                                    Quantity: <%= item.quantity %>
-                                                                </span>
+                                                                        <div class="order-item-info">
+
+                                                                            <strong>
+                                                                                <%= item.donut ? item.donut.name
+                                                                                    : 'Donut' %>
+                                                                            </strong>
+
+                                                                            <span>
+                                                                                Quantity: <%= item.quantity %>
+                                                                            </span>
+
+                                                                        </div>
 
                                                             </div>
 
                                                             <strong class="order-item-price">
-                                                                BD
-                                                                <%= item.donut ? (item.donut.price *
+                                                                BD <%= item.donut ? (item.donut.price *
                                                                     item.quantity).toFixed(3) : '0.000' %>
                                                             </strong>
 
                                                         </div>
+
 
                                                         <% }) %>
 
