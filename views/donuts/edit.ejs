@@ -4,54 +4,106 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Edit Donut</title>
+
+    <title>Edit Donut | Donut House</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+    <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@300;400;600;700;800;900&display=swap"
+        rel="stylesheet">
+
+    <link rel="stylesheet" href="/stylesheets/style.css">
 </head>
 
 <body>
 
-    <h1>Edit Donut</h1>
+    <div class="admin-layout">
 
-    <form action="/donuts/<%= donut._id %>?_method=PUT" method="POST">
+        <%- include('../partials/_adminSidebar.ejs') %>
 
-        <label for="name">Name:</label>
-        <input type="text" name="name" id="name" value="<%= donut.name %>" required>
+            <main class="admin-content">
 
-        <br><br>
+                <div class="donut-edit-page">
 
-        <label for="description">Description:</label>
-        <textarea name="description" id="description" required><%= donut.description %></textarea>
+                    <div class="donut-edit-card">
 
-        <br><br>
+                        <h1 class="admin-form-card-title">Edit Donut</h1>
 
-        <label for="price">Price:</label>
-        <input type="number" name="price" id="price" step="0.001" value="<%= donut.price %>" required>
+                        <p class="donut-edit-subtitle">
+                            Update the details of this delicious donut.
+                        </p>
 
-        <br><br>
 
-        <label for="image">Image URL:</label>
-        <input type="text" name="image" id="image" value="<%= donut.image %>" required>
+                        <form action="/donuts/<%= donut._id %>?_method=PUT" method="POST" class="donut-edit-form">
 
-        <br><br>
+                            <label for="name">
+                                Name
+                            </label>
 
-        <label for="category">Category:</label>
-        <input type="text" name="category" id="category" value="<%= donut.category %>" required>
+                            <input type="text" name="name" id="name" value="<%= donut.name %>" required>
 
-        <br><br>
 
-        <label for="available">Available:</label>
+                            <label for="description">
+                                Description
+                            </label>
 
-        <input type="checkbox" name="available" id="available" value="true" <%=donut.available ? 'checked' : '' %>
-        >
+                            <textarea name="description" id="description" required><%= donut.description %></textarea>
 
-        <br><br>
 
-        <button type="submit">Update Donut</button>
+                            <label for="price">
+                                Price
+                            </label>
 
-    </form>
+                            <input type="number" name="price" id="price" step="0.001" value="<%= donut.price %>"
+                                required>
 
-    <a href="/donuts/<%= donut._id %>">
-        Cancel
-    </a>
+
+                            <label for="image">
+                                Image URL
+                            </label>
+
+                            <input type="text" name="image" id="image" value="<%= donut.image %>" required>
+
+
+                            <label for="category">
+                                Category
+                            </label>
+
+                            <input type="text" name="category" id="category" value="<%= donut.category %>" required>
+
+
+                            <div class="donut-edit-checkbox">
+
+                                <input type="checkbox" name="available" id="available" value="true" <%=donut.available
+                                    ? 'checked' : '' %>
+                                >
+
+                                <label for="available">
+                                    Available
+                                </label>
+
+                            </div>
+
+
+                            <button type="submit" class="donut-update-button">
+                                Update Donut
+                            </button>
+
+
+                            <a href="/donuts/<%= donut._id %>" class="donut-edit-back">
+                                Cancel
+                            </a>
+
+                        </form>
+
+                    </div>
+
+                </div>
+
+            </main>
+
+    </div>
 
 </body>
 

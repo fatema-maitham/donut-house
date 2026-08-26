@@ -2,9 +2,7 @@
 <html lang="en">
 
 <head>
-
     <meta charset="UTF-8">
-
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
     <title>
@@ -18,32 +16,23 @@
         rel="stylesheet">
 
     <link rel="stylesheet" href="/stylesheets/style.css">
-
 </head>
 
 <body>
 
-    <%- include('../partials/_navbar.ejs') %>
+    <% if (user && user.role==='admin' ) { %>
 
-        <main>
+        <!-- ================= ADMIN VIEW ================= -->
 
-            <section class="donut-show-section">
+        <div class="admin-layout">
 
-                <div class="container">
+            <%- include('../partials/_adminSidebar.ejs') %>
 
-                    <!-- BACK TO MENU -->
-
-                    <a href="/donuts" class="donut-back-menu">
-                        ← Back to Menu
-                    </a>
-
-
-                    <!-- DONUT DETAILS -->
+                <main class="admin-content">
 
                     <div class="donut-show-grid">
 
                         <!-- IMAGE -->
-
                         <div class="donut-show-image">
 
                             <img src="<%= donut.image %>" alt="<%= donut.name %>">
@@ -52,7 +41,6 @@
 
 
                         <!-- DETAILS -->
-
                         <div class="donut-show-details">
 
                             <div class="donut-show-category">
@@ -71,42 +59,103 @@
                                 <%= donut.description %>
                             </p>
 
-
-                            <% if (user) { %>
-
-                                <form action="/cart/add/<%= donut._id %>" method="POST" class="donut-add-form">
-
-                                    <button type="submit" class="donut-add-button">
-                                        Add to Cart
-                                    </button>
-
-                                </form>
-
-                                <% } else { %>
-
-                                    <div class="donut-login-message">
-
-                                        Please log in to add this donut to your cart.
-
-                                        <a href="/auth/login">
-                                            Login
-                                        </a>
-
-                                    </div>
-
-                                    <% } %>
-
                         </div>
 
                     </div>
 
-                </div>
+                </main>
 
-            </section>
+        </div>
 
-        </main>
 
-        <%- include('../partials/_footer.ejs') %>
+        <% } else { %>
+
+            <!-- ================= CUSTOMER VIEW ================= -->
+
+            <%- include('../partials/_navbar.ejs') %>
+
+                <main>
+
+                    <section class="donut-show-section">
+
+                        <div class="container">
+
+                            <!-- BACK TO MENU -->
+                            <a href="/donuts" class="donut-back-menu">
+                                ← Back to Menu
+                            </a>
+
+
+                            <!-- DONUT DETAILS -->
+                            <div class="donut-show-grid">
+
+                                <!-- IMAGE -->
+                                <div class="donut-show-image">
+
+                                    <img src="<%= donut.image %>" alt="<%= donut.name %>">
+
+                                </div>
+
+
+                                <!-- DETAILS -->
+                                <div class="donut-show-details">
+
+                                    <div class="donut-show-category">
+                                        <%= donut.category %>
+                                    </div>
+
+                                    <h1>
+                                        <%= donut.name %>
+                                    </h1>
+
+                                    <div class="donut-show-price">
+                                        BD <%= Number(donut.price).toFixed(3) %>
+                                    </div>
+
+                                    <p class="donut-show-description">
+                                        <%= donut.description %>
+                                    </p>
+
+
+                                    <% if (user) { %>
+
+                                        <form action="/cart/add/<%= donut._id %>" method="POST" class="donut-add-form">
+
+                                            <button type="submit" class="donut-add-button">
+
+                                                Add to Cart
+
+                                            </button>
+
+                                        </form>
+
+                                        <% } else { %>
+
+                                            <div class="donut-login-message">
+
+                                                Please log in to add this donut to your cart.
+
+                                                <a href="/auth/login">
+                                                    Login
+                                                </a>
+
+                                            </div>
+
+                                            <% } %>
+
+                                </div>
+
+                            </div>
+
+                        </div>
+
+                    </section>
+
+                </main>
+
+                <%- include('../partials/_footer.ejs') %>
+
+                    <% } %>
 
 </body>
 
