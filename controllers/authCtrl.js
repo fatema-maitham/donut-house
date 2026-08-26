@@ -103,8 +103,15 @@ const login = async (req, res) => {
     };
 
     req.session.save(() => {
-      res.redirect('/');
+      // ADMIN → Admin Dashboard
+      if (userInDatabase.role === 'admin') {
+        res.redirect('/admin/dashboard');
+      } else {
+        // CUSTOMER → Customer Home
+        res.redirect('/');
+      }
     });
+
   } catch (err) {
     console.log(err);
     res.send('Something went wrong');

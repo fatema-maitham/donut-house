@@ -48,6 +48,7 @@ const orderRouter = require('./routes/orderRouter');
 
 const aboutRouter = require('./routes/aboutRouter');
 
+const adminRouter = require('./routes/adminRouter');
 
 // =========================
 // PORT
@@ -141,6 +142,9 @@ app.use('/orders', orderRouter);
 
 // ABOUT
 app.use('/about', aboutRouter);
+
+// ADMIN
+app.use('/admin', adminRouter);
 
 
 // =========================

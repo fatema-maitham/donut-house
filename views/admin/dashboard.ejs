@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Admin Dashboard | Donut House</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+    <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@300;400;600;700;800;900&display=swap"
+        rel="stylesheet">
+
+    <link rel="stylesheet" href="/stylesheets/style.css">
+</head>
+
+<body>
+
+    <div class="admin-layout">
+
+        <%- include('../partials/_adminSidebar.ejs') %>
+
+            <main class="admin-content">
+
+                <!-- HEADER -->
+
+                <div class="admin-page-header">
+
+                    <div>
+
+                        <span class="location-label">
+                            DONUT HOUSE
+                        </span>
+
+                        <h1>
+                            Admin Dashboard
+                        </h1>
+
+                        <p>
+                            Welcome back, <%= user ? user.username : 'Admin' %>.
+                        </p>
+
+                    </div>
+
+                </div>
+
+
+                <!-- STATISTICS -->
+
+                <section class="admin-stats-grid">
+
+                    <div class="admin-stat-card">
+
+                        <span class="admin-stat-label">
+                            TOTAL ORDERS
+                        </span>
+
+                        <strong class="admin-stat-number">
+                            <%= orderCount %>
+                        </strong>
+
+                        <span class="admin-stat-description">
+                            Customer orders
+                        </span>
+
+                    </div>
+
+
+                    <div class="admin-stat-card">
+
+                        <span class="admin-stat-label">
+                            TOTAL DONUTS
+                        </span>
+
+                        <strong class="admin-stat-number">
+                            <%= donutCount %>
+                        </strong>
+
+                        <span class="admin-stat-description">
+                            Menu items
+                        </span>
+
+                    </div>
+
+
+                    <div class="admin-stat-card">
+
+                        <span class="admin-stat-label">
+                            LOCATIONS
+                        </span>
+
+                        <strong class="admin-stat-number">
+                            <%= locationCount %>
+                        </strong>
+
+                        <span class="admin-stat-description">
+                            Donut House locations
+                        </span>
+
+                    </div>
+
+
+                    <div class="admin-stat-card">
+
+                        <span class="admin-stat-label">
+                            CUSTOMERS
+                        </span>
+
+                        <strong class="admin-stat-number">
+                            <%= userCount %>
+                        </strong>
+
+                        <span class="admin-stat-description">
+                            Registered users
+                        </span>
+
+                    </div>
+
+                </section>
+
+
+                <!-- QUICK ACTIONS -->
+
+                <section class="admin-dashboard-section">
+
+                    <div class="admin-section-heading">
+
+                        <span class="location-label">
+                            QUICK ACTIONS
+                        </span>
+
+                        <h2>
+                            Manage Donut House
+                        </h2>
+
+                    </div>
+
+
+                    <div class="admin-dashboard-actions">
+
+                        <a href="/orders/admin" class="admin-action-card">
+
+                            <div>
+                                <span class="admin-action-title">
+                                    Manage Orders
+                                </span>
+
+                                <span class="admin-action-text">
+                                    View and manage customer orders.
+                                </span>
+                            </div>
+
+                            <span class="admin-action-arrow">
+                                →
+                            </span>
+
+                        </a>
+
+
+                        <a href="/donuts/admin" class="admin-action-card">
+
+                            <div>
+                                <span class="admin-action-title">
+                                    All Donuts
+                                </span>
+
+                                <span class="admin-action-text">
+                                    View, edit and delete donuts.
+                                </span>
+                            </div>
+
+                            <span class="admin-action-arrow">
+                                →
+                            </span>
+
+                        </a>
+
+
+                        <a href="/donuts/new" class="admin-action-card">
+
+                            <div>
+                                <span class="admin-action-title">
+                                    Add Donut
+                                </span>
+
+                                <span class="admin-action-text">
+                                    Add a new donut to the menu.
+                                </span>
+                            </div>
+
+                            <span class="admin-action-arrow">
+                                →
+                            </span>
+
+                        </a>
+
+
+                        <a href="/locations" class="admin-action-card">
+
+                            <div>
+                                <span class="admin-action-title">
+                                    All Locations
+                                </span>
+
+                                <span class="admin-action-text">
+                                    View and manage locations.
+                                </span>
+                            </div>
+
+                            <span class="admin-action-arrow">
+                                →
+                            </span>
+
+                        </a>
+
+
+                        <a href="/locations/new" class="admin-action-card">
+
+                            <div>
+                                <span class="admin-action-title">
+                                    Add Location
+                                </span>
+
+                                <span class="admin-action-text">
+                                    Add a new Donut House location.
+                                </span>
+                            </div>
+
+                            <span class="admin-action-arrow">
+                                →
+                            </span>
+
+                        </a>
+
+                    </div>
+
+                </section>
+
+            </main>
+
+    </div>
+
+</body>
+
+</html>
