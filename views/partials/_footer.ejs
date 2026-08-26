@@ -2,6 +2,7 @@
 
   <div class="container footerInner">
 
+    <!-- BRAND -->
     <div class="footerCol">
 
       <div class="footerLogo">
@@ -14,6 +15,8 @@
 
     </div>
 
+
+    <!-- MENU -->
     <div class="footerCol">
 
       <div class="footerTitle">
@@ -30,6 +33,8 @@
 
     </div>
 
+
+    <!-- ACCOUNT -->
     <div class="footerCol">
 
       <div class="footerTitle">
@@ -46,10 +51,26 @@
           My Orders
         </a>
 
-        <% } %>
+        <a class="footerLink" href="/auth/sign-out">
+          Logout
+        </a>
+
+        <% } else { %>
+
+          <a class="footerLink" href="/auth/sign-in">
+            Login
+          </a>
+
+          <a class="footerLink" href="/auth/sign-up">
+            Register
+          </a>
+
+          <% } %>
 
     </div>
 
+
+    <!-- CONTACT -->
     <div class="footerCol">
 
       <div class="footerTitle">
@@ -72,6 +93,8 @@
 
   </div>
 
+
+  <!-- FOOTER BOTTOM -->
   <div class="footerBottom">
 
     <div class="container footerBottomInner">
