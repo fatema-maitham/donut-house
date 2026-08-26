@@ -2,6 +2,14 @@
 
 Donut House is a full-stack donut ordering web application where customers can browse donuts, add items to their cart, place orders, view their order history, and find pickup locations. Administrators can manage donuts, locations, and customer orders through an admin dashboard.
 
+![Home Page](./docs/screenshots/home.png)
+
+![Donut Boxes](./docs/screenshots/boxes.png)
+
+![Monthly Specials](./docs/screenshots/monthy.png)
+
+![Donut Details](./docs/screenshots/details.png)
+
 ## ✨ Features
 
 ### 👤 Authentication
