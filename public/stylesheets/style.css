@@ -12573,132 +12573,113 @@ nav a:hover::after {
 
 
 /* ============================================
-   BUTTON
-============================================ */
-
-.simple-location-button {
-  display: inline-flex;
-
-  align-items: center;
-  justify-content: center;
-
-  min-height: 44px;
-
-  padding: 0 20px;
-
-  border: 0;
-  border-radius: 12px;
-
-  background: #fcbc58;
-  color: var(--navy);
-
-  font-family: 'Manrope', sans-serif;
-
-  font-size: 13px;
-  font-weight: 900;
-
-  text-decoration: none;
-
-  box-shadow: var(--shadow2);
-
-  cursor: pointer;
-
-  transition: transform .2s ease;
-}
-
-.simple-location-button:hover {
-  transform: translateY(-2px);
-}
-
-
-/* ============================================
-   ACTIONS
+   LOCATION ACTIONS
 ============================================ */
 
 .simple-location-actions {
   display: flex;
-
-  justify-content: flex-end;
-
+  align-items: center;
   gap: 8px;
-
-  margin-top: 20px;
+  margin-top: 25px;
 }
 
 .simple-location-actions form {
   margin: 0;
 }
 
-.simple-location-delete {
-  display: inline-flex;
 
+/* ============================================
+   LOCATION BUTTONS
+   SAME STYLE AS ADMIN DONUT BUTTONS
+============================================ */
+
+.simple-location-button,
+.simple-location-edit,
+.simple-location-delete {
+  height: 38px;
+  padding: 0 16px;
+
+  display: inline-flex;
   align-items: center;
   justify-content: center;
 
-  min-height: 44px;
-
-  padding: 0 20px;
-
-  border: 0;
-  border-radius: 12px;
-
-  background: #ffd9d4;
-  color: #9b3c34;
+  border-radius: 999px;
 
   font-family: 'Manrope', sans-serif;
+  font-size: 12px;
+  font-weight: 800;
 
-  font-size: 13px;
-  font-weight: 900;
-
+  text-decoration: none;
   cursor: pointer;
+  white-space: nowrap;
 
-  transition: transform .2s ease;
-}
-
-.simple-location-delete:hover {
-  transform: translateY(-2px);
+  box-sizing: border-box;
 }
 
 
 /* ============================================
-   EMPTY
+   VIEW
 ============================================ */
 
-.simple-location-empty {
-  max-width: 650px;
-
-  margin: 0 auto;
-
-  padding: 30px;
-
-  background: #fff;
-
-  border: 1px solid rgba(15, 42, 67, .08);
-  border-radius: 20px;
-
-  box-shadow: var(--shadow2);
-
-  text-align: center;
+.simple-location-button {
+  background: var(--navy);
+  color: #ffffff;
+  border: 1px solid var(--navy);
 }
 
-.simple-location-empty h2 {
-  margin: 0 0 10px;
+.simple-location-button:hover {
+  opacity: 0.85;
+}
 
+
+/* ============================================
+   EDIT
+============================================ */
+
+.simple-location-edit {
+  background: #fff1f5;
   color: var(--navy);
-
-  font-size: 24px;
-  font-weight: 900;
+  border: 1px solid #f0c8d2;
 }
 
-.simple-location-empty p {
-  margin: 0 0 20px;
-
-  color: rgba(15, 42, 67, .65);
-
-  font-size: 14px;
-  font-weight: 600;
+.simple-location-edit:hover {
+  background: #ffe6ed;
 }
 
+
+/* ============================================
+   DELETE
+============================================ */
+
+.simple-location-delete {
+  background: #ffffff;
+  color: #c65c72;
+  border: 1px solid #e4b6c0;
+}
+
+.simple-location-delete:hover {
+  background: #fff3f5;
+}
+
+
+/* ============================================
+   MOBILE
+============================================ */
+
+@media (max-width: 700px) {
+
+  .simple-location-actions {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .simple-location-actions .simple-location-button,
+  .simple-location-actions .simple-location-edit,
+  .simple-location-actions .simple-location-delete {
+    width: 100%;
+  }
+
+}
 
 /* ============================================
    SHOW PAGE
