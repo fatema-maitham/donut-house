@@ -142,6 +142,8 @@ Donut House is a full-stack donut ordering web application where customers can b
 
 ![Donut House Wireframes](./docs/wireframes.png)
 
+[View and edit the wireframes in Excalidraw](https://excalidraw.com/#json=Pznz9kRXvud33jka_9O8I,38zMoYgD-XgnHRfZ4iqXuA)
+
 ---
 
 ## 🗄️ Data Models
