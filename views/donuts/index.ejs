@@ -25,6 +25,7 @@
             <div class="container">
 
                 <!-- MENU INTRO -->
+
                 <div class="menuIntro" id="menu">
 
                     <div class="menuIntroTitle">
@@ -49,7 +50,8 @@
                     <% categories.forEach(cat=> { %>
 
                         <% const filteredDonuts=donuts.filter( donut=> donut.category === cat.key
-                            ); %>
+                            );
+                            %>
 
 
                             <% if (filteredDonuts.length> 0) { %>
@@ -108,7 +110,9 @@
                                                                         data-trace="May contain traces of peanuts, nuts, and tree nuts."
                                                                         data-allergens="Allergens: wheat, gluten, soy"
                                                                         aria-label="Open product info">
+
                                                                         i
+
                                                                     </button>
 
                                                                 </div>
@@ -118,7 +122,9 @@
 
                                                                 <a href="/donuts/<%= donut._id %>"
                                                                     class="name donut-name-link">
+
                                                                     <%= donut.name %>
+
                                                                 </a>
 
 
@@ -127,20 +133,28 @@
                                                                 <div class="price">
 
                                                                     <div class="price-val">
+
                                                                         BD <%= donut.price.toFixed(3) %>
+
                                                                     </div>
 
 
                                                                     <!-- ADD TO CART -->
 
-                                                                    <a href="/cart/add/<%= donut._id %>"
-                                                                        class="add-to-cart-btn"
-                                                                        aria-label="Add <%= donut.name %> to cart">
+                                                                    <form action="/cart/add/<%= donut._id %>"
+                                                                        method="POST" class="add-to-cart-form">
 
-                                                                        <img src="/images/cart.png" alt="Add to cart"
-                                                                            class="add-to-cart-icon">
+                                                                        <button type="submit" class="add-to-cart-btn"
+                                                                            aria-label="Add <%= donut.name %> to cart"
+                                                                            data-donut-image="<%= donut.image %>">
 
-                                                                    </a>
+                                                                            <img src="/images/cart.png"
+                                                                                alt="Add to cart"
+                                                                                class="add-to-cart-icon">
+
+                                                                        </button>
+
+                                                                    </form>
 
                                                                 </div>
 
@@ -159,22 +173,26 @@
                                                                     Product info
                                                                 </div>
 
-
                                                                 <button class="closeBtn" type="button" data-close
                                                                     aria-label="Close">
+
                                                                     &times;
+
                                                                 </button>
 
                                                             </div>
 
 
-                                                            <div class="backText" data-bdesc></div>
+                                                            <div class="backText" data-bdesc>
+                                                            </div>
 
 
-                                                            <div class="backText muted" data-btrace></div>
+                                                            <div class="backText muted" data-btrace>
+                                                            </div>
 
 
-                                                            <div class="backText bold" data-ballergens></div>
+                                                            <div class="backText bold" data-ballergens>
+                                                            </div>
 
                                                         </div>
 
@@ -196,93 +214,10 @@
 
         </main>
 
-
-        <!-- CARD FLIP SCRIPT -->
-
-        <script>
-
-            const cards = document.querySelectorAll("[data-card]");
+        <script src="/javascripts/cart-animation.js"></script>
 
 
-            function closeAll() {
-
-                cards.forEach(card => {
-                    card.classList.remove("flipped");
-                });
-
-            }
-
-
-            function cleanText(text) {
-
-                return (text || "")
-                    .replace(/\\\n/g, "\n")
-                    .replace(/\r\n/g, "\n");
-
-            }
-
-
-            cards.forEach(card => {
-
-                const openBtn =
-                    card.querySelector("[data-open]");
-
-                const closeBtn =
-                    card.querySelector("[data-close]");
-
-                const bDesc =
-                    card.querySelector("[data-bdesc]");
-
-                const bTrace =
-                    card.querySelector("[data-btrace]");
-
-                const bAll =
-                    card.querySelector("[data-ballergens]");
-
-
-                openBtn?.addEventListener("click", event => {
-
-                    event.preventDefault();
-                    event.stopPropagation();
-
-                    closeAll();
-
-                    bDesc.textContent =
-                        cleanText(openBtn.dataset.desc);
-
-                    bTrace.textContent =
-                        cleanText(openBtn.dataset.trace);
-
-                    bAll.textContent =
-                        cleanText(openBtn.dataset.allergens);
-
-                    card.classList.add("flipped");
-
-                });
-
-
-                closeBtn?.addEventListener("click", event => {
-
-                    event.preventDefault();
-                    event.stopPropagation();
-
-                    card.classList.remove("flipped");
-
-                });
-
-            });
-
-
-            document.addEventListener("keydown", event => {
-
-                if (event.key === "Escape") {
-                    closeAll();
-                }
-
-            });
-
-        </script>
-
+        <%- include('../partials/_footer.ejs') %>
 
 </body>
 

@@ -132,13 +132,15 @@
 
                       <form action="/cart/add/<%= donut._id %>" method="POST" class="add-to-cart-form">
 
-                        <button type="submit" class="add-to-cart-btn" aria-label="Add <%= donut.name %> to cart">
+                        <button type="submit" class="add-to-cart-btn" aria-label="Add <%= donut.name %> to cart"
+                          data-donut-image="<%= donut.image %>">
 
                           <img src="/images/cart.png" alt="">
-
                         </button>
 
                       </form>
+
+
 
                     </div>
 
@@ -414,6 +416,8 @@
 
 
     <%- include('./partials/_footer.ejs') %>
+
+      <script src="/javascripts/cart-animation.js"></script>
 
 </body>
 

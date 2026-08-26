@@ -11679,3 +11679,73 @@ nav a:hover::after {
   }
 
 }
+
+
+
+
+
+
+
+
+/* ============================================
+   FLYING DONUT
+============================================ */
+
+.flying-donut {
+  position: fixed;
+
+  width: 60px;
+  height: 60px;
+
+  object-fit: contain;
+
+  pointer-events: none;
+
+  z-index: 99999;
+
+  transform:
+    translate(-50%, -50%) scale(1);
+
+  opacity: 1;
+
+  transition:
+    left .6s cubic-bezier(.2, .8, .2, 1),
+    top .6s cubic-bezier(.2, .8, .2, 1),
+    transform .6s cubic-bezier(.2, .8, .2, 1),
+    opacity .6s ease;
+
+  will-change:
+    left,
+    top,
+    transform,
+    opacity;
+}
+
+
+/* ============================================
+   CART BOUNCE
+============================================ */
+
+.cart-bounce {
+  animation: cartBounce .45s ease;
+}
+
+@keyframes cartBounce {
+
+  0% {
+    transform: scale(1);
+  }
+
+  35% {
+    transform: scale(1.25);
+  }
+
+  65% {
+    transform: scale(.9);
+  }
+
+  100% {
+    transform: scale(1);
+  }
+
+}
