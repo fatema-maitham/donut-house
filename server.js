@@ -10,6 +10,11 @@ const express = require('express');
 
 const app = express();
 
+const isProduction = process.env.NODE_ENV === 'production';
+
+if (isProduction) {
+  app.set('trust proxy', 1);
+}
 
 // =========================
 // MIDDLEWARE
@@ -88,19 +93,25 @@ app.use(
 // SESSION
 // =========================
 
+// =========================
+// SESSION
+// =========================
+
 app.use(
   session({
-
     secret: process.env.SESSION_SECRET,
-
     resave: false,
-
     saveUninitialized: false,
 
     store: MongoStore.create({
       mongoUrl: process.env.MONGODB_URI
-    })
+    }),
 
+    cookie: {
+      httpOnly: true,
+      sameSite: 'lax',
+      secure: isProduction
+    }
   })
 );
 
@@ -207,3 +218,7 @@ app.listen(
 
   }
 );
+
+app.listen(port, '0.0.0.0', () => {
+  console.log(`The express app is ready on port ${port}!`);
+});
