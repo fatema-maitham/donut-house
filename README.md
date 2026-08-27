@@ -10,6 +10,14 @@ Donut House is a full-stack donut ordering web application where customers can b
 
 ![Donut Details](./docs/screenshots/details.png)
 
+![404 Page](./docs/screenshots/404.png)
+
+![Admin Dashboard](./docs/screenshots/admindash.png)
+
+![All Donuts](./docs/screenshots/alldonuts.png)
+
+![All Locations](./docs/screenshots/alllocations.png)
+
 ## ✨ Features
 
 ### 👤 Authentication
