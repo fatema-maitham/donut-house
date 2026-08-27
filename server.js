@@ -208,17 +208,6 @@ app.use(
 // START SERVER
 // =========================
 
-app.listen(
-  port,
-  () => {
-
-    console.log(
-      `The express app is ready on port ${port}!`
-    );
-
-  }
-);
-
 app.listen(port, '0.0.0.0', () => {
   console.log(`The express app is ready on port ${port}!`);
 });
