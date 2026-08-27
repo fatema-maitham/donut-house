@@ -236,133 +236,134 @@
                     </div>
 
                 </main>
+                <%- include('../partials/_footer.ejs') %>
 
-                <% } %>
-                    <script>
-                        function convertToMinutes(time) {
-                            if (!time) return null;
+                    <% } %>
+                        <script>
+                            function convertToMinutes(time) {
+                                if (!time) return null;
 
-                            time = time.trim().toLowerCase();
+                                time = time.trim().toLowerCase();
 
-                            const match = time.match(
-                                /^(\d{1,2})(?::(\d{2}))?\s*(am|pm)$/
-                            );
+                                const match = time.match(
+                                    /^(\d{1,2})(?::(\d{2}))?\s*(am|pm)$/
+                                );
 
-                            if (match) {
-                                let hours = parseInt(match[1]);
-                                const minutes = parseInt(match[2]) || 0;
-                                const period = match[3];
+                                if (match) {
+                                    let hours = parseInt(match[1]);
+                                    const minutes = parseInt(match[2]) || 0;
+                                    const period = match[3];
 
-                                if (period === "am" && hours === 12) {
-                                    hours = 0;
+                                    if (period === "am" && hours === 12) {
+                                        hours = 0;
+                                    }
+
+                                    if (period === "pm" && hours !== 12) {
+                                        hours += 12;
+                                    }
+
+                                    return hours * 60 + minutes;
                                 }
 
-                                if (period === "pm" && hours !== 12) {
-                                    hours += 12;
-                                }
+                                const parts = time.split(":");
+
+                                const hours = parseInt(parts[0]);
+                                const minutes = parseInt(parts[1]) || 0;
+
+                                if (isNaN(hours)) return null;
 
                                 return hours * 60 + minutes;
                             }
 
-                            const parts = time.split(":");
 
-                            const hours = parseInt(parts[0]);
-                            const minutes = parseInt(parts[1]) || 0;
+                            function updateLocationStatus() {
 
-                            if (isNaN(hours)) return null;
+                                const now = new Date();
 
-                            return hours * 60 + minutes;
-                        }
-
-
-                        function updateLocationStatus() {
-
-                            const now = new Date();
-
-                            const current =
-                                now.getHours() * 60 +
-                                now.getMinutes();
+                                const current =
+                                    now.getHours() * 60 +
+                                    now.getMinutes();
 
 
-                            document
-                                .querySelectorAll(".location-status-js")
-                                .forEach(status => {
+                                document
+                                    .querySelectorAll(".location-status-js")
+                                    .forEach(status => {
 
-                                    const opening =
-                                        convertToMinutes(
-                                            status.dataset.opening
+                                        const opening =
+                                            convertToMinutes(
+                                                status.dataset.opening
+                                            );
+
+                                        const closing =
+                                            convertToMinutes(
+                                                status.dataset.closing
+                                            );
+
+
+                                        if (opening === null || closing === null) {
+                                            status.textContent = "Closed";
+                                            return;
+                                        }
+
+
+                                        let isOpen = false;
+
+
+                                        // Normal hours
+                                        // Example: 8am → 8pm
+                                        if (opening < closing) {
+
+                                            isOpen =
+                                                current >= opening &&
+                                                current < closing;
+
+                                        }
+
+
+                                        // Overnight hours
+                                        // Example: 9am → 12am
+                                        else if (opening > closing) {
+
+                                            isOpen =
+                                                current >= opening ||
+                                                current < closing;
+
+                                        }
+
+
+                                        // Same opening and closing time
+                                        else {
+
+                                            isOpen = false;
+
+                                        }
+
+
+                                        status.textContent =
+                                            isOpen ? "Open" : "Closed";
+
+
+                                        status.classList.remove(
+                                            "location-open",
+                                            "location-closed"
                                         );
 
-                                    const closing =
-                                        convertToMinutes(
-                                            status.dataset.closing
+
+                                        status.classList.add(
+                                            isOpen
+                                                ? "location-open"
+                                                : "location-closed"
                                         );
 
-
-                                    if (opening === null || closing === null) {
-                                        status.textContent = "Closed";
-                                        return;
-                                    }
+                                    });
+                            }
 
 
-                                    let isOpen = false;
+                            updateLocationStatus();
 
-
-                                    // Normal hours
-                                    // Example: 8am → 8pm
-                                    if (opening < closing) {
-
-                                        isOpen =
-                                            current >= opening &&
-                                            current < closing;
-
-                                    }
-
-
-                                    // Overnight hours
-                                    // Example: 9am → 12am
-                                    else if (opening > closing) {
-
-                                        isOpen =
-                                            current >= opening ||
-                                            current < closing;
-
-                                    }
-
-
-                                    // Same opening and closing time
-                                    else {
-
-                                        isOpen = false;
-
-                                    }
-
-
-                                    status.textContent =
-                                        isOpen ? "Open" : "Closed";
-
-
-                                    status.classList.remove(
-                                        "location-open",
-                                        "location-closed"
-                                    );
-
-
-                                    status.classList.add(
-                                        isOpen
-                                            ? "location-open"
-                                            : "location-closed"
-                                    );
-
-                                });
-                        }
-
-
-                        updateLocationStatus();
-
-                        // Update every minute
-                        setInterval(updateLocationStatus, 60000);
-                    </script>
+                            // Update every minute
+                            setInterval(updateLocationStatus, 60000);
+                        </script>
 
 
 </body>
