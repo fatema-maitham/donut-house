@@ -42,7 +42,6 @@ const addToCart = async (req, res) => {
 
         redirectBack(req, res, '/donuts');
     } catch (err) {
-        console.error('ADD TO CART ERROR:', err);
         res.status(500).send('Something went wrong');
     }
 };
@@ -65,7 +64,6 @@ const index = async (req, res) => {
             user: user
         });
     } catch (err) {
-        console.error('CART INDEX ERROR:', err);
         res.status(500).send('Something went wrong');
     }
 };
@@ -96,7 +94,6 @@ const increase = async (req, res) => {
 
         res.redirect('/cart');
     } catch (err) {
-        console.error('INCREASE CART ERROR:', err);
         res.status(500).send('Something went wrong');
     }
 };
@@ -134,7 +131,6 @@ const decrease = async (req, res) => {
 
         res.redirect('/cart');
     } catch (err) {
-        console.error('DECREASE CART ERROR:', err);
         res.status(500).send('Something went wrong');
     }
 };
@@ -160,7 +156,6 @@ const remove = async (req, res) => {
 
         res.redirect('/cart');
     } catch (err) {
-        console.error('REMOVE CART ERROR:', err);
         res.status(500).send('Something went wrong');
     }
 };

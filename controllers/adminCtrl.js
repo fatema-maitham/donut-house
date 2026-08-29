@@ -23,7 +23,6 @@ const dashboard = async (req, res) => {
             userCount,
         });
     } catch (err) {
-        console.log(err);
         res.send('Something went wrong');
     }
 };

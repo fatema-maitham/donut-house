@@ -22,7 +22,6 @@ const index = async (req, res) => {
         });
 
     } catch (err) {
-        console.log(err);
         res.status(500).send('Something went wrong');
     }
 };
@@ -57,7 +56,6 @@ const show = async (req, res) => {
         });
 
     } catch (err) {
-        console.log(err);
         res.status(500).send('Something went wrong');
     }
 };
@@ -78,7 +76,6 @@ const newOrder = async (req, res) => {
         });
 
     } catch (err) {
-        console.log(err);
         res.status(500).send('Something went wrong');
     }
 };
@@ -179,7 +176,6 @@ const create = async (req, res) => {
         );
 
     } catch (err) {
-        console.log(err);
         res.status(500).send(
             'Something went wrong'
         );
@@ -237,7 +233,6 @@ const cancel = async (req, res) => {
         );
 
     } catch (err) {
-        console.log(err);
         res.status(500).send(
             'Something went wrong'
         );
@@ -264,7 +259,6 @@ const adminIndex = async (req, res) => {
         });
 
     } catch (err) {
-        console.log(err);
         res.status(500).send(
             'Something went wrong'
         );
@@ -314,14 +308,9 @@ const updateStatus = async (req, res) => {
 
         await order.save();
 
-
-        // IMPORTANT:
-        // Go back to admin Manage Orders page
-
         res.redirect('/orders/admin');
 
     } catch (err) {
-        console.log(err);
         res.status(500).send(
             'Something went wrong'
         );

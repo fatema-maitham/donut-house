@@ -216,11 +216,6 @@ document.addEventListener("DOMContentLoaded", () => {
 
             } catch (error) {
 
-                console.error(
-                    "ADD TO CART ERROR:",
-                    error
-                );
-
                 /* Only reload if request actually fails */
                 window.location.href =
                     form.action;

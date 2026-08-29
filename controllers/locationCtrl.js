@@ -31,7 +31,6 @@ const show = async (req, res) => {
             location,
         });
     } catch (error) {
-        console.error(error);
         return res.status(404).render('404.ejs');
     }
 };
@@ -60,7 +59,6 @@ const create = async (req, res) => {
 
         res.redirect('/locations');
     } catch (error) {
-        console.error(error);
         res.status(400).send('Unable to create location.');
     }
 };
@@ -78,7 +76,6 @@ const edit = async (req, res) => {
             location,
         });
     } catch (error) {
-        console.error(error);
         return res.status(404).render('404.ejs');
     }
 };
@@ -104,7 +101,6 @@ const update = async (req, res) => {
 
         res.redirect(`/locations/${location._id}`);
     } catch (error) {
-        console.error(error);
         res.status(400).send('Unable to update location.');
     }
 };
@@ -120,7 +116,6 @@ const destroy = async (req, res) => {
 
         res.redirect('/locations');
     } catch (error) {
-        console.error(error);
         res.status(400).send('Unable to delete location.');
     }
 };

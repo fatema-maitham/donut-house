@@ -8,15 +8,11 @@ const home = async (req, res) => {
       available: true
     });
 
-    console.log('HOME DONUTS:', donuts);
-
     res.render('index.ejs', {
       donuts
     });
 
   } catch (error) {
-
-    console.log(error);
 
     res.status(500).send('Server Error');
 

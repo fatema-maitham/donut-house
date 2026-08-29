@@ -62,7 +62,6 @@ const register = async (req, res) => {
       res.redirect('/');
     });
   } catch (err) {
-    console.log(err);
     res.send('Something went wrong');
   }
 };
@@ -113,7 +112,6 @@ const login = async (req, res) => {
     });
 
   } catch (err) {
-    console.log(err);
     res.send('Something went wrong');
   }
 };

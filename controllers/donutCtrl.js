@@ -51,8 +51,6 @@ const index = async (req, res) => {
 
     } catch (err) {
 
-        console.log(err);
-
         res.send('Something went wrong');
 
     }
@@ -80,8 +78,6 @@ const adminIndex = async (req, res) => {
         });
 
     } catch (err) {
-
-        console.log(err);
 
         res.send('Something went wrong');
 
@@ -115,9 +111,6 @@ const show = async (req, res) => {
         });
 
     } catch (err) {
-
-        console.log(err);
-
         res.send('Something went wrong');
 
     }
@@ -166,9 +159,6 @@ const create = async (req, res) => {
         res.redirect('/donuts/admin');
 
     } catch (err) {
-
-        console.log(err);
-
         res.send('Something went wrong');
 
     }
@@ -201,9 +191,6 @@ const edit = async (req, res) => {
         });
 
     } catch (err) {
-
-        console.log(err);
-
         res.send('Something went wrong');
 
     }
@@ -261,9 +248,6 @@ const update = async (req, res) => {
         );
 
     } catch (err) {
-
-        console.log(err);
-
         res.send('Something went wrong');
 
     }
@@ -288,9 +272,6 @@ const deleteDonut = async (req, res) => {
         );
 
     } catch (err) {
-
-        console.log(err);
-
         res.send('Something went wrong');
 
     }
