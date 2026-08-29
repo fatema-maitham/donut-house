@@ -214,8 +214,7 @@
                                             <%= order._id %>
                                         </span>
 
-                                        <form action="/orders/<%= order._id %>?_method=DELETE" method="POST"
-                                            onsubmit="return confirm('Delete this order?');">
+                                        <form action="/orders/<%= order._id %>?_method=DELETE" method="POST">
                                             <button type="submit" class="order-delete-btn">
                                                 Delete Order
                                             </button>

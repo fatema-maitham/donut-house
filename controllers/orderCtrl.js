@@ -317,6 +317,25 @@ const updateStatus = async (req, res) => {
     }
 };
 
+// =========================================================
+// ADMIN - DELETE ORDER
+// =========================================================
+
+const deleteOrder = async (req, res) => {
+    try {
+        const order = await Order.findById(req.params.id);
+
+        if (!order) {
+            return res.status(404).send('Order not found');
+        }
+
+        await Order.findByIdAndDelete(req.params.id);
+
+        res.redirect('/orders/admin');
+    } catch (err) {
+        res.status(500).send('Something went wrong');
+    }
+};
 
 // =========================================================
 // EXPORTS
@@ -330,4 +349,5 @@ module.exports = {
     cancel,
     adminIndex,
     updateStatus,
+    deleteOrder,
 };

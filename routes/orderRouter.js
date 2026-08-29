@@ -34,6 +34,12 @@ router.put(
     orderCtrl.updateStatus
 );
 
+router.delete(
+    '/:id',
+    isSignedIn,
+    isAdmin,
+    orderCtrl.deleteOrder
+);
 
 // SINGLE ORDER
 
